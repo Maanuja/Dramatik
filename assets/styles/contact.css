@@ -1,0 +1,52 @@
+/* -----------------------*/
+/*  FORMULAIRE DE CONTACT
+/* -----------------------*/
+
+.auto{
+    margin: 1em;
+    padding: 0.5em;
+    width: 110px;
+    min-width: 0;
+    color:var(--white);
+    font-family: monospace;
+    flex: auto;
+}
+fieldset{
+    border-style: none;
+    max-width:100%;/*500px*/
+    padding:16px;   
+    /* margin-left: 10%;
+    margin-top: 20px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+legend{
+    font-family: "PT Serif";
+    text-transform: uppercase;
+    font-size:2em;
+    text-align: center;
+    background-color: var(--midnight);
+    color: var(--white);
+}
+#contact-form{
+    width: 100%;
+}
+input[type=text],input[type=email],input[type=file], textarea, select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-top: 6px;
+    background: var(--white);
+    resize: vertical;
+}
+input[type=submit] {
+    background: var(--pinktarn);
+    margin: 0 auto;
+    outline: 0;/*on peut l'omettre*/
+    color: var(--white);/*écriture*/
+    border: 0;
+    padding: 12px 24px;
+    width: 100%;
+    text-align: center;
+}

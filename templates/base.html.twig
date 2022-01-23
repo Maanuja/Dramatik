@@ -1,19 +1,178 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Homepage{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+</head>
+
+<body id="bootstrap-overrides" class="bglight">
+{% block body %}
+    <header class="p-3 bglight text-white">
+        {% block nav %}
+            <nav>
+                <!-- <div class="container"> -->
+                <div class="d-flex flex-wrap  justify-content-center justify-content-lg-start">
+                    <a href="{{ path('app_homepage_home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
+                    </a>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('app_homepage_home') }}">Home</a></button></li>
+                        <!-- <li><button type="button" class="btn btn-g btn-tube"><a href="index.php?route=drama">Dramas</a></button></li> -->
+                        <li class="nav-item dropdown">
+                            <button type="button" class="btn btn-g btn-tube">
+                                <a class=" dropdown-toggle" href="#" data-bs-toggle="dropdown">  Drama  </a>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <button type="button" class="btn btn-g btn-tube">
+                                        <a class="dropdown-item" href="#"> Abcdaire</a>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-g btn-tube">
+                                        <a class="dropdown-item" href="#">QUIZZ</a>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><button type="button" class="btn btn-g btn-tube"><a href="#">SUGGESTION</a></button></li>
+                        <li><button type="button" class="btn btn-g btn-tube"><a href=" ">A PROPOS</a></button></li>
+                        <li><form>
+                                <label>
+                                    <input class=" search__box" type="text" placeholder="Search">
+                                </label>
+                                <i class="fa fa-search search__icon"></i>
+                            </form></li>
+                    </ul>
+                    <div class="text-end">
+                        {#                    <?php if (isset($_SESSION['mail'])) { ?>#}
+                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="#">Account</a></button>
+                        <button type="submit" class="btn btn-g btn-round"><a href="#">Log out</a></button>
+                        {#                    <?php#}
+                        {#                            }#}
+                        {#                            else {#}
+                        {#                            ?>#}
+                        {#                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="index.php?route=login">Login</a></button>#}
+                        {#                    <button type="button" class="btn btn-g btn-round"><a href="index.php?route=signin">Sign-up</a></button>#}
+                        {#                    <?php#}
+                        {#                            }#}
+                        {#                            ?>#}
+                    </div>
+                </div>
+                <!-- </div> -->
+            </nav>
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    </header>
+    <main>
+{% block content %} {% endblock %}
+    </main>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+
+    <!--------------------------------------------- TOP BUTTON ------------------------->
+<div class="top">
+    {% block flowbutton %}
+    <a href="#top" title="Retourner en Haut">
+        <i class="fa fa-arrow-circle-up fa-4x"></i>
+    </a>
+    {% endblock %}
+</div>
+<!--------------------------------------------- TOP BUTTON FIN------------------------>
+
+<div class="bglight">
+    {% block footer %}
+        <!-- <div class="container">
+            <footer class="py-2 my-2">
+                <div class="d-flex justify-content-between py-2 my-2 border-top border-dark">
+                    <ul class="list-unstyled d-flex">
+                        <li class="ms-3 "><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook fa-2x circle-icon"></i></a></li>
+                        <li class="ms-3 "><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram fa-2x circle-icon"></i></a></li>
+                        <li class="ms-3 "><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter fa-2x circle-icon"></i></a></li>
+                    </ul>
+                    <p class="mb-0">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
+                </div>
+            </footer>
+        </div> -->
+        <div class="container">
+
+
+            <!------------------------------------------ LA NEWSLETTER HIDDEN----------------------------------------->
+            <div id="fenetre" class="overlay">
+                <div class="fenetre"> <a class="close" href="#">&times;</a>
+                    <div> <!-- fenetre dialogue -->
+                        <div><!-- la boite -->
+                            <div class="newsletter-title">
+                                <h2>Rejoignez-nous &amp; Pour jouer aux Quizz</h2>
+                            </div>
+                            <div class="box-content">
+                                <?php
+                            if(!isset($newsletter_inscription))
+                            {
+                            ?>
+                                <label>Inscrivez vous à notre Newsletter et restez à jour avec nos Quizz!</label>
+                                <div id="form_inscription">
+                                    <form name="inscription" id="inscription" method="post" onsubmit="return newsletter();">
+                                        <div>
+                                            <label for="inscription_mail"></label><input placeholder="pseudo@domain.com" name="newsletter_mail" id="inscription_mail" required pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
+                                            <br>
+                                            <p id="demo"></p>
+                                            <br>
+                                            <button type="submit" class="news-button" >S'inscrire</button>
+                                        </div>
+                                    </form>
+                                    <div class="inscription-bottom">
+                                        <input type="checkbox" id="dont_show_again">
+                                        <label for="dont_show_again">Ne plus montrer ce message</label>
+                                    </div>
+                                </div>
+                                <!-- /#form_inscription -->
+                                <?php
+                            }
+                            else{ ?>
+                                <p>Nous avons le plaisir de vous compter parmi les nouveaux abonnés de la newsletter AnilCustom et tenons à vous remercier de l'intérêt que vous portez à notre Boutique.</p>
+                                <?php } ?>
+                            </div>
+                            <!-- /.box-content -->
+                        </div>
+                        <!-- la boite -->
+                    </div>
+                    <!-- fenetre dialogue -->
+                </div>
+            </div>
+            <!------------------------------------------------ HIDDDEN FIN ------------------------------------------->
+
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+                <p class="col-md-4 mb-0 text-muted">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
+
+                <!-- <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                </a> -->
+                <div class="nlt col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <a class="button-onpage" href="#fenetre">S'inscrire à la Newsletter</a>
+                </div>
+
+                <ul class="nav col-md-4 justify-content-end">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                </ul>
+            </footer>
+        </div>
+    {% endblock %}
+</div>
+
+{% endblock %}
+</body>
 </html>
+

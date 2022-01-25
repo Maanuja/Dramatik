@@ -53,15 +53,14 @@
                     </ul>
                     <div class="text-end">
                         {#                    <?php if (isset($_SESSION['mail'])) { ?>#}
-                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="#">Account</a></button>
-                        <button type="submit" class="btn btn-g btn-round"><a href="#">Log out</a></button>
+{#                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="#">Account</a></button>#}
+{#                        <button type="submit" class="btn btn-g btn-round"><a href="#">Log out</a></button>#}
                         {#                    <?php#}
                         {#                            }#}
                         {#                            else {#}
                         {#                            ?>#}
-                        {#                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="index.php?route=login">Login</a></button>#}
-                        {#                    <button type="button" class="btn btn-g btn-round"><a href="index.php?route=signin">Sign-up</a></button>#}
-                        {#                    <?php#}
+                                                                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
+                                                                    <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>                                            <?php
                         {#                            }#}
                         {#                            ?>#}
                     </div>
@@ -71,40 +70,24 @@
         {% endblock %}
     </header>
     <main>
-{% block content %} {% endblock %}
-    </main>
-{% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
-{% endblock %}
-
-
-    <!--------------------------------------------- TOP BUTTON ------------------------->
-<div class="top">
-    {% block flowbutton %}
-    <a href="#top" title="Retourner en Haut">
-        <i class="fa fa-arrow-circle-up fa-4x"></i>
-    </a>
+    {% block content %}
     {% endblock %}
-</div>
-<!--------------------------------------------- TOP BUTTON FIN------------------------>
+    </main>
+
 
 <div class="bglight">
     {% block footer %}
-        <!-- <div class="container">
-            <footer class="py-2 my-2">
-                <div class="d-flex justify-content-between py-2 my-2 border-top border-dark">
-                    <ul class="list-unstyled d-flex">
-                        <li class="ms-3 "><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook fa-2x circle-icon"></i></a></li>
-                        <li class="ms-3 "><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram fa-2x circle-icon"></i></a></li>
-                        <li class="ms-3 "><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter fa-2x circle-icon"></i></a></li>
-                    </ul>
-                    <p class="mb-0">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
-                </div>
-            </footer>
-        </div> -->
+        <!--------------------------------------------- TOP BUTTON ------------------------->
+        <div class="top">
+            {% block flowbutton %}
+                <a href="#top" title="Retourner en Haut">
+                    <i class="fa fa-arrow-circle-up fa-4x"></i>
+                </a>
+            {% endblock %}
+        </div>
+        <!--------------------------------------------- TOP BUTTON FIN------------------------>
+
         <div class="container">
-
-
             <!------------------------------------------ LA NEWSLETTER HIDDEN----------------------------------------->
             <div id="fenetre" class="overlay">
                 <div class="fenetre"> <a class="close" href="#">&times;</a>
@@ -171,7 +154,9 @@
         </div>
     {% endblock %}
 </div>
-
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>

@@ -1,0 +1,35 @@
+html,body{
+    height:100%;margin:0;
+}
+section {
+    position: relative;
+    height: 100%;
+    width: 80%;
+    margin-bottom: 12px;
+    margin-left: 100PX;
+    margin-right: 100px;
+
+}
+
+.full-height {
+    height: 100%;
+}
+
+.right-box{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: var(--tuscany);
+    padding: 100px;
+    white-space: break-spaces;
+    text-align: center;
+}
+
+/* centering with CSS Grid */
+.column-center {
+    display: grid;
+    justify-content: center;
+    gap: 100px;
+    align-content: center;
+    grid-auto-flow: column;
+}

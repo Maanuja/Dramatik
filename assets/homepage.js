@@ -1,3 +1,3 @@
-import './styles/aboutus.css';
+import './styles/homepage.css';
 // start the Stimulus application
 import './bootstrap';

@@ -10,8 +10,6 @@ import'./newsletter.js';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import './styles/bootstrapOver.css';
-import './styles/contact.css';
-import './styles/homepage.css';
 import './styles/style.css';
 import './styles/bootstrap-grid.css';
 import './styles/bootstrap-grid.min.css';

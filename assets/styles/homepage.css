@@ -1,43 +1,35 @@
 html,body{
     height:100%;margin:0;
 }
-
-.search__container{
-    display: inline-block;
+section {
     position: relative;
-    height: 35px;
-    width: 35px;
-    box-sizing: border-box;
-    margin: 0px 8px 7px 0px;
-    padding: 7px 9px 0px 9px;
-    border: 3px solid var(--blue-emrald);
-    border-radius: 25px;
-    transition: all 200ms ease;
-    cursor: text;
-}
-
-.sidenav {
-    margin-left: 660px;
-    margin-top: 20vh;
     height: 100%;
-    width: 200px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: var(--wafer-dark);
-    overflow-x: hidden;
+    width: 80%;
+    margin-bottom: 12px;
+    margin-left: 100PX;
+    margin-right: 100px;
+
 }
 
-.sidenav a{
-    color: var(--lightbrown);
-    padding: 32px;
-    font-family: Poppins,sans-serif;
-    font-weight: 500;
-    text-decoration: none;
-    display: block;
+.full-height {
+    height: 100%;
 }
 
-#bootstrap-overrides .sidenav a:hover {
-    background-color: var(--tuscany);
-    color: black;
+.right-box{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: var(--tuscany);
+    padding: 100px;
+    white-space: break-spaces;
+    text-align: center;
+}
+
+/* centering with CSS Grid */
+.column-center {
+    display: grid;
+    justify-content: center;
+    gap: 100px;
+    align-content: center;
+    grid-auto-flow: column;
 }

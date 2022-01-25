@@ -30,6 +30,8 @@
     border-top: none !important;
     border-left: none !important;
     border-right: none !important;
+    width: 100%;
+    padding: 12px;
     border-bottom: thick double var(--blue-emrald) !important;
     border: 1px thick double !important;
 }

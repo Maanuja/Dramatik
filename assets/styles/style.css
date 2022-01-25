@@ -1,23 +1,24 @@
 :root{
 
   /* COULEURS */
-  --text-gray: #3f4954;
-  --text-light : #686666da;
-  --white: #ffffff;
-  --lightbrown:#BD9F7C;
-  --darkred: #5F0000;
---cutepink: #FFC1A3;
---pinktarn: #A26B69;
+	--text-gray: #3f4954;
+	--text-light : #686666da;
+	--white: #ffffff;
+	--lightbrown:#BD9F7C;
+	--darkred: #5F0000;
+	--cutepink: #FFC1A3;
+	--pinktarn: #A26B69;
 
 
---wafer: #ECE3D7;
---armadillo: #4c4740;
---wafer-dark: #BD9F7C;
---tapa: #79766e;
---hunter-green: #192013;
---blue-emrald: #0E5E5D;
---manatee: #969ca4;
---tuscany: #b45c34;
+	--wafer: #ECE3D7;
+	--armadillo: #4c4740;
+	--wafer-dark: #BD9F7C;
+	--tapa: #79766e;
+	--hunter-green: #192013;
+	--sage-green:#656b50;
+	--blue-emrald: #0E5E5D;
+	--manatee: #969ca4;
+	--tuscany: #b45c34;
 }
 
 
@@ -85,7 +86,6 @@ nav .btn.btn-g {
 .search__icon {
   box-sizing: border-box;
   float: right;
-  font-size: 2.5rem;
   display: inline-block;
 /*   justify-content: center;
   align-items: center; */

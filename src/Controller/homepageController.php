@@ -17,11 +17,11 @@ class homepageController extends AbstractController
     }
 
     /**
-     * @Route("/contact")
+     * @Route("/apropos")
      */
-    public function contact(): Response
+    public function apropos(): Response
     {
-        return new Response( 'PageContact');
+        return $this->render('apropos.html.twig');
     }
 
     /**

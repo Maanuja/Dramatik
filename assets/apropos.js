@@ -5,14 +5,7 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import'./newsletter.js';
-
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
-import './styles/bootstrapOver.css';
-import './styles/style.css';
-import './styles/bootstrap-grid.css';
-import './styles/bootstrap-grid.min.css';
-import './styles/bootstrap.min.css';
+import './styles/aboutus.css';
 // start the Stimulus application
 import './bootstrap';

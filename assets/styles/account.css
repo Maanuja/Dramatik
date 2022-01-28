@@ -14,7 +14,12 @@ header {
     right: 0;
 
 }
-
+#bootstrap-overrides .box-profil{
+    position: relative;
+    height: 50px;
+    width: 90%;
+    z-index: -999;
+}
 #nav-account {
     display: inline-flex;
     flex-direction: column;

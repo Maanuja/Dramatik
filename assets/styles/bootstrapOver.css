@@ -1,6 +1,7 @@
 #bootstrap-overrides a{
     text-decoration: none;
-    color: var(--blue-emrald);
+    color: black;
+    font-weight: bold;
 }
 
 #bootstrap-overrides a:hover, #bootstrap-overrides a::after{

@@ -5,68 +5,11 @@
     {{ encore_entry_link_tags('account') }}
 {% endblock %}
 
-{% block body %}
-{% block header %}
-    <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
-    <header class="p-3 text-white">
-        <nav >
-            <!-- <div class="container"> -->
-            <div class="d-flex flex-wrap  justify-content-center justify-content-lg-start">
-                <a href="{{ path('app_homepage_home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
-                </a>
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('app_homepage_home') }}">Home</a></button></li>
-                    <!-- <li><button type="button" class="btn btn-g btn-tube"><a href="index.php?route=drama">Dramas</a></button></li> -->
-                    <li class="nav-item dropdown">
-                        <button type="button" class="btn btn-g btn-tube">
-                            <a class=" dropdown-toggle" href="#" data-bs-toggle="dropdown">  Drama  </a>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <button type="button" class="btn btn-g btn-tube">
-                                    <a class="dropdown-item" href="#"> Abcdaire</a>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="btn btn-g btn-tube">
-                                    <a class="dropdown-item" href="#">QUIZZ</a>
-                                </button>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><button type="button" class="btn btn-g btn-tube"><a href="#">SUGGESTION</a></button></li>
-                    <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('app_homepage_apropos') }}">A PROPOS</a></button></li>
-                    <li><form>
-                            <label>
-                                <input class=" search__box" type="text" placeholder="Search">
-                            </label>
-                            <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
-                        </form></li>
-                </ul>
-                <div class="text-end">
-                    {#                    <?php if (isset($_SESSION['mail'])) { ?>#}
-                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_account') }}">Account</a></button>
-                    <button type="submit" class="btn btn-g btn-round"><a href="#">Log out</a></button>
-                    {#                    <?php#}
-                    {#                            }#}
-                    {#                            else {#}
-                    {#                            ?>#}
-                    {#                                            <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>#}
-                    {#                                            <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>#}
-                    {#                    <?php#}
-                    {#                            }#}
-                    {#                            ?>#}
-                </div>
-            </div>
-            <!-- </div> -->
-        </nav>
-    </header>
-    <div class="box-profil">
-
-    </div>
-{% endblock %}
 {% block content %}
+    <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+    <div class="box-profil">
+        
+    </div>
     <div class="container">
         <div class="row">
             <div class="left col-md-4">
@@ -109,10 +52,7 @@
         </div>
     </div>
 {% endblock %}
-    {% block footer %}
-        {{ parent() }}
-    {% endblock %}
-{% endblock %}
+
 
 {% block javascripts %}
 

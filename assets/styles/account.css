@@ -6,6 +6,9 @@
     object-fit: cover;
     filter: brightness(75%);
 }
+.display-5{
+    font-size: calc(1.1rem + 2.1vw);
+}
 
 header {
     position: absolute;
@@ -35,44 +38,32 @@ header {
     color: #888;
     flex-wrap: wrap;
     justify-content: space-between;
+    background-color: var(--sage-green);
+
 }
 .nav-item-account{
-    margin: 40px 30px 0 10px;
-
+    /*margin: 40px 30px 0 10px;*/
+    margin: 24px 41px;
+    padding: 0px 42px;
+    text-align: center;
 }
 /*#nav-account .nav-item-account:nth-child(1)*/
 #nav-account .nav-item-account:hover {
     color: #999;
     border-bottom: 2px solid #999;
 }
-.gallery  {
-    margin-top: 35px;
-}
 
-.gallery div {
-    margin-bottom: 30px;
-}
 
-.gallery img {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    cursor: pointer;
-}
-.gallery img:hover {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    cursor: pointer;
-    filter: brightness(75%);
-}
-#coor,#mquizz,#mscore,#mcritk{
+/*--------------------------------------------------------------
+    DISPLAY BOX
+--------------------------------------------------------------*/
+#coor,#mquizz,#mscore,#mcritk, #validquizz, #createdrama{
     display: none;
 }
-#coor:target,#mscore:target,#mcritk:target{
+#coor:target,#mscore:target,#mcritk:target, #createdrama:target{
     display: contents;
 }
-#mquizz:target{
+#mquizz:target, #validquizz:target{
     display: flex;
+    flex-direction: column;
 }

@@ -67,3 +67,29 @@ header {
     display: flex;
     flex-direction: column;
 }
+
+/*--------------------------------------------------------------
+	QUIZZ BOX
+--------------------------------------------------------------*/
+.gallery  {
+    margin-top: 35px;
+}
+
+.gallery div {
+    margin-bottom: 30px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.gallery img:hover {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    filter: brightness(75%);
+}
+

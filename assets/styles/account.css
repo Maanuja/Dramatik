@@ -8,6 +8,7 @@
 }
 .display-5{
     font-size: calc(1.1rem + 2.1vw);
+    text-transform: uppercase;
 }
 
 header {
@@ -38,7 +39,7 @@ header {
     color: #888;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: var(--sage-green);
+    background-color: rgb(201,111,70);
 
 }
 .nav-item-account{
@@ -47,12 +48,31 @@ header {
     padding: 0px 42px;
     text-align: center;
 }
-/*#nav-account .nav-item-account:nth-child(1)*/
-#nav-account .nav-item-account:hover {
-    color: #999;
-    border-bottom: 2px solid #999;
+#nav-account .nav-item-account a {
+    display: block;
+    position: relative;
+    padding: 0.2em 0;
 }
 
+/* Fade in */
+#nav-account .nav-item-account a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: black;
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+}
+
+#nav-account .nav-item-account a:hover::after,
+#nav-account .nav-item-account a:focus::after {
+    opacity: 1;
+    color: rgb(232,194,176);
+    transform: translate3d(0, 0.2em, 0);
+}
 
 /*--------------------------------------------------------------
     DISPLAY BOX
@@ -93,3 +113,51 @@ header {
     filter: brightness(75%);
 }
 
+/*--------------------------------------------------------------
+	COMMENTS
+--------------------------------------------------------------*/
+#mcritk .comment {
+    background-color: rgb(232,194,176);
+    padding: 30px;
+    margin: 15px 0;
+}
+
+#mcritk .comment > .pull-left {
+    margin-right:20px;
+}
+
+#mcritk .comment img {
+    max-width:106px;
+    border-radius: 50%;
+}
+
+#mcritk .comment h4 {
+    margin:0 0 10px;
+}
+
+#mcritk .comment p {
+    margin-bottom:15px;
+    text-align:justify;
+}
+
+#mcritk .comment-detail {
+    margin:0;
+}
+
+#mcritk .comment-detail {
+    color: var(--sage-green);
+    font-size:12px;
+    padding-right: 10px;
+    font-weight:600;
+}
+
+#mcritk .comment-detail a:hover {
+    text-decoration:underline;
+}
+
+#mcritk .comment-detail  i {
+    color: var(--sage-green);
+    font-size:15px;
+    margin-right:10px;
+    margin-left: 10px;
+}

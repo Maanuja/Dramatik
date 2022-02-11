@@ -7,12 +7,31 @@
 
 {% block content %}
     <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+    <div class="banner-change pull-right">
+        <input class="inputfile" type="file" name="pic" accept="image/png">
+        <label><i class="fa fa-camera"></i></label>
+    </div>
     <div class="box-profil">
-
+        <div class="row mx-auto h-100">
+            <div class="left col-md-3">
+                <div class="outer">
+                    <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}"/>
+                    <div class="inner">
+                        <input class="inputfile" type="file" name="pic" accept="image/png">
+                        <label><i class="fa fa-camera"></i></label>
+                    </div>
+                </div>
+            </div>
+            <div class="right col-md-9">
+                    <h3 class="display-4">Welcome, User name</h3>
+                    <h4>MM/DD/YYYY</h4>
+                    <h4>BEST SCORE</h4>
+            </div>
+        </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="left col-md-4">
+            <div class="left col-md-3">
                 <div id="nav-account">
                     <div class="nav-item-account"><a href="#coor">Mes Coordonnées</a></div>
                     <div class="nav-item-account"><a href="#mquizz">Mes Quizzs</a></div>
@@ -24,14 +43,12 @@
 
                 </div>
             </div>
-            <div class="right col-md-8 coord"  id="coor">
+            <div class="right col-md-9 coord"  id="coor">
                 <div class="col-lg-6 col-md-12 mx-auto mbr-form">
+                    <h2 class="display-5">Changer Mes Coordonnées</h2>
                     <!--Formbuilder Form-->
                     <form action="#" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
-                        <div class="dragArea form-row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h2 class="mbr-fonts-style pb-2 display-5">Changer Mes Coordonnées</h2>
-                            </div>
+                        <div class="form-row">
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
                                 <input name="text" placeholder="Pseudo" class="form-control display-7">
                             </div>
@@ -118,6 +135,9 @@
                     </div>
                     <!-- COMMENT - END -->
                 </div>
+            </div>
+            <div class="right col-md-8" id="mscore">
+                <div class="col-md-8 mt-5">Mes Scores</div>
             </div>
         </div>
     </div>

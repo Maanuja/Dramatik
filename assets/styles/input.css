@@ -32,14 +32,10 @@ form {
     }
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .contact.col, .cid-rArIj1RKHU .col-lg-6 {
         max-width: 48%;
     }
-}
-
-.coord h2 {
-    text-align: center;
 }
 
 .coord p {

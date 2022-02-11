@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzPlay') }}
+{% endblock %}
+
+{% block content %}
+{# progess n°question/total question avec while(?) et enchainement de question à l'aide de card/carrousel, 1 form submit à la fin #}
+    <form action="/valideQuizz" method="post">
+        <div class="d-flex flex-column justify-content-center ">
+
+            <h1 class="tab text-center display-5 my-4">Enoncé de la question</h1>
+            <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="questionnumber" id="btnradio1" value="Choix" autocomplete="off">
+                <label class="btn btn-lg border-dark" for="btnradio1">Choix 1</label>
+
+                <input type="radio" class="btn-check" name="questionnumber" id="btnradio2" autocomplete="off">
+                <label class="btn btn-lg border-dark" for="btnradio2">Choix 2</label>
+
+                <input type="radio" class="btn-check" name="questionnumber" id="btnradio3" autocomplete="off">
+                <label class="btn btn-lg border-dark" for="btnradio3">Choix 3</label>
+
+                <input type="radio" class="btn-check" name="questionnumber" id="btnradio4" autocomplete="off">
+                <label class="btn btn-lg border-dark px-5" for="btnradio4">Choix 4</label>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('quizzPlay') }}
+    {{ parent() }}
+{% endblock %}

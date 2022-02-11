@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzCreate') }}
+{% endblock %}
+
+{% block content %}
+    <form name="creerquizz" action="{{ path('app_quizz_questionc')}}" enctype="multipart/form-data" method="POST" >
+        <div id="boxcreate" class="container justify-content-center p-5">
+            <div class="row">
+                <div class="col ms-4">
+                    <input type="text" id="quizzcreate" name="quizz" placeholder="Titre du Quizz" aria-label="Titre du Quizz" required>
+                    <input type="text" id="quizzcreate" name="drama" placeholder="Titre du drama" aria-label="Titre du drama" required>
+
+                    <select class="form-select form-select-sm" name="nombre" aria-label="question selection">
+                        <option selected>Sélectionner le nombre de question souhaité</option>
+                        <option value="5">5 - Cinq</option>
+                        <option value="7">7 - Sept</option>
+                        <option value="10">10 - Dix</option>
+                    </select>
+
+                    <button type="submit" name="detailQuizz" class="btn btn-outline-secondary" >Create quizz </button>
+                </div>
+                <div class="col">
+
+
+                    <div class="form-input">
+                        <div class="preview">
+                            <img id="quizz-preview">
+                        </div>
+
+                        <label for="file-cq-1" class="input-group-text">Upload Image</label>
+                        <input type="file" class="form-control" id="file-cq-1" accept="image/*" >
+
+                    </div>
+
+
+                    {#  <img src="{{ asset('images/logoDramatik.png') }}" class="ratio ratio-16x9"> #}
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('quizzCreate') }}
+    {{ parent() }}
+{% endblock %}

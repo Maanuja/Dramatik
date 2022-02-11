@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quizzes{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzPlay') }}
+{% endblock %}
+
+{% block header %}
+    <div class="img-top">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="apercu row row-cols-3 row-cols-md-3 g-4">
+        <div class="col w-auto">
+            <div class="card">
+                <div class="ap card-body">
+                    <h5 class="card-title">Quizz Header</h5>
+                    <div class="card-footer" style="margin-top: 3rem;"><a href="#">Go somewhere</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col w-auto">
+            <div class="card">
+                <div class="ap card-body">
+                    <h5 class="card-title">Quizz Header</h5>
+                    <div class="card-footer" style="margin-top: 3rem;"><a href="#">Go somewhere</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col w-auto">
+            <div class="card">
+                <div class="ap card-body">
+                    <h5 class="card-title">Quizz Header</h5>
+                    <div class="card-footer" style="margin-top: 3rem;"><a href="#">Go somewhere</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#  https://freefrontend.com/css-card-hover-effects/  #}
+
+    <div class="deck row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('images/happibanner.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <h2 class="card-title">Card title</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('images/iontbobanner.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <h2 class="card-title">Card title</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('images/allofusaredeadQB.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <h2 class="card-title">Card title</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ asset('images/snowdropbanner.jpg') }}" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <h2 class="card-title">Card title</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

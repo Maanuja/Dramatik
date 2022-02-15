@@ -6,6 +6,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\formQuestionc;
 
 class quizzController extends AbstractController
 {
@@ -22,7 +23,13 @@ class quizzController extends AbstractController
      */
     public function questionc(): Response
     {
-        return $this->render('quizzCreate/questionCreate.html.twig');
+        //creer plusieur form avec boucle puis les envoyer
+        $arrayForms = array();
+        for ($i=0; $i<$_POST['nombre']; $i++) {
+            ${"form".$i} = $this->createForm(formQuestionc::class);
+            $arrayForms[] = ${"form".$i}->createView();
+        }
+        return $this->render('quizzCreate/questionCreate.html.twig', ["formlist"=>$arrayForms]);
     }
 
     /**
@@ -38,4 +45,5 @@ class quizzController extends AbstractController
     public function quizz(){
         return $this->render('quizzPlay/quizzStart.html.twig');
     }
+
 }

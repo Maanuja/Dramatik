@@ -56,3 +56,12 @@ function getImage() {
         })
     };
 }
+
+function handleNextQuestion(i) {
+    const ind = i;
+    const next = document.getElementsByName("question"+ind+1);
+    next.style.display=block;
+    document.getElementsByName("question"+i).style.display=none;
+
+    }
+

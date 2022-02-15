@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+{% block title %}Utilisateur{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('session') }}
+{% endblock %}
+{% block body %}
+    <div class="text-center">
+    {% set currentPath = path(app.request.attributes.get('_route'),
+                       app.request.attributes.get('_route_params')) %}
+        {% if 'login' in currentPath %}
+            <div class="movebox" id="movebox">
+        {% else %}
+            <div class="movebox right-panel-active" id="movebox">
+        {% endif %}
+{#        <div class="movebox" id="movebox">#}
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    <h1>Créer un Compte</h1>
+                    <input type="text" placeholder="Nom d'Utilisateur" />
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Mot de passe " id="mdpsu"/>
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
+                    </div>
+                    <input type="password" placeholder="Confirmer Mot de passe" id="mdpsd"/>
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
+                    </div>
+                    <button>S'inscrire</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="#">
+                    <h1>Reconecte-Toi</h1>
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Mot de passe " id="mdp"/>
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpco" aria-hidden="true" onClick="mdpc()"></i>
+                    </div>
+                    <a href="#">Mot de passe oublié?</a>
+                    <button>Se conecter</button>
+                </form>
+            </div>
+            <div class="overlayA-movebox">
+                <div class="overlayA">
+                    <div class="overlayA-panel overlayA-left">
+                        <button type="button" id="myBtn" class="ghost btn-close" aria-label="Close" href="{{ path('app_homepage_home') }}" ></button>
+                        <h1>Hey, Rebonjour!</h1>
+                        <p>Connecte-toi vite et fait les quizzs de la communauté</p>
+                        <button class="ghost" id="signIn">Se conecter</button>
+                    </div>
+                    <div class="overlayA-panel overlayA-right">
+                        <button type="button" id="myBtnbis" class="ghost btn-close" aria-label="Close" ></button>
+                        <h1>Salut, DramaLover!</h1>
+                        <p>Créé toi un compte et rejoins nous dans cette aventure!</p>
+                        <button class="ghost" id="signUp">S'inscrire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('session') }}
+    <script>
+    function mdpc()
+    {
+        var passwordInput = document.getElementById('mdp');
+        var passStatus = document.getElementById('pass-status-mdpco');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+    function mdpsu()
+    {
+        var passwordInput = document.getElementById('mdpsu');
+        var passStatus = document.getElementById('pass-status-mdpsu');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+    function mdpsd()
+    {
+        var passwordInput = document.getElementById('mdpsd');
+        var passStatus = document.getElementById('pass-status-mdpsd');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+
+    document.getElementById("myBtn").onclick = function ()
+    {
+        location.href = "{{ path('app_homepage_home') }}";
+    };
+    document.getElementById("myBtnbis").onclick = function ()
+    {
+        location.href = "{{ path('app_homepage_home') }}";
+    };
+    </script>
+{% endblock %}

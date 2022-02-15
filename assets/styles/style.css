@@ -43,13 +43,11 @@ nav ul li{
   padding-left: 1rem;
 
 }
-.btn.btn-tube {
-  border-radius: 21px;
-  width: 125px;
-}
+
 nav .btn.btn-g {
-  background: var(--wafer-dark);
-  color: var(--lightbrown) !important;
+	background-color: transparent;
+	/*background: var(--wafer-dark);*/
+	/*color: var(--lightbrown) !important;*/
 }
 
 @media all and (min-width: 992px) {
@@ -117,6 +115,13 @@ nav .btn.btn-g {
   font-size: 11px !important;
   color: var(--hunter-green) !important;
   /* padding: 8px 37px; */
+}
+
+.btn.btn-tube {
+	/*border-radius: 21px;*/
+	border-bottom: black;
+	width: 125px;
+	border-radius: 0;
 }
 
 .btn.btn-round {

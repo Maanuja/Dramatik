@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+{% block title %}Account{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
+{% block content %}
+    <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+    <div class="banner-change pull-right">
+        <input class="inputfile" type="file" name="pic" accept="image/png">
+        <label><i class="fa fa-camera"></i></label>
+    </div>
+    <div class="box-profil">
+        <div class="row mx-auto h-100">
+            <div class="left col-md-3">
+                <div class="outer">
+                    <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}"/>
+                    <div class="inner">
+                        <input class="inputfile" type="file" name="pic" accept="image/png">
+                        <label><i class="fa fa-camera"></i></label>
+                    </div>
+                </div>
+            </div>
+            <div class="right col-md-9">
+                    <h3 class="display-4">Welcome, User name</h3>
+                    <h4>MM/DD/YYYY</h4>
+                    <h4>BEST SCORE</h4>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="left col-md-3">
+                <div id="nav-account">
+                    <div class="nav-item-account"><a href="#coor">Mes Coordonnées</a></div>
+                    <div class="nav-item-account"><a href="#mquizz">Mes Quizzs</a></div>
+                    <div class="nav-item-account"><a href="#mcritk">Mes Critik</a></div>
+                    <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
+                    <div class="nav-item-account"><a href="#mscore">Créer Quizz</a></div>
+                    <div class="nav-item-account"><a href="#createdrama">Ajout Drama</a></div>
+                    <div class="nav-item-account"><a href="#validquizz">Validation quizz</a></div>
+
+                </div>
+            </div>
+            <div class="right col-md-9 coord"  id="coor">
+                <div class="col-lg-6 col-md-12 mx-auto mbr-form">
+                    <h2 class="display-5">Changer Mes Coordonnées</h2>
+                    <!--Formbuilder Form-->
+                    <form action="#" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
+                        <div class="form-row">
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
+                                <input name="text" placeholder="Pseudo" class="form-control display-7">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
+                                <div class="form-row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-for="phone" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                                <input type="text" name="phone" placeholder="00 00 00 00 00" class="form-control display-7" value="">
+                            </div>
+                            <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                                <input type="email" name="email" placeholder="Email" class="form-control display-7" value="">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="message">
+                                <input name="password" placeholder="Mot de passe" class="form-control display-7">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="message">
+                                <input name="password" placeholder="Confirme mot de passe" class="form-control display-7">
+                            </div>
+                            <div class="col-auto m-auto pt-5"><button type="submit" class="btn btn-submit display-7">ENVOYER</button></div>
+                        </div>
+                    </form>
+                    <!--Formbuilder Form-->
+                </div>
+            </div>
+            <div class="right col-md-8" id="mquizz">
+                <h2 class="display-5">MES QUIZZS</h2>
+                <div class="row gallery">
+                    <div class="col-md-4">
+                        <img data-src="holder.js/200x250?theme=thumb" alt="Thumbnail" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17e8c7240af%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17e8c7240af%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1875%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    </div>
+                    <div class="col-md-4">
+                        <img data-src="holder.js/200x250?theme=thumb" alt="Thumbnail" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17e8c7240af%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17e8c7240af%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1875%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    </div>
+                    <div class="col-md-4">
+                        <img data-src="holder.js/200x250?theme=thumb" alt="Thumbnail" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17e8c7240af%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17e8c7240af%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1875%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    </div>
+                    <div class="col-md-4">
+                        <img data-src="holder.js/200x250?theme=thumb" alt="Thumbnail" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17e8c7240af%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17e8c7240af%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1875%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    </div>
+                    <div class="col-md-4">
+                        <img data-src="holder.js/200x250?theme=thumb" alt="Thumbnail" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22200%22%20height%3D%22250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20250%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_17e8c7240af%20text%20%7B%20fill%3A%23eceeef%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A13pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_17e8c7240af%22%3E%3Crect%20width%3D%22200%22%20height%3D%22250%22%20fill%3D%22%2355595c%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2256.1875%22%20y%3D%22131%22%3EThumbnail%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+                    </div>
+                </div>
+            </div>
+            <div class="right col-md-8" id="mcritk">
+                <div class="col-sm-8" id="comments">
+                    <h2 class="display-5">MES Comments</h2>
+                    <!-- COMMENT 1 - START -->
+                    <div class="comment">
+                        <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
+                        <div class="comment-body">
+                            <h4 class="comment-heading">Maanu User</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="comment-detail pull-left">
+                                <i class="fa fa-calendar"></i>07/02/2022
+                                <i class="fa fa-thumbs-up"></i>10
+                            </div>
+                            <div class="comment-detail pull-right">
+                                <a href="">View drama</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- COMMENT - END -->
+                    <div class="comment">
+                        <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
+                        <div class="comment-body">
+                            <h4 class="comment-heading">Maanu User</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="comment-detail pull-left">
+                                <i class="fa fa-calendar"></i>07/02/2022
+                                <i class="fa fa-thumbs-up"></i>10
+                            </div>
+                            <div class="comment-detail pull-right">
+                                <a href="">View drama</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- COMMENT - END -->
+                </div>
+            </div>
+            <div class="right col-md-8" id="mscore">
+                <div class="col-md-8 mt-5">Mes Scores</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+{% endblock %}

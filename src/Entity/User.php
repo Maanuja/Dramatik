@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -29,7 +31,7 @@ class User
     #[ORM\Column(type: 'string', length: 50)]
     private $UsMail;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'roleFormat')]
     private $UsRole;
 
     #[ORM\Column(type: 'string', length: 100)]
@@ -37,6 +39,26 @@ class User
 
     #[ORM\Column(type: 'string', length: 100)]
     private $usImg;
+
+    #[ORM\OneToMany(mappedBy: 'qzUser', targetEntity: Quizz::class, orphanRemoval: true)]
+    private $quizzs;
+
+    #[ORM\OneToMany(mappedBy: 'scUser', targetEntity: Score::class, orphanRemoval: true)]
+    private $scores;
+
+    #[ORM\OneToMany(mappedBy: 'crUser', targetEntity: Critic::class)]
+    private $critics;
+
+    #[ORM\OneToMany(mappedBy: 'cmUser', targetEntity: Comment::class)]
+    private $comments;
+
+    public function __construct()
+    {
+        $this->quizzs = new ArrayCollection();
+        $this->scores = new ArrayCollection();
+        $this->critics = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +157,126 @@ class User
     public function setUsImg(string $usImg): self
     {
         $this->usImg = $usImg;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quizz[]
+     */
+    public function getQuizzs(): Collection
+    {
+        return $this->quizzs;
+    }
+
+    public function addQuizz(Quizz $quizz): self
+    {
+        if (!$this->quizzs->contains($quizz)) {
+            $this->quizzs[] = $quizz;
+            $quizz->setQzUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizz(Quizz $quizz): self
+    {
+        if ($this->quizzs->removeElement($quizz)) {
+            // set the owning side to null (unless already changed)
+            if ($quizz->getQzUser() === $this) {
+                $quizz->setQzUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Score[]
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
+    }
+
+    public function addScore(Score $score): self
+    {
+        if (!$this->scores->contains($score)) {
+            $this->scores[] = $score;
+            $score->setScUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScore(Score $score): self
+    {
+        if ($this->scores->removeElement($score)) {
+            // set the owning side to null (unless already changed)
+            if ($score->getScUser() === $this) {
+                $score->setScUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Critic[]
+     */
+    public function getCritics(): Collection
+    {
+        return $this->critics;
+    }
+
+    public function addCritic(Critic $critic): self
+    {
+        if (!$this->critics->contains($critic)) {
+            $this->critics[] = $critic;
+            $critic->setCrUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritic(Critic $critic): self
+    {
+        if ($this->critics->removeElement($critic)) {
+            // set the owning side to null (unless already changed)
+            if ($critic->getCrUser() === $this) {
+                $critic->setCrUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setCmUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getCmUser() === $this) {
+                $comment->setCmUser(null);
+            }
+        }
 
         return $this;
     }

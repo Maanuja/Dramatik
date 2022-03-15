@@ -16,11 +16,13 @@ class Character
     #[ORM\Column(type: 'string', length: 15)]
     private $chName;
 
-    #[ORM\Column(type: 'integer')]
-    private $chDrama;
 
     #[ORM\Column(type: 'array')]
     private $chQualities = [];
+
+    #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'characters')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $chDrama;
 
     public function getId(): ?int
     {
@@ -39,18 +41,6 @@ class Character
         return $this;
     }
 
-    public function getChDrama(): ?int
-    {
-        return $this->chDrama;
-    }
-
-    public function setChDrama(int $chDrama): self
-    {
-        $this->chDrama = $chDrama;
-
-        return $this;
-    }
-
     public function getChQualities(): ?array
     {
         return $this->chQualities;
@@ -59,6 +49,18 @@ class Character
     public function setChQualities(array $chQualities): self
     {
         $this->chQualities = $chQualities;
+
+        return $this;
+    }
+
+    public function getChDrama(): ?Drama
+    {
+        return $this->chDrama;
+    }
+
+    public function setChDrama(?Drama $chDrama): self
+    {
+        $this->chDrama = $chDrama;
 
         return $this;
     }

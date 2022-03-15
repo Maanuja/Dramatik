@@ -13,13 +13,7 @@ class Critic
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $crUser;
-
-    #[ORM\Column(type: 'integer')]
-    private $crDrama;
-
-    #[ORM\Column(type: 'datetime')]
+        #[ORM\Column(type: 'datetime')]
     private $crCreatedAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -46,33 +40,17 @@ class Critic
     #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
     private $crRate;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'critics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $crUser;
+
+    #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'critics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $crDrama;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCrUser(): ?int
-    {
-        return $this->crUser;
-    }
-
-    public function setCrUser(int $crUser): self
-    {
-        $this->crUser = $crUser;
-
-        return $this;
-    }
-
-    public function getCrDrama(): ?int
-    {
-        return $this->crDrama;
-    }
-
-    public function setCrDrama(int $crDrama): self
-    {
-        $this->crDrama = $crDrama;
-
-        return $this;
     }
 
     public function getCrCreatedAt(): ?\DateTimeInterface
@@ -179,6 +157,30 @@ class Critic
     public function setCrRate(string $crRate): self
     {
         $this->crRate = $crRate;
+
+        return $this;
+    }
+
+    public function getCrUser(): ?User
+    {
+        return $this->crUser;
+    }
+
+    public function setCrUser(?User $crUser): self
+    {
+        $this->crUser = $crUser;
+
+        return $this;
+    }
+
+    public function getCrDrama(): ?Drama
+    {
+        return $this->crDrama;
+    }
+
+    public function setCrDrama(?Drama $crDrama): self
+    {
+        $this->crDrama = $crDrama;
 
         return $this;
     }

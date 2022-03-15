@@ -13,30 +13,19 @@ class Choices
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $chQuestion;
-
     #[ORM\Column(type: 'text', nullable: true)]
     private $chChoice;
 
     #[ORM\Column(type: 'boolean')]
     private $chTrue;
 
+    #[ORM\ManyToOne(targetEntity: Questions::class, inversedBy: 'choices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $chQuestion;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getChQuestion(): ?int
-    {
-        return $this->chQuestion;
-    }
-
-    public function setChQuestion(int $chQuestion): self
-    {
-        $this->chQuestion = $chQuestion;
-
-        return $this;
     }
 
     public function getChChoice(): ?string
@@ -59,6 +48,18 @@ class Choices
     public function setChTrue(bool $chTrue): self
     {
         $this->chTrue = $chTrue;
+
+        return $this;
+    }
+
+    public function getChQuestion(): ?Questions
+    {
+        return $this->chQuestion;
+    }
+
+    public function setChQuestion(?Questions $chQuestion): self
+    {
+        $this->chQuestion = $chQuestion;
 
         return $this;
     }

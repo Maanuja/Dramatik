@@ -13,30 +13,19 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $cmUser;
-
     #[ORM\Column(type: 'text')]
     private $cmComment;
 
     #[ORM\Column(type: 'datetime')]
     private $cmDate;
 
+    #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $cmDrama;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCmUser(): ?int
-    {
-        return $this->cmUser;
-    }
-
-    public function setCmUser(int $cmUser): self
-    {
-        $this->cmUser = $cmUser;
-
-        return $this;
     }
 
     public function getCmComment(): ?string
@@ -59,6 +48,18 @@ class Comment
     public function setCmDate(\DateTimeInterface $cmDate): self
     {
         $this->cmDate = $cmDate;
+
+        return $this;
+    }
+
+    public function getCmDrama(): ?Drama
+    {
+        return $this->cmDrama;
+    }
+
+    public function setCmDrama(?Drama $cmDrama): self
+    {
+        $this->cmDrama = $cmDrama;
 
         return $this;
     }

@@ -13,42 +13,21 @@ class Score
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $scUser;
-
-    #[ORM\Column(type: 'integer')]
-    private $scQuizz;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $scScore;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $scUser;
+
+    #[ORM\ManyToOne(targetEntity: Quizz::class, inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $scQuizz;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getScUser(): ?int
-    {
-        return $this->scUser;
-    }
-
-    public function setScUser(int $scUser): self
-    {
-        $this->scUser = $scUser;
-
-        return $this;
-    }
-
-    public function getScQuizz(): ?int
-    {
-        return $this->scQuizz;
-    }
-
-    public function setScQuizz(int $scQuizz): self
-    {
-        $this->scQuizz = $scQuizz;
-
-        return $this;
     }
 
     public function getScScore(): ?int
@@ -59,6 +38,30 @@ class Score
     public function setScScore(?int $scScore): self
     {
         $this->scScore = $scScore;
+
+        return $this;
+    }
+
+    public function getScUser(): ?User
+    {
+        return $this->scUser;
+    }
+
+    public function setScUser(?User $scUser): self
+    {
+        $this->scUser = $scUser;
+
+        return $this;
+    }
+
+    public function getScQuizz(): ?Quizz
+    {
+        return $this->scQuizz;
+    }
+
+    public function setScQuizz(?Quizz $scQuizz): self
+    {
+        $this->scQuizz = $scQuizz;
 
         return $this;
     }

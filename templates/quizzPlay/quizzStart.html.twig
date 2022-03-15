@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quizz{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzPlay') }}
+{% endblock %}
+
+{% block content %}
+
+    <div id="quizzbox" class="d-grid justify-content-center gap-4">
+        <h1 class="text-center display-2">Quizz</h1>
+        <h1 class="text-center display-5">Nom du drama</h1>
+        <h1 class="text-center display-1">Nom du quizz</h1>
+        <h1 class="text-center display-6">Auteur-createdAt</h1>
+        <div class="text-center display-1"><i class="fa fa-play-circle playcolor"></i></div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('quizzPlay') }}
+    {{ parent() }}
+{% endblock %}

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 
 use DateTimeZone;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;
@@ -23,6 +25,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class quizzController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/quizzBook", name="quizB")
      */
@@ -33,7 +42,7 @@ class quizzController extends AbstractController
     /**
      * @Route("/qcre", name="quizzCreation")
      */
-    public function quizzcreate(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+    public function quizzcreate(Request $request, SluggerInterface $slugger): Response
     {
         $formquiz = $this->createForm(formQuizzC::class);
 
@@ -41,10 +50,10 @@ class quizzController extends AbstractController
         if ($formquiz->isSubmitted() && $formquiz->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $entityManager = $doctrine->getManager();
 
-            $drama = $doctrine->getRepository(Drama::class)->findOneBy(array('drName' => $formquiz->get('drama')->getData()));
-            $user = $doctrine->getRepository(User::class)->findOneBy(array('id' => 1));
+
+            $drama = $this->entityManager->getRepository(Drama::class)->findOneBy(array('drName' => $formquiz->get('drama')->getData()));
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(array('id' => 1));
             $var = $formquiz->get('nombre')->getData();
 
             $imageFile = $formquiz->get('file')->getData();
@@ -76,8 +85,8 @@ class quizzController extends AbstractController
 
                     // ... perform some action, such as saving the task to the database
 
-                    $entityManager->persist($quizz);
-                    $entityManager->flush();
+                    $this->entityManager->persist($quizz);
+                    $this->entityManager->flush();
 
                     return $this->redirectToRoute('creationQuestion', ['idQz' => $quizz->getId(), 'nb' => $var]);
                 }
@@ -89,9 +98,9 @@ class quizzController extends AbstractController
     /**
      * @Route("/qtcrea/{idQz}/{nb}", name="creationQuestion")
      */
-    public function questionc(int $idQz, int $nb, Request $request, ManagerRegistry $doctrine): Response
+    public function questionc(int $idQz, int $nb, Request $request): Response
     {
-        $quiz = $doctrine->getRepository(Quizz::class)->findOneBy(array('id' => $idQz));
+        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $idQz));
         if ($nb<0 || !$quiz) {
                 return $this->redirectToRoute('home');
         }
@@ -102,7 +111,7 @@ class quizzController extends AbstractController
             if ($nb == 0) {
                 return $this->render('quizzCreate/questionCreate.html.twig', ["fin" => "fin"]);
             }else {
-                $entityManager = $doctrine->getManager();
+                $this->entityManager = $this->entityManager->getManager();
 
 
                 $question = new Questions();
@@ -129,13 +138,13 @@ class quizzController extends AbstractController
                 $choice4->setChTrue(false);
                 $choice4->setChQuestion($question);
 
-                $entityManager->persist($question);
-                $entityManager->persist($choice1);
-                $entityManager->persist($choice2);
-                $entityManager->persist($choice3);
-                $entityManager->persist($choice4);
+                $this->entityManager->persist($question);
+                $this->entityManager->persist($choice1);
+                $this->entityManager->persist($choice2);
+                $this->entityManager->persist($choice3);
+                $this->entityManager->persist($choice4);
 
-                $entityManager->flush();
+                $this->entityManager->flush();
 
                 return $this->redirectToRoute('creationQuestion', ['idQz' => $quiz->getId(), 'nb' => $nb - 1]);
 
@@ -151,9 +160,9 @@ class quizzController extends AbstractController
     /**
      * @Route("/{quizzId}/question", name="quest")
      */
-    public function question(int $quizzId, Request $request, ManagerRegistry $doctrine): Response
+    public function question(int $quizzId, Request $request): Response
     {
-        $listQuestions = $doctrine->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
+        $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
         $correction = [];
 
         //var_dump($listQuestions);
@@ -167,7 +176,7 @@ class quizzController extends AbstractController
                 }
             }
 
-                //= $doctrine->getRepository(Choices::class)->findBy(array('chQuestion' => $ea->getId()));
+                //= $this->>entityManager->getRepository(Choices::class)->findBy(array('chQuestion' => $ea->getId()));
             //si bool true, on ajoute à la liste de correction
 
         }

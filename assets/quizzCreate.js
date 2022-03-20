@@ -44,7 +44,7 @@ function getImage() {
                 const width = this.width;
 
                 if (height < 1080 || width < 1920) {
-                    alert("Height and Width must not under 1080px for height and 1920px for width.");
+                    alert("Height and Width must not be under 1080px for height and 1920px for width.");
                     return false;
                 }
 
@@ -57,11 +57,4 @@ function getImage() {
     };
 }
 
-function handleNextQuestion(i) {
-    const ind = i;
-    const next = document.getElementsByName("question"+ind+1);
-    next.style.display=block;
-    document.getElementsByName("question"+i).style.display=none;
-
-    }
 

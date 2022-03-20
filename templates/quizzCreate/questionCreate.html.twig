@@ -5,53 +5,56 @@
     {{ encore_entry_link_tags('quizzCreate') }}
 {% endblock %}
 
+
+
 {% block content %}
-    <div class="d-flex flex-column justify-content-center" >
-    {% if app.request.get("quizz", null) %}
-    <p>{{ app.request.get("quizz") }}</p>
+    <div style="background-image: url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }})" >
+    {% if (formquest is defined) and (nombre is defined) %}
+        {{ form_start(formquest) }}
+        <div class="container-sm p-5" id="boxcreate" role="group" aria-label="Basic input text group">
+
+            <div class="form-floating">
+                {{ form_widget(formquest.question, {'id': 'floatingInput', 'attr': {'class':'form-control'}}) }}
+                <label for="floatingInput">Enonce de la Question</label>
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" style="background-color: lightgreen" id="Choix1">Correcte</span>
+                {{ form_widget(formquest.choice1, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix2">Fausse</span>
+                {{ form_widget(formquest.choice2, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix3">Fausse</span>
+                {{ form_widget(formquest.choice3, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix4">Fausse</span>
+                {{ form_widget(formquest.choice4, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <button type="submit" name="submit" class="btn">
+                {% if nombre==0 %}
+                    Soumettre  <i class="fa fa-arrow-right" id="nxtqst"></i>
+                {% else %}
+                    Next Question  <i class="fa fa-arrow-right" id="nxtqst"></i>
+                {% endif %}
+            </button>
+        </div>
+        {{ form_end(formquest) }}
     {% endif %}
 
-    {# render dans un loop avec un id different à chaque fois chaque form
-        id permet de connaitre le form en cours
-    css display defaut 1st and display none les autre
-    button click add Event Listener #}
-{#        {% for i in range(1, app.request.get("nombre")) %}#}
-        {% for form in formlist %}
-{{ form_start(form)   }}
+    {% if fin is defined %}
+        <h1>Vous avez soumis votre quizz ! Il sera accessible à tous une fois validé par nos admins. Merci !</h1>
+    {% endif %}
 
-            <div class="d-grid gap-4 m-3 w-75" id="boxcreate" role="group" aria-label="Basic input text group">
-            {#while compteur inferieur au nmb de question choisi lors de la creation du quizz + submit à chaque question -> nouvelle ligne dans la bdd#}
-            {#                <input type="text" name="{{ i }}question" class="tab text-center display-5 my-4" placeholder="Enonce de la question" aria-label="Enonce de la question" aria-describedby="enonce"> #}
-                    {{ form_widget(form.question) }}
-                <div class="input-group p-3">
-                    <span class="input-group-text" style="background-color: lightgreen" id="Choix1">Correcte</span>
 
-                        {{ form_widget(form.choix1) }}
-                </div>
-
-                <div class="input-group p-3">
-                    <span class="input-group-text" id="Choix2">Fausse</span>
-                    {{ form_widget(form.choix2) }}
-                </div>
-
-                <div class="input-group p-3">
-                    <span class="input-group-text" id="Choix3">Fausse</span>
-                    {{ form_widget(form.choix3) }}
-                </div>
-
-                <div class="input-group p-3">
-                    <span class="input-group-text" id="Choix4">Fausse</span>
-                    {{ form_widget(form.choix4) }}
-                </div>
-
-                <button type="submit" name="submit" class="btn" onclick="handleNextQuestion()">Next Question  <i class="fa fa-arrow-right" id="nxtqst"></i>
-                </button>
-            </div>
-        </div>
-
-{{ form_end(form) }}
-
-        {% endfor %}
+</div>
 {% endblock %}
 
 {% block javascripts %}

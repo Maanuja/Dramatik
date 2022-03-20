@@ -46,8 +46,7 @@ class formQuestion extends AbstractType
             $builder
                 ->add('question'.$i, TextType::class, ['disabled'=> true, 'data' => $question[$i]->getId(), 'label'=> $question[$i]->getQtQuestion()])
                 ->add('choice'.$i, ChoiceType::class, [
-                    'attr' => ['class'=>"d-grid btn-group-vertical gap-4 p-3",  'role'=>"group", 'aria-label'=>"Basic radio toggle button group"] ,
-                    'label' => 'Choisir',
+                   'label' => 'Choisir',
                     'choices' => $choices,
                     'expanded' => true,
                     'multiple' => false,
@@ -56,7 +55,6 @@ class formQuestion extends AbstractType
                         return ['class' => 'btn-check'];
                     },
 
-                    'label_attr' => ['class' => 'btn btn-lg border-dark']
                 ]);
         }
 

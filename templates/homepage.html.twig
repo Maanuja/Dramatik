@@ -15,7 +15,7 @@
                     <i class="fa fa-search search__icon"></i>
                 </form>
                 <div class="jumbotron">
-                    <a href="{{ path('app_homepage_home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
                     </a>
                     <p class="lead">Hello, Bienvenue sur le site de Dramatik! Le site de référence pour les dramas ainsi
@@ -25,11 +25,15 @@
                 </div>
             </div>
             <div class="right-box">
-                <div><a href="{{ path('app_homepage_home') }}">ACCUEIL</a></div>
+                <div><a href="{{ path('home') }}">ACCUEIL</a></div>
                 <div>DRAMAS</div>
                 <div>SUGGESTION</div>
                 <div><a href="{{ path('app_homepage_apropos') }}">A PROPOS</a></div>
-                <div><a href="{{ path('app_homepage_login') }}">SE CONNECTER</a></div>
+                {% if app.user %}
+                    <div><a href="{{ path('account') }}">COMPTE</a></div>
+                {%  else %}
+                    <div><a href="{{ path('app_homepage_login') }}">SE CONNECTER</a></div>
+                {% endif %}
             </div>
         </section>
     {% block footer %}
@@ -114,10 +118,10 @@
                     </div>
 
                     <ul class="nav col-md-4 justify-content-end">
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Accueil</a></li>
+                        <li class="nav-item"><a href="{{ path('home') }}" class="nav-link px-2 text-muted">Accueil</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Dramas</a></li>
                         <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Suggestion</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Apropos</a></li>
+                        <li class="nav-item"><a href="{{ path('app_homepage_apropos') }}" class="nav-link px-2 text-muted">Apropos</a></li>
                     </ul>
                 </footer>
             </div>

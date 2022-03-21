@@ -15,10 +15,10 @@
         {% endif %}
 {#        <div class="movebox" id="movebox">#}
             <div class="form-container sign-up-container">
-                <form action="#">
+                {#<form action="{{ path('app_register') }}" method="post">
                     <h1>Créer un Compte</h1>
                     <input type="text" placeholder="Nom d'Utilisateur" />
-                    <input type="email" placeholder="Email" />
+                    <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Mot de passe " id="mdpsu"/>
                     <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
@@ -27,34 +27,80 @@
                     <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
                     </div>
-                    <button>S'inscrire</button>
-                </form>
+                    <button type="submit">S'inscrire</button>
+                </form>#}
+                {% if 'register' in currentPath%}
+
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email,{
+                        'attr': {
+                                'placeholder': "Emails"
+                            }
+                    })
+                    }}
+                    {{ form_row(registrationForm.username,{
+                        'attr': {
+                            'placeholder': "Username"
+                        }
+                    })
+                    }}
+                    {{ form_row(registrationForm.password, {
+                        'attr': {
+                            'placeholder': "Mot de passe ",
+                        }
+                    }) }}
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
+                    </div>
+                    {{ form_row(registrationForm.password_confirm, {
+                        'attr': {
+                            'placeholder': "Confirmer Mot de passe",
+                        }
+                    }) }}
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
+                    </div>
+                    {{ form_row(registrationForm.agreeTerms) }}
+                    <button type="submit" class="btn">Register</button>
+                {{ form_end(registrationForm) }}
+                {% endif %}
             </div>
             <div class="form-container sign-in-container">
-                <form action="#">
+            {% if 'login' in currentPath%}
+
+                <form action="{{ path('app_login') }}" method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
                     <h1>Reconecte-Toi</h1>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Mot de passe " id="mdp"/>
+                        {% if last_username is defined%}
+                        <input type="email" placeholder="Email" value="{{ last_username }}" name="_username" id="inputEmail" autocomplete="email"/>
+                        {% endif %}
+                    <input type="password" placeholder="Mot de passe "  name="_password" id="inputPassword" autocomplete="current-password" />
                     <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpco" aria-hidden="true" onClick="mdpc()"></i>
                     </div>
                     <a href="#">Mot de passe oublié?</a>
                     <button>Se conecter</button>
+                     <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
                 </form>
+            {% endif %}
             </div>
             <div class="overlayA-movebox">
                 <div class="overlayA">
                     <div class="overlayA-panel overlayA-left">
-                        <button type="button" id="myBtn" class="ghost btn-close" aria-label="Close" href="{{ path('app_homepage_home') }}" ></button>
+                        <button type="button" id="myBtn" class="ghost btn-close" aria-label="Close" href="{{ path('home') }}" ></button>
                         <h1>Hey, Rebonjour!</h1>
                         <p>Connecte-toi vite et fait les quizzs de la communauté</p>
-                        <button class="ghost" id="signIn">Se conecter</button>
+                        <button class="ghost" id="signIn"><a href="{{ path('app_login') }}">Se conecter</a></button>
                     </div>
                     <div class="overlayA-panel overlayA-right">
                         <button type="button" id="myBtnbis" class="ghost btn-close" aria-label="Close" ></button>
                         <h1>Salut, DramaLover!</h1>
                         <p>Créé toi un compte et rejoins nous dans cette aventure!</p>
-                        <button class="ghost" id="signUp">S'inscrire</button>
+                        <button class="ghost" id="signUp"><a href="{{ path('app_register') }}">S'inscrire</a></button>
                     </div>
                 </div>
             </div>
@@ -68,7 +114,7 @@
     <script>
     function mdpc()
     {
-        var passwordInput = document.getElementById('mdp');
+        var passwordInput = document.getElementById('inputPassword');
         var passStatus = document.getElementById('pass-status-mdpco');
 
         if (passwordInput.type == 'password'){
@@ -83,7 +129,7 @@
     }
     function mdpsu()
     {
-        var passwordInput = document.getElementById('mdpsu');
+        var passwordInput = document.getElementById('registration_form_password');
         var passStatus = document.getElementById('pass-status-mdpsu');
 
         if (passwordInput.type == 'password'){
@@ -98,7 +144,7 @@
     }
     function mdpsd()
     {
-        var passwordInput = document.getElementById('mdpsd');
+        var passwordInput = document.getElementById('registration_form_password_confirm');
         var passStatus = document.getElementById('pass-status-mdpsd');
 
         if (passwordInput.type == 'password'){
@@ -114,11 +160,11 @@
 
     document.getElementById("myBtn").onclick = function ()
     {
-        location.href = "{{ path('app_homepage_home') }}";
+        location.href = "{{ path('home') }}";
     };
     document.getElementById("myBtnbis").onclick = function ()
     {
-        location.href = "{{ path('app_homepage_home') }}";
+        location.href = "{{ path('home') }}";
     };
     </script>
 {% endblock %}

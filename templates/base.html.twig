@@ -19,11 +19,11 @@
             <nav>
                 <!-- <div class="container"> -->
                 <div class="d-flex flex-wrap  justify-content-center justify-content-lg-start">
-                    <a href="{{ path('app_homepage_home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                         <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
                     </a>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('app_homepage_home') }}">Home</a></button></li>
+                        <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('home') }}">Home</a></button></li>
                         <!-- <li><button type="button" class="btn btn-g btn-tube"><a href="index.php?route=drama">Dramas</a></button></li> -->
                         <li class="nav-item dropdown">
                             <button type="button" class="btn btn-g btn-tube">
@@ -52,17 +52,14 @@
                             </form></li>
                     </ul>
                     <div class="text-end">
-                        {#                    <?php if (isset($_SESSION['mail'])) { ?>#}
-{#                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="#">Account</a></button>#}
-{#                        <button type="submit" class="btn btn-g btn-round"><a href="#">Log out</a></button>#}
-                        {#                    <?php#}
-                        {#                            }#}
-                        {#                            else {#}
-                        {#                            ?>#}
-                                                                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
-                                                                    <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>                                            <?php
-                        {#                            }#}
-                        {#                            ?>#}
+                        {% if app.user %}
+                            <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('account') }}">Account</a></button>
+                            <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
+                        {% else %}
+                            <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
+                            <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>                                            <?
+                        {% endif %}
+
                     </div>
                 </div>
                 <!-- </div> -->

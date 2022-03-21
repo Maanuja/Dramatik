@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="right col-md-9">
-                    <h3 class="display-4">Welcome, User name</h3>
+                    <h3 class="display-4">Welcome, {{ app.user.username }}</h3>
                     <h4>MM/DD/YYYY</h4>
                     <h4>BEST SCORE</h4>
             </div>
@@ -50,23 +50,20 @@
                     <form action="#" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
                         <div class="form-row">
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
-                                <input name="text" placeholder="Pseudo" class="form-control display-7">
+                                <input name="text" id="username" placeholder="Pseudo" class="form-control display-7">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
                                 <div class="form-row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">
+                                        <input type="text" id="nameFirst" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">
+                                        <input type="text" id="nameFirst" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">
                                     </div>
                                 </div>
                             </div>
-                            <div data-for="phone" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
-                                <input type="text" name="phone" placeholder="00 00 00 00 00" class="form-control display-7" value="">
-                            </div>
-                            <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
-                                <input type="email" name="email" placeholder="Email" class="form-control display-7" value="">
+                            <div data-for="email" class="col-lg-12 col-md-12 col-sm-12">
+                                <input type="email" id="email" name="email" placeholder="Email" class="form-control display-7" value="">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="message">
                                 <input name="password" placeholder="Mot de passe" class="form-control display-7">

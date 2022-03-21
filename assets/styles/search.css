@@ -1,0 +1,14 @@
+#bootstrap-overrides .card{
+    background-color: transparent;
+}
+#bootstrap-overrides .card-body{
+    border-radius: 0px;
+    border-style: solid ;
+    border-left: black;
+}
+#bootstrap-overrides hr:not([size]) {
+    height: 2px;
+    border-width: thick;
+    color: black;
+    opacity: 1;
+}

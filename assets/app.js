@@ -11,6 +11,8 @@ import'./newsletter.js';
 import './styles/app.css';
 import './styles/bootstrapOver.css';
 import './styles/style.css';
+import './styles/search.css';
+
 import './styles/bootstrap-grid.css';
 import './styles/bootstrap-grid.min.css';
 import './styles/bootstrap.min.css';

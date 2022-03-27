@@ -8,30 +8,67 @@
 {% endblock %}
 
 {% block content %}
-{# progess n°question/total question avec while(?) et enchainement de question à l'aide de card/carrousel, 1 form submit à la fin #}
-    <form action="/valideQuizz" method="post">
-        <div class="d-flex flex-column justify-content-center ">
-
-            <h1 class="tab text-center display-5 my-4">Enoncé de la question</h1>
-            <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio1" value="Choix" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio1">Choix 1</label>
-
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio2" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio2">Choix 2</label>
-
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio3" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio3">Choix 3</label>
-
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio4" autocomplete="off">
-                <label class="btn btn-lg border-dark px-5" for="btnradio4">Choix 4</label>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+            <ul class="moving-steps">
+                {% for i in range(0,numberQuestion-1)%}
+                    <li></li>
+                {% endfor %}
+            </ul>
         </div>
-    </form>
 
-{% endblock %}
+        <div class="col-11">
+        {{ form_start(form) }}
 
-{% block javascripts %}
-    {{ encore_entry_script_tags('quizzPlay') }}
+
+
+        {# progess n°question/total question avec while(?) et enchainement de question à l'aide de card/carrousel, 1 form submit à la fin #}
+
+        {% for i in range(0,numberQuestion-1)%}
+
+
+        <div class="taille flex-column justify-content-center" id="question{{ i }}" >
+
+
+                <h2 class="text-center my-4">{{ form_label(attribute(form, 'question' ~ i )) }}</h2>
+
+                <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
+                    {#            {{ field.choices(attribute(form, 'choice' ~ i)) }}#}
+                    {% set n=0 %}
+                    {% for label, widget in field_choices(attribute(form, 'choice' ~ i)) %}
+
+                        <input type="radio" class="btn-check" name="questionnumber{{ i }}" id="btnradio{{ i }}{{ n }}" value="{{ widget }}" autocomplete="off">
+                        <label id="choix" class="btn btn-outline-success px-5" for="btnradio{{ i }}{{ n }}">{{ label }}</label>
+                        {% set n = n+1 %}
+                    {% endfor %}
+                </div>
+
+                {% if i==numberQuestion-1 %}
+                    <button type="submit" id="nxtqst" name="submit" class="btn">
+                        Soumettre  <i class="fa fa-arrow-right" ></i>
+                    </button>
+                {% else %}
+                    <button type="button" name="next" id="nxtqst" value="{{ i }}" class="btn">
+                        Next Question  <i class="fa fa-arrow-right" ></i>
+                    </button>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+
+
+
+            {{ form_end(form, {render_rest: false}) }}
+        </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+
+    {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('quizzPlay') }}
+
 {% endblock %}

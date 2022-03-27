@@ -127,12 +127,13 @@
 
 
 .taille{
-    display: none !important;
+    display: none ;
 }
 
 .taille:first-child{
-    display: flex !important;
+    display: flex ;
 }
+
 .taille label{
     text-transform: capitalize;
 }
@@ -140,6 +141,47 @@
     font-size: 20px !important;
 
 }
+
+.container{
+    margin: 10px !important;
+}
+.moving-steps {
+    counter-reset: headings;
+    list-style: none;
+    position: relative;
+
+
+}
+
+
+.moving-steps > li:before {
+    background-color: indianred;
+    border-radius: 50%;
+    color: #FFFFFF;
+    counter-increment: headings;
+    content: counter(headings);
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+
+    text-align: center;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+}
+
+.moving-steps > li:after{
+    content:' ';
+    border-left:2px solid ;
+    margin:0 1.5rem;
+    height:100%;
+}
+
+.moving-steps > li:last-of-type:after {
+    border: none;
+}
+
+
 
 
 

@@ -14,9 +14,10 @@
 
 <body id="bootstrap-overrides" class="bglight">
 {% block body %}
-    <header class="p-3 text-white">
+    <header>
+
         {% block nav %}
-            <nav>
+            <nav class="p-3 text-white">
                 <!-- <div class="container"> -->
                 <div class="d-flex flex-wrap  justify-content-center justify-content-lg-start">
                     <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -37,7 +38,7 @@
                                 </li>
                                 <li>
                                     <button type="button" class="btn btn-g btn-tube">
-                                        <a class="dropdown-item" href="#">QUIZZ</a>
+                                        <a class="dropdown-item" href="{{ path('quizB') }}">QUIZZ</a>
                                     </button>
                                 </li>
                             </ul>

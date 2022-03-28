@@ -32,18 +32,11 @@ class homepageController extends AbstractController
         return $this->render('account/session.html.twig');
     }
     /**
-     * @Route("/signup")
+     * @Route("/register")
      */
     public function signup(): Response
     {
         return $this->render('account/session.html.twig');
-    }
-    /**
-     * @Route("/account")
-     */
-    public function account(): Response
-    {
-        return $this->render('account/account.html.twig');
     }
     /**
      * @Route("/search")
@@ -51,13 +44,5 @@ class homepageController extends AbstractController
     public function search(): Response
     {
         return $this->render('search.html.twig');
-    }
-
-    /**
-    * @Route("hello/{firstname<[A-Z a-z]+>}/{lastname<[A-Z a-z]+>}")
-    */
-    public function hello(string $lastname, string $firstname): Response
-    {
-        return new Response(sprintf('coucou %s %s', $firstname, $lastname));
     }
 }

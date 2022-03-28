@@ -6,6 +6,24 @@
 {% endblock %}
 {% block content %}
     <section class="apropos-intro">
+        {% for message in app.flashes('success') %}
+            <!-- Modal -->
+            <div id="exampleModalCenter" class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="padding-right: 17px; display: block;">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Merci de nous avoir contacté</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ message }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"><a href="{{ path('apropos') }}">Quitter</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         <img class="imgdrama" src="{{ asset('images/apropos/bgtext.jpg') }}" alt="Symfony!">
         <div class="container">
             <div class="row justify-content-md-end">
@@ -117,7 +135,8 @@
             <div class="row">
                 <div class="col-lg-10 col-md-12 mx-auto mbr-form">
                     <!--Formbuilder Form-->
-                    <form action="#" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
+                    <form action="#" method="POST" onsubmit="contact()" id="contact" class="mbr-form form-with-styler" data-form-title="Form Name">
+                        {{ form_start(contact_form) }}
                         <div class="dragArea form-row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <h5 class="mbr-fonts-style pb-2 display-2">
@@ -130,24 +149,32 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
                                 <div class="form-row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">
+                                        {{ form_row(contact_form.ctFName, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Prénom'}}) }}
+{#                                        <input type="text" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">#}
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                        <input type="text" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">
+                                        {{ form_row(contact_form.ctLName, {'attr': {'class': 'form-control text-multiple'}}) }}
+{#                                        <input type="text" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">#}
                                     </div>
                                 </div>
                             </div>
-                            <div data-for="phone" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
-                                <input type="text" name="phone" placeholder="00 00 00 00 00" class="form-control display-7" value="">
+                            <div data-for="phone" class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                <p id="err"></p>
+                                {{ form_row(contact_form.ctTel, {'attr': {'class': 'form-control text-multiple'}}) }}
+{#                                <input type="text" name="phone" placeholder="00 00 00 00 00" class="form-control display-7" value="">#}
                             </div>
                             <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
-                                <input type="email" name="email" placeholder="Email" class="form-control display-7" value="">
+                                <p id="err2"></p>
+                                {{ form_row(contact_form.ctMail, {'attr': {'class': 'form-control display-7"'}}) }}
+{#                                <input type="email" name="email" placeholder="Email" class="form-control display-7" value="">#}
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="message">
-                                <textarea name="message" placeholder="Message" class="form-control display-7"></textarea>
+                                {{ form_row(contact_form.ctMessage, {'attr': {'class': 'form-control display-7"'}}) }}
+{#                                <textarea name="message" placeholder="Message" class="form-control display-7"></textarea>#}
                             </div>
-                            <div class="col-auto m-auto pt-5"><button type="submit" class="btn btn-submit display-7">ENVOYER</button></div>
+                            <div class="col-auto m-auto pt-5"><input type="submit" value="ENVOYER" class="btn btn-submit display-7" ></div>
                         </div>
+                        {{ form_end(contact_form) }}
                     </form>
                     <!--Formbuilder Form-->
                 </div>

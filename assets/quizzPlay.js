@@ -11,7 +11,10 @@ document.querySelectorAll('#nxtqst').forEach(item => {
 
         tab.style.display = "none";
         tabN.style.display = "block";
-        //alert(number +"H eight and Width must not be under 1080px for height and 1920px for width.");
+
+        var stp = document.querySelector('.moving-steps li:nth-child('+nb+')');
+        stp.classList.add("active");
+
         return true;
     })});
 

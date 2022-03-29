@@ -39,7 +39,7 @@
                     {% for label, widget in field_choices(attribute(form, 'choice' ~ i)) %}
 
                         <input type="radio" class="btn-check" name="questionnumber{{ i }}" id="btnradio{{ i }}{{ n }}" value="{{ widget }}" autocomplete="off">
-                        <label id="choix" class="btn btn-outline-success px-5" for="btnradio{{ i }}{{ n }}">{{ label }}</label>
+                        <label id="choix" class="btn btn-outline-selected px-5" for="btnradio{{ i }}{{ n }}">{{ label }}</label>
                         {% set n = n+1 %}
                     {% endfor %}
                 </div>

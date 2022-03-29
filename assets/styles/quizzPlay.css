@@ -155,9 +155,9 @@
 
 
 .moving-steps > li:before {
-    background-color: indianred;
+    border: 1px solid indianred;
     border-radius: 50%;
-    color: #FFFFFF;
+    color: white;
     counter-increment: headings;
     content: counter(headings);
     display: block;
@@ -179,6 +179,18 @@
 
 .moving-steps > li:last-of-type:after {
     border: none;
+}
+
+.active:before{
+    background-color: darkred !important;
+}
+
+.btn-outline-selected{
+    border-color: orchid;
+}
+
+.btn-outline-selected:hover{
+    background-color: orchid;
 }
 
 

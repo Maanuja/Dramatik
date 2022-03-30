@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
@@ -37,6 +38,9 @@ class RegistrationFormType extends AbstractType
                         'class'=> "col-lg-6 col-md-12 col-sm-12 form-group",
                     ],
                     'constraints' => [
+                        new Regex(['pattern' => '/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/',
+                            'message' => 'Votre mot de passe doit comporter au moins 8 caractères, des lettres majuscules et minuscules, des chiffres et au moins un caractère spécial.',
+                        ]),
                         new NotBlank([
                             'message' => 'Please enter a password',
                         ]),

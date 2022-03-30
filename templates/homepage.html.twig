@@ -13,6 +13,11 @@
                         <input class=" search__box" type="text" placeholder="Search">
                     </label>
                     <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 </form>
                 <div class="jumbotron">
                     <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

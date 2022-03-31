@@ -64,7 +64,7 @@
     max-width : 100%;
     border-radius : 15px;
     object-fit: cover;
- }
+}
 
 
 .apercu .card-title{
@@ -127,6 +127,7 @@
 }
 
 
+
 .container{
     margin: 10px !important;
 }
@@ -134,10 +135,7 @@
     counter-reset: headings;
     list-style: none;
     position: relative;
-
-
 }
-
 
 .moving-steps > li:before {
     border: 1px solid indianred;
@@ -148,7 +146,6 @@
     display: block;
     font-size: 16px;
     font-weight: bold;
-
     text-align: center;
     width: 3rem;
     height: 3rem;
@@ -170,7 +167,6 @@
     background-color: darkred !important;
 }
 
-
 .taille{
     display: none ;
 }
@@ -178,7 +174,6 @@
 .taille:first-child{
     display: flex ;
 }
-
 
 .btn-outline-selected{
     border-color: orchid;
@@ -196,8 +191,4 @@
     width: 100%;
     font-size: 20px !important;
 }
-
-
-
-
 

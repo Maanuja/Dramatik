@@ -29,7 +29,9 @@ class formQuestion extends AbstractType
             }
             $builder
                 ->add('choice'.$i, ChoiceType::class, [
+
                     'label'=> $question[$i]->getQtQuestion(),
+
                     'choices' => $choices,
                     'expanded' => true,
                     'multiple' => false,
@@ -40,9 +42,10 @@ class formQuestion extends AbstractType
                         // adds a class like attending_yes, attending_no, etc
                         return ['class' => 'btn-check'];
                     },
+
                 ]);
         }
         $builder
-        ->add('submit', SubmitType::class);
+            ->add('submit', SubmitType::class);
     }
 }

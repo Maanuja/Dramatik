@@ -28,6 +28,22 @@
     width: 5.2rem;
     text-align: center;
 }
+
+.form-floating{
+    width: 80%;
+    text-align: center;
+    margin-left: 10%;
+}
+
+
+.form-floating input{
+    text-align: center;
+}
+
+#boxcreate span{
+    width: 5.2rem;
+    text-align: center;
+}
 #quizzcreate {
     border: none;
     background-color: var(--wafer);

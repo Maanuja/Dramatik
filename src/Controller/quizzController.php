@@ -34,18 +34,18 @@ class quizzController extends AbstractController
      * @Route("/quizzBook", name="quizB")
      */
     public function quizBook(Request $request, PaginatorInterface $paginator): Response
-{
-    $data = $this->entityManager->getRepository(Quizz::class)->findAll();
-    $recent = $this->entityManager->getRepository(Quizz::class)->findRecentQuizz();
+    {
+        $data = $this->entityManager->getRepository(Quizz::class)->findAll();
+        $recent = $this->entityManager->getRepository(Quizz::class)->findRecentQuizz();
 
-    $quizzes = $paginator->paginate(
-        $data,
-        $request->query->getInt('page', 1),
-        2
-    );
+        $quizzes = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            2
+        );
 
-    return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent]);
-}
+        return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent]);
+    }
     /**
      * @Route("/qcre", name="quizzCreation")
      */
@@ -88,8 +88,6 @@ class quizzController extends AbstractController
                     $quizz->setQzImg($newFilename);
                     $quizz->setQzUser($user);
 
-
-
                     $this->entityManager->persist($quizz);
                     $this->entityManager->flush();
 
@@ -107,44 +105,48 @@ class quizzController extends AbstractController
     {
         $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $idQz));
         if ($nb<0 || !$quiz) {
-                return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home');
         }
+
 
         $questioncForm = $this->createForm(formQuestionc::class);
         $questioncForm->handleRequest($request);
         if ($questioncForm->isSubmitted() && $questioncForm->isValid()) {
 
 
-                $question = new Questions();
-                $question->setQtQuestion($questioncForm->get('question')->getData());
-                $question->setQtQuizz($quiz);
 
-                $choices = array();
-                for($i=1; $i<=4; $i++){
-                    $choice = new Choices();
-                    $choice->setChChoice($questioncForm->get('choice'.$i)->getData());
-                    if($i=1){
-                        $choice->setChTrue(true);
-                    }
-                    else{
-                        $choice->setChTrue(false);
-                    }
-                    $choice->setChQuestion($question);
-                    $choices[] = $choice;
+            $question = new Questions();
+            $question->setQtQuestion($questioncForm->get('question')->getData());
+            $question->setQtQuizz($quiz);
+
+            $choices = array();
+            for($i=1; $i<=4; $i++){
+                $choice = new Choices();
+                $choice->setChChoice($questioncForm->get('choice'.$i)->getData());
+                if($i=1){
+                    $choice->setChTrue(true);
                 }
-
-                $this->entityManager->persist($question);
-                foreach ($choices as $choice){
-                    $this->entityManager->persist($choice);
+                else{
+                    $choice->setChTrue(false);
                 }
+                $choice->setChQuestion($question);
+                $choices[] = $choice;
+            }
 
-                $this->entityManager->flush();
+            $this->entityManager->persist($question);
+            foreach ($choices as $choice){
+                $this->entityManager->persist($choice);
+            }
+
+            $this->entityManager->flush();
+
 
             if ($nb == 1) {
                 return $this->render('quizzCreate/questionCreate.html.twig', ["fin" => "fin"]);
             }
 
-                return $this->redirectToRoute('creationQuestion', ['idQz' => $quiz->getId(), 'nb' => $nb - 1]);
+
+            return $this->redirectToRoute('creationQuestion', ['idQz' => $quiz->getId(), 'nb' => $nb - 1]);
 
 
         }
@@ -158,7 +160,9 @@ class quizzController extends AbstractController
     public function question(int $quizzId, Request $request): Response
     {
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
+
         $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $quizzId));
+
 
 
         $questionForm = $this->createForm(formQuestion::class, $listQuestions);

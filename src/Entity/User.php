@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
+
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -27,11 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Assert\EqualTo(propertyPath: "password_confirm", message: "The password is invalid.")]
-
     private $password;
-
-    public $password_confirm;
 
     #[ORM\Column(type: 'string', length: 30)]
     private $username;

@@ -52,14 +52,14 @@
                     <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
                     </div>
-                    {{ form_row(registrationForm.password_confirm, {
+                    {#{{ form_row(registrationForm.password_confirm, {
                         'attr': {
                             'placeholder': "Confirmer Mot de passe",
                         }
-                    }) }}
-                    <div class="p-viewer">
+                    }) }}#}
+                   {# <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
-                    </div>
+                    </div>#}
                     {{ form_row(registrationForm.agreeTerms) }}
                     <button type="submit" class="btn">Register</button>
                 {{ form_end(registrationForm) }}

@@ -1,0 +1,79 @@
+{% extends 'user/user.html.twig'%}
+{% block title %}Modifer Profil{% endblock %}
+    {% block boxprofil %}
+
+        <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+        <div class="banner-change pull-right">
+            <input class="inputfile" type="file" name="pic" accept="image/png">
+            <label><i class="fa fa-camera"></i></label>
+        </div>
+        <div class="box-profil">
+            <div class="row mx-auto h-100">
+                <div class="left col-md-3">
+                    <div class="outer">
+                        <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}"/>
+                        <div class="inner">
+{#                            {{ form_row(form_userinfo.UsImg, {'attr': {'class': 'inputfile', 'onchange': "loadFile(event)"}}) }}#}
+{#                            <input class="inputfile" id="update_user_form_UsImg" type="file" name="update_user_form[UsImg]" accept="image/png" onchange="loadFile(event)">#}
+                            <label><i class="fa fa-camera"></i></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="right col-md-9">
+                    <h3 class="display-4">Welcome, {{ app.user.username }}</h3>
+                    <h4>MM/DD/YYYY</h4>
+                    <h4>BEST SCORE</h4>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% block rightbox %}
+    <div class="right col-md-9 coord"  id="">
+        <div class="col-lg-6 col-md-12 mx-auto mbr-form">
+            <h2 class="display-5">Changer Mes Coordonnées</h2>
+            <!--Formbuilder Form-->
+            <form action="{{ path('modify_userinfo') }}" method="post" class="mbr-form form-with-styler" data-form-title="Form Name">
+                {{ form_start(form_userinfo) }}
+                <div class="form-row">
+                    <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
+                        {{ form_row(form_userinfo.username, {'attr': {'class': 'form-control display-7', 'placeholder': 'Pseudo'}}) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
+                        <div class="form-row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                {{ form_row(form_userinfo.UsLname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Nom'}}) }}
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                {{ form_row(form_userinfo.UsFname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Prénom'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div data-for="email" class="col-lg-12 col-md-12 col-sm-12">
+                        {{ form_row(form_userinfo.email, {'attr': {'class': 'form-control display-7', 'placeholder': 'Email'}}) }}
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                        {{ form_row(form_userinfo.UsImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'value': "yes"}}) }}
+{#                        <input name="password" placeholder="Mot de passe" class="form-control display-7">#}
+                        <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
+
+                    </div>
+                    <div class="col-auto m-auto pt-5">
+                        <button type="submit" class="btn btn-submit display-7">ENVOYER</button>
+                    </div>
+                </div>
+                {{ form_end(form_userinfo) }}
+            </form>
+            <!--Formbuilder Form-->
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById("output");
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+    </script>
+{% endblock %}

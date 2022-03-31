@@ -24,7 +24,7 @@ class Drama
     #[ORM\Column(type: 'integer')]
     private $drNbEp;
 
-    #[ORM\Column(type: 'decimal', precision: 2, scale: 1, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1, nullable: true)]
     private $drRate;
 
     #[ORM\Column(type: 'string', length: 100)]
@@ -47,6 +47,15 @@ class Drama
 
     #[ORM\OneToMany(mappedBy: 'qzDrama', targetEntity: Quizz::class)]
     private $quizzs;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $createdAt;
+
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $updatedAt;
+
+    #[ORM\Column(type: 'date', nullable: true)]
+    private $drDateEnd;
 
     public function __construct()
     {
@@ -261,6 +270,42 @@ class Drama
                 $quizz->setQzDrama(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getDrDateEnd(): ?\DateTimeInterface
+    {
+        return $this->drDateEnd;
+    }
+
+    public function setDrDateEnd(?\DateTimeInterface $drDateEnd): self
+    {
+        $this->drDateEnd = $drDateEnd;
 
         return $this;
     }

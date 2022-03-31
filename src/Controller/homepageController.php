@@ -9,26 +9,40 @@ use Symfony\Component\Routing\Annotation\Route;
 class homepageController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function home(): Response
     {
-        return new Response('HomePage');
+        return $this->render('homepage.html.twig');
     }
 
     /**
-     * @Route("/contact")
+     * @Route("/apropos")
      */
-    public function contact(): Response
+    public function apropos(): Response
     {
-        return new Response( 'PageContact');
+        return $this->render('apropos.html.twig');
     }
 
     /**
-    * @Route("hello/{firstname<[A-Z a-z]+>}/{lastname<[A-Z a-z]+>}")
-    */
-    public function hello(string $lastname, string $firstname): Response
+     * @Route("/login")
+     */
+    public function login(): Response
     {
-        return new Response(sprintf('coucou %s %s', $firstname, $lastname));
+        return $this->render('account/session.html.twig');
+    }
+    /**
+     * @Route("/register")
+     */
+    public function signup(): Response
+    {
+        return $this->render('account/session.html.twig');
+    }
+    /**
+     * @Route("/search")
+     */
+    public function search(): Response
+    {
+        return $this->render('search.html.twig');
     }
 }

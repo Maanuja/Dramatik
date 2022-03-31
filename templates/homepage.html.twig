@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+{% block title %}Homepage{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+{% block body %}
+    <div class="container full-height">
+        <section class="column-center">
+            <div class="left-box">
+                <form class="text-center">
+                    <label>
+                        <input class=" search__box" type="text" placeholder="Search">
+                    </label>
+                    <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </form>
+                <div class="jumbotron">
+                    <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
+                    </a>
+                    <p class="lead">Hello, Bienvenue sur le site de Dramatik! Le site de référence pour les dramas ainsi
+                    que pour rencontrer d'autres fans de dramas.
+                    </p>
+
+                </div>
+            </div>
+            <div class="right-box">
+                <div><a href="{{ path('home') }}">ACCUEIL</a></div>
+                <div>DRAMAS</div>
+                <div>SUGGESTION</div>
+                <div><a href="{{ path('app_homepage_apropos') }}">A PROPOS</a></div>
+                {% if app.user %}
+                    <div><a href="{{ path('account') }}">COMPTE</a></div>
+                {%  else %}
+                    <div><a href="{{ path('app_homepage_login') }}">SE CONNECTER</a></div>
+                {% endif %}
+            </div>
+        </section>
+    {% block footer %}
+
+        <!--------------------------------------------- TOP BUTTON ------------------------->
+        <div class="top">
+            <a href="#top" title="Retourner en Haut">
+                <i class="fa fa-arrow-circle-up fa-4x"></i>
+            </a>
+        </div>
+        <!--------------------------------------------- TOP BUTTON FIN------------------------>
+
+        <div class="bglight">
+            <!-- <div class="container">
+                <footer class="py-2 my-2">
+                    <div class="d-flex justify-content-between py-2 my-2 border-top border-dark">
+                        <ul class="list-unstyled d-flex">
+                            <li class="ms-3 "><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook fa-2x circle-icon"></i></a></li>
+                            <li class="ms-3 "><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram fa-2x circle-icon"></i></a></li>
+                            <li class="ms-3 "><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter fa-2x circle-icon"></i></a></li>
+                        </ul>
+                        <p class="mb-0">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
+                    </div>
+                </footer>
+            </div> -->
+            <div class="container">
+
+
+                <!------------------------------------------ LA NEWSLETTER HIDDEN----------------------------------------->
+                <div id="fenetre" class="overlay">
+                    <div class="fenetre"> <a class="close" href="#">&times;</a>
+                        <div> <!-- fenetre dialogue -->
+                            <div><!-- la boite -->
+                                <div class="newsletter-title">
+                                    <h2>Rejoignez-nous &amp; Pour jouer aux Quizz</h2>
+                                </div>
+                                <div class="box-content">
+                                    <?php
+                            if(!isset($newsletter_inscription))
+                            {
+                            ?>
+                                    <label>Inscrivez vous à notre Newsletter et restez à jour avec nos Quizz!</label>
+                                    <div id="form_inscription">
+                                        <form name="inscription" id="inscription" method="post" onsubmit="return newsletter();">
+                                            <div>
+                                                <label for="inscription_mail"></label><input placeholder="pseudo@domain.com" name="newsletter_mail" id="inscription_mail" required pattern="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
+                                                <br>
+                                                <p id="demo"></p>
+                                                <br>
+                                                <button type="submit" class="news-button" >S'inscrire</button>
+                                            </div>
+                                        </form>
+                                        <div class="inscription-bottom">
+                                            <input type="checkbox" id="dont_show_again">
+                                            <label for="dont_show_again">Ne plus montrer ce message</label>
+                                        </div>
+                                    </div>
+                                    <!-- /#form_inscription -->
+                                    <?php
+                            }
+                            else{ ?>
+                                    <p>Nous avons le plaisir de vous compter parmi les nouveaux abonnés de la newsletter AnilCustom et tenons à vous remercier de l'intérêt que vous portez à notre Boutique.</p>
+                                    <?php } ?>
+                                </div>
+                                <!-- /.box-content -->
+                            </div>
+                            <!-- la boite -->
+                        </div>
+                        <!-- fenetre dialogue -->
+                    </div>
+                </div>
+                <!------------------------------------------------ HIDDDEN FIN ------------------------------------------->
+
+                <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+                    <p class="col-md-4 mb-0 text-muted">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
+
+                    <!-- <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    </a> -->
+                    <div class="nlt col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <a class="button-onpage" href="#fenetre">S'inscrire à la Newsletter</a>
+                    </div>
+
+                    <ul class="nav col-md-4 justify-content-end">
+                        <li class="nav-item"><a href="{{ path('home') }}" class="nav-link px-2 text-muted">Accueil</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Dramas</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Suggestion</a></li>
+                        <li class="nav-item"><a href="{{ path('app_homepage_apropos') }}" class="nav-link px-2 text-muted">Apropos</a></li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
+    {% endblock %}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

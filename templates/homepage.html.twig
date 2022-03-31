@@ -35,17 +35,11 @@
                 <div>SUGGESTION</div>
                 <div><a href="{{ path('app_homepage_apropos') }}">A PROPOS</a></div>
                 {% if app.user %}
-                {% for role in app.user.roles %}
-                    {%if role == 'ROLE_ADMIN' %}
-                        <div><a href="{{ path('admin_admin') }}">COMPTE</a></div>
-                    {% endif %}
-                {% endfor %}
-                {% elseif app.user %}
-                {% for role in app.user.roles %}
-                    {%if role == 'ROLE_USER' %}
+                    {%if is_granted('ROLE_ADMIN') %}
+                        <div><a href="{{ path('admin_admin') }}">COMPTEA</a></div>
+                    {% else %}
                         <div><a href="{{ path('account') }}">COMPTE</a></div>
                     {% endif %}
-                {% endfor %}
                 {% else %}
                     <div><a href="{{ path('app_homepage_login') }}">SE CONNECTER</a></div>
                 {% endif %}

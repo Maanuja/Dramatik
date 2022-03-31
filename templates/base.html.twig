@@ -53,25 +53,16 @@
                         </li>
                     </ul>
                     <div class="text-end">
-                        {% if app.user %}
-                            {% for role in app.user.roles %}
-                                {%if role == 'ROLE_ADMIN' %}
-                                    <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('admin_admin') }}">Account</a></button>
-                                    <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
-                                {% endif %}
-                            {% endfor %}
-                        {% elseif app.user %}
-                        {% for role in app.user.roles %}
-                            {%if role == 'ROLE_USER' %}
-                                <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('account') }}">Account</a></button>
-                                <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
-                            {% endif %}
-                        {% endfor %}
+                        {%if is_granted('ROLE_ADMIN')  %}
+                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('admin_admin') }}">Account</a></button>
+                        <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
+                        {%elseif is_granted('ROLE_USER') %}
+                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('account') }}">Account</a></button>
+                        <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
                         {% else %}
-                            <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
-                            <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>                                            <?
+                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
+                        <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>
                         {% endif %}
-
                     </div>
                 </div>
                 <!-- </div> -->

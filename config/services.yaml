@@ -6,6 +6,7 @@
 parameters:
     imgquizz_directory: '%kernel.project_dir%/public/uploads/imageQuizz'
     imguser_directory: '%kernel.project_dir%/public/uploads/imageUser'
+    images_directory: '%kernel.project_dir%/public/uploads/Drama'
 
 services:
     # default configuration for services in *this* file

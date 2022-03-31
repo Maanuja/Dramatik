@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block content %}
+    <section class="py-5 text-center container">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success ">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('fail') %}
+            <div class="alert alert-warning">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('ppsuccess') %}
+            <div class="alert alert-success ">
+                {{ message }}
+            </div>
+        {% endfor %}{% for message in app.flashes('ppfail') %}
+            <div class="alert alert-warning ">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Your Admin Page</h1>
+                <p class="lead text-muted">Hello {{ app.user.username }},</br> \°u°/</p>
+                <p>
+                    <a href="{{ path('admin_modify_admininfo') }}" class="btn btn-primary my-2">Profil Info</a>
+                    <a href="{{ path("admin_drama_ajout") }}" class="btn btn-primary my-2">Ajoute Drama</a>
+                    <a href="{{ path("admin_drama_home") }}" class="btn btn-primary my-2">Dramas</a>
+                    <a href="#" class="btn btn-primary my-2">Valider Quizz</a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

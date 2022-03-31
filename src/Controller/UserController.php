@@ -35,15 +35,30 @@ class UserController extends AbstractController
                 $uploadedFile = $form->get('UsImg')->getData();
                 $newFilename = md5(uniqid()).'.'.$uploadedFile->guessExtension();
                 $uploadedFile->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('imguser_directory'),
                     $newFilename
                 );
                 $user->setUsImg($newFilename);
                 $this->addFlash('ppsuccess', 'Votre photo de profil a été mise à jour!');
 
             }
-            elseif ($form->get('UsImg')->getData() == null ){
+            else {
                 $this->addFlash('ppfail', 'Votre photo de profil n\'a pas  été mise à jour!');
+            }
+
+            if ( $form->get('UsBanImg')->getData() != null){
+                $uploadedFile = $form->get('UsBanImg')->getData();
+                $newFilename = md5(uniqid()).'.'.$uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $this->getParameter('imguser_directory'),
+                    $newFilename
+                );
+                $user->setUsBanImg($newFilename);
+                $this->addFlash('ppbsuccess', 'Votre bannière de profil a été mise à jour!');
+
+            }
+            else {
+                $this->addFlash('ppbfail', 'Votre Bannière de profil n\'a pas  été mise à jour!');
             }
 
             $entityManager->persist($user);

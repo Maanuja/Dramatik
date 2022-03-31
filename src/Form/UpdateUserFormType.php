@@ -36,6 +36,13 @@ class UpdateUserFormType extends AbstractType
                 'attr' => ['accept' => "image/png"],
                 'data_class' => null,
             ])
+            ->add('UsBanImg', FileType::class,[
+                'label' => false,
+                'mapped' => false,
+                'required' => false,
+                'attr' => ['accept' => "image/png"],
+                'data_class' => null,
+            ])
         ;
     }
 

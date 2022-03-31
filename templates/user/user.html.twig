@@ -72,12 +72,20 @@
     <main>
         {% block content %}
             {% block boxprofil %}
-                <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+                {%if app.user.UsBanImg != null %}
+                    <img class="header-banner" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsBanImg }}">
+                {% else %}
+                    <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+                {% endif %}
                 <div class="box-profil">
                     <div class="row mx-auto h-100">
                         <div class="left col-md-3">
                             <div class="outer">
-                                <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
+                                {%if app.user.UsImg != null %}
+                                    <img class="photo pull-right" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsImg }}" id="output"/>
+                                {% else %}
+                                    <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="right col-md-9">
@@ -119,6 +127,15 @@
                             {{ message }}
                         </div>
                     {% endfor %}{% for message in app.flashes('ppfail') %}
+                        <div class="alert alert-warning ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('ppbsuccess') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}{% for message in app.flashes('ppbfail') %}
                         <div class="alert alert-warning ">
                             {{ message }}
                         </div>

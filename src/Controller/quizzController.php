@@ -205,7 +205,8 @@ class quizzController extends AbstractController
      * @Route("/quizz/{id}", name="quizzStart")
      */
     public function quizz(int $id){
-        return $this->render('quizzPlay/quizzStart.html.twig');
+        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $id));
+        return $this->render('quizzPlay/quizzStart.html.twig', ['quizz'=> $quiz]);
     }
 
 }

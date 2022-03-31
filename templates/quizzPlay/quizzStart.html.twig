@@ -5,18 +5,26 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzPlay') }}
+    {% if quizz is defined %}
+    <style>
+        body {
+            background: center no-repeat url({{ quizz.qzImg ? asset('uploads/imageQuizz/' ~ quizz.qzImg)  : "none" }});
+            background-size: cover;
+        }
+    </style>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-
+    {% if quizz is defined %}
     <div id="quizzbox" class="d-grid justify-content-center gap-4">
         <h1 class="text-center display-2">Quizz</h1>
-        <h1 class="text-center display-5">Nom du drama</h1>
-        <h1 class="text-center display-1">Nom du quizz</h1>
-        <h1 class="text-center display-6">Auteur-createdAt</h1>
-        <div class="text-center display-1"><a href="{{ path('quest', {'quizzId': 2}) }}"><i class="fa fa-play-circle playcolor"></i></a></div>
+        <h1 class="text-center display-5">{{ quizz.qzDrama.drName }}</h1>
+        <h1 class="text-center display-1">{{ quizz.qzName }}</h1>
+        <h1 class="text-center display-6">{{ quizz.qzUser.username }} - {{ quizz.qzCreatedAt|date("d/m/Y") }}</h1>
+        <div class="text-center display-1"><a href="{{ path('quest', {'quizzId': quizz.id}) }}"><i class="fa fa-play-circle playcolor"></i></a></div>
     </div>
-
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}

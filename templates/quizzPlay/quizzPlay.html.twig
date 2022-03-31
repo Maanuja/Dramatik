@@ -5,6 +5,12 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzPlay') }}
+    <style>
+        body {
+            background: center no-repeat url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
+            background-size: cover;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -19,35 +25,36 @@
         </div>
 
         <div class="col-11">
-        {{ form_start(form) }}
 
 
 
-        {# progess n°question/total question avec while(?) et enchainement de question à l'aide de card/carrousel, 1 form submit à la fin #}
+                    {{ form_start(qstform) }}
+
 
         {% for i in range(0,numberQuestion-1)%}
 
 
-        <div class="taille flex-column justify-content-center" id="question{{ i }}" >
+        <div class="taille flex-column justify-content-center" id="form_question_choice{{ i }}" >
 
 
-                <h2 class="text-center my-4">{{ form_label(attribute(form, 'question' ~ i )) }}</h2>
+                <h2 class="text-center my-4">{{ form_label(qstform['choice' ~ i]) }}</h2>
 
                 <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
-                    {#            {{ field.choices(attribute(form, 'choice' ~ i)) }}#}
-                    {% set n=0 %}
-                    {% for label, widget in field_choices(attribute(form, 'choice' ~ i)) %}
 
-                        <input type="radio" class="btn-check" name="questionnumber{{ i }}" id="btnradio{{ i }}{{ n }}" value="{{ widget }}" autocomplete="off">
-                        <label id="choix" class="btn btn-outline-selected px-5" for="btnradio{{ i }}{{ n }}">{{ label }}</label>
-                        {% set n = n+1 %}
-                    {% endfor %}
+
+
+                    {% for child in qstform['choice' ~ i].children %}
+
+                            {{ form_widget(child, {'attr': {'class': 'btn-check'}}) }}
+                            <label class="btn btn-outline-selected px-5" for="{{ child.vars.id }}" >{{ child.vars.label }}</label>
+
+                        {% endfor %}
+
+
                 </div>
 
                 {% if i==numberQuestion-1 %}
-                    <button type="submit" id="nxtqst" name="submit" class="btn">
-                        Soumettre  <i class="fa fa-arrow-right" ></i>
-                    </button>
+                    {{ form_widget(qstform.submit, {'attr': {'class':'btn'}, 'id': 'nxtqst'}) }}
                 {% else %}
                     <button type="button" name="next" id="nxtqst" value="{{ i }}" class="btn">
                         Next Question  <i class="fa fa-arrow-right" ></i>
@@ -58,8 +65,7 @@
             {% endfor %}
 
 
-
-            {{ form_end(form, {render_rest: false}) }}
+    {{ form_end(qstform) }}
         </div>
         </div>
     </div>

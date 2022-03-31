@@ -14,90 +14,55 @@
 {% endblock %}
 
 {% block content %}
-    <div class="apercu row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card">
-                <div class="image">
-                    <img src="{{ asset('images/happibanner.jpg') }}"  alt="...">
-                </div>
-                <div class="card-title">
-                    <a type="button" class="btn btn-outline-dark" href="{{ path('home') }}"> PLAY <i class="fa fa-play-circle"></i></a>
-                </div>
 
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="image">
-                    <img src="{{ asset('images/iontbobanner.jpg') }}"  alt="...">
-                </div>
-                <div class="card-title">
-                    <a type="button" class="btn btn-outline-dark" href="{{ path('home') }}"> PLAY <i class="fa fa-play-circle"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="image">
-                    <img src="{{ asset('images/allofusaredeadQB.jpg') }}"  alt="...">
-                </div>
-                <div class="card-title">
-                    <a type="button" class="btn btn-outline-dark" href="{{ path('home') }}"> PLAY <i class="fa fa-play-circle"></i></a>
+    {% if recent is defined %}
+        <div class="apercu row row-cols-1 row-cols-md-3 g-4">
+        {%  for top in recent %}
+            <div class="col">
+                <div class="card">
+                    <div class="image">
+                        <img src="{{ asset('uploads/imageQuizz/' ~ top.qzImg) }}"  alt="...">
+                    </div>
+                    <div class="card-title">
+                        <a type="button" class="btn btn-outline-dark" href="{{ path('quizzStart',{'id': top.id}) }}"> PLAY <i class="fa fa-play-circle"></i></a>
+                    </div>
                 </div>
             </div>
+        {% endfor %}
         </div>
-    </div>
+    {% endif %}
+
 
     {% if not app.session.get('name')  %}
     <h4 class="alert alert-primary m-4 bg-transparent"> Veuillez vous connecter/inscrire pour profiter de nos fonctionnalités </h4>
     {% endif %}
 
-    <div class="deck row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card">
-                <img src="{{ asset('images/happibanner.jpg') }}" class="card-img-top" alt="...">
-                <div class="card-img-overlay">
-                    <h2 class="card-title">PLAY</h2>
-                    <a href="{{ path('quizzStart') }}"><i class="fa fa-play-circle-o"></i></a>
+    {% if quizzes is defined %}
+        <div class="deck row row-cols-1 row-cols-md-3 g-4">
+        {%  for quizz in quizzes %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                    <div class="card-img-overlay">
+                        <h2 class="card-title">PLAY</h2>
+                        <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                    </div>
                 </div>
             </div>
+        {% endfor %}
         </div>
-        <div class="col">
-            <div class="card">
-                <img src="{{ asset('images/iontbobanner.jpg') }}" class="card-img-top" alt="...">
-                <div class="card-img-overlay">
-                    <h2 class="card-title">PLAY</h2>
-                    <a href="{{ path('quizzStart') }}"><i class="fa fa-play-circle-o"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="{{ asset('images/allofusaredeadQB.jpg') }}" class="card-img-top" alt="...">
-                <div class="card-img-overlay">
-                    <h2 class="card-title">PLAY</h2>
-                    <a href="{{ path('quizzStart') }}"><i class="fa fa-play-circle-o"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="{{ asset('images/snowdropbanner.jpg') }}" class="card-img-top" alt="...">
-                <div class="card-img-overlay">
-                    <h2 class="card-title">PLAY</h2>
-                    <a href="{{ path('quizzStart') }}"><i class="fa fa-play-circle-o"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    {% endif %}
+
     <nav class="m-5" aria-label="quizz navigation">
-        <ul class="pagination  justify-content-center">
+        {{ knp_pagination_render(quizzes) }}
+        {#<ul class="pagination  justify-content-center">
             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
+        </ul>#}
     </nav>
 
 

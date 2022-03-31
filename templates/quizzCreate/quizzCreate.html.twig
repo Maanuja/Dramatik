@@ -10,14 +10,20 @@
     <div id="boxcreate" class="container-sm p-5">
         <div class="row">
             <div class="col-md-7" >
+                <div class="row">
 {#                {{ form_widget(formquizz.titre, {'id': 'quizzcreate', 'attr': {'class':'form-control'}}) }}#}
-                {{ form_widget(formquizz.titre, {'id': 'quizzcreate'}) }}
-                {{ form_widget(formquizz.drama, {'id': 'quizzcreate'}) }}
+              {{ form_widget(formquizz.qzName, {'id': 'quizzcreate'}) }}
+                </div>
+                <div class="row">
+                {{ form_widget(formquizz.qzDrama, {'id': 'quizzcreate'}) }}
+                </div>
+                <div class="row">
 
-
-
-                {{ form_widget(formquizz.nombre, {'attr': {'class':'form-select form-select-sm'}}) }}
+                {{ form_widget(formquizz.qzFormat, {'id': 'quizzcreate'}) }}
+                </div>
+                <div class="row">
                 <button type="submit" name="detailQuizz" class="btn btn-outline-secondary" >Create quizz </button>
+                </div>
             </div>
             <div class="col-md">
                 <div class="form-input">
@@ -25,7 +31,7 @@
                         <img id="quizz-preview">
                     </div>
 
-                    {{ form_row(formquizz.file, {'id':'file-cq-1', 'attr': {'class':'form-control'}}) }}
+                    {{ form_row(formquizz.qzImg, {'id':'file-cq-1', 'attr': {'class':'form-control'}}) }}
                 </div>
 
 

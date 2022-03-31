@@ -17,13 +17,13 @@ class Score
     #[ORM\Column(type: 'integer', nullable: true)]
     private $scScore;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $scUser;
-
     #[ORM\ManyToOne(targetEntity: Quizz::class, inversedBy: 'scores')]
     #[ORM\JoinColumn(nullable: false)]
     private $scQuizz;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'scores')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $scUser;
 
     public function getId(): ?int
     {
@@ -42,18 +42,6 @@ class Score
         return $this;
     }
 
-    public function getScUser(): ?User
-    {
-        return $this->scUser;
-    }
-
-    public function setScUser(?User $scUser): self
-    {
-        $this->scUser = $scUser;
-
-        return $this;
-    }
-
     public function getScQuizz(): ?Quizz
     {
         return $this->scQuizz;
@@ -62,6 +50,18 @@ class Score
     public function setScQuizz(?Quizz $scQuizz): self
     {
         $this->scQuizz = $scQuizz;
+
+        return $this;
+    }
+
+    public function getScUser(): ?User
+    {
+        return $this->scUser;
+    }
+
+    public function setScUser(?User $scUser): self
+    {
+        $this->scUser = $scUser;
 
         return $this;
     }

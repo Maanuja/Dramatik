@@ -39,7 +39,7 @@
     min-height: fit-content;
     position: relative;
     max-width : 300px;
-    height : 215px;
+    height : 190px;
     background-color: indianred;
     margin : 30px 10px;
     padding : 20px 15px;
@@ -63,6 +63,7 @@
 .apercu .card .image img{
     max-width : 100%;
     border-radius : 15px;
+    object-fit: cover;
  }
 
 
@@ -79,7 +80,7 @@
     font-style: italic ;
 }
 .apercu .card:hover {
-    height : 250px;
+    height : 200px;
 }
 
 .apercu .card:hover .card-title {
@@ -126,22 +127,6 @@
 }
 
 
-.taille{
-    display: none ;
-}
-
-.taille:first-child{
-    display: flex ;
-}
-
-.taille label{
-    text-transform: capitalize;
-}
-#choix, .taille button{
-    font-size: 20px !important;
-
-}
-
 .container{
     margin: 10px !important;
 }
@@ -185,14 +170,32 @@
     background-color: darkred !important;
 }
 
-.btn-outline-selected{
-    border-color: orchid;
+
+.taille{
+    display: none ;
 }
 
-.btn-outline-selected:hover{
+.taille:first-child{
+    display: flex ;
+}
+
+
+.btn-outline-selected{
+    border-color: orchid;
+    text-transform: capitalize;
+    font-size: 20px !important;
+}
+
+.btn-check:active+.btn-outline-selected, .btn-check:checked+.btn-outline-selected, .btn-outline-selected.active, .btn-outline-selected.dropdown-toggle.show, .btn-outline-selected:active
+{
     background-color: orchid;
 }
 
+#nxtqst {
+    background-color: lavenderblush;
+    width: 100%;
+    font-size: 20px !important;
+}
 
 
 

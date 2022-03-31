@@ -8,7 +8,9 @@
 }
 #boxcreate button{
     font-size: 20px !important;
-    margin: 1.3rem 30%;
+    margin: 1.3rem auto;
+    width: fit-content;
+
 }
 
 .form-floating{
@@ -29,9 +31,10 @@
 #quizzcreate {
     border: none;
     background-color: var(--wafer);
-    font-size: 2rem;
-    margin: 3rem 1rem;
+    font-size: 25px;
+    margin: 3rem auto;
     text-align: center;
+    width: fit-content;
     max-width: 100%;
 }
 

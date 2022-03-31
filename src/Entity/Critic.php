@@ -40,13 +40,13 @@ class Critic
     #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
     private $crRate;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'critics')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $crUser;
-
     #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'critics')]
     #[ORM\JoinColumn(nullable: false)]
     private $crDrama;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'critics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $crUser;
 
     public function getId(): ?int
     {

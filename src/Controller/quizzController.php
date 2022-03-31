@@ -4,11 +4,8 @@ namespace App\Controller;
 
 
 use DateTimeZone;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\Persistence\ManagerRegistry;
-use Psr\Container\ContainerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +18,7 @@ use App\Entity\Drama;
 use App\Entity\User;
 use App\Entity\Questions;
 use App\Entity\Choices;
+use App\Entity\Score;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class quizzController extends AbstractController
@@ -35,9 +33,18 @@ class quizzController extends AbstractController
     /**
      * @Route("/quizzBook", name="quizB")
      */
-    public function quizBook(): Response
+    public function quizBook(Request $request, PaginatorInterface $paginator): Response
 {
-    return $this->render('quizzBook.html.twig');
+    $data = $this->entityManager->getRepository(Quizz::class)->findAll();
+    $recent = $this->entityManager->getRepository(Quizz::class)->findRecentQuizz();
+
+    $quizzes = $paginator->paginate(
+        $data,
+        $request->query->getInt('page', 1),
+        2
+    );
+
+    return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent]);
 }
     /**
      * @Route("/qcre", name="quizzCreation")
@@ -48,15 +55,13 @@ class quizzController extends AbstractController
 
         $formquiz->handleRequest($request);
         if ($formquiz->isSubmitted() && $formquiz->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
 
 
-            $drama = $this->entityManager->getRepository(Drama::class)->findOneBy(array('drName' => $formquiz->get('drama')->getData()));
+//            $user = $this->getUser();
             $user = $this->entityManager->getRepository(User::class)->findOneBy(array('id' => 1));
-            $var = $formquiz->get('nombre')->getData();
+            $var = $formquiz->get('qzFormat')->getData();
 
-            $imageFile = $formquiz->get('file')->getData();
+            $imageFile = $formquiz->get('qzImg')->getData();
             if ($imageFile) {
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -74,16 +79,16 @@ class quizzController extends AbstractController
                 }
 
 
-                if ($drama && $user) {
+                if ($user) {
                     $quizz = new Quizz();
-                    $quizz->setQzName($formquiz->get('titre')->getData());
-                    $quizz->setQzDrama($drama);
+                    $quizz->setQzName($formquiz->get('qzName')->getData());
+                    $quizz->setQzDrama($formquiz->get('qzDrama')->getData());
                     $quizz->setQzCreatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'), new DateTimeZone('Europe/Paris')));
-                    $quizz->setQzFormat($formquiz->get('nombre')->getData());
+                    $quizz->setQzFormat($formquiz->get('qzFormat')->getData());
                     $quizz->setQzImg($newFilename);
                     $quizz->setQzUser($user);
 
-                    // ... perform some action, such as saving the task to the database
+
 
                     $this->entityManager->persist($quizz);
                     $this->entityManager->flush();
@@ -105,56 +110,46 @@ class quizzController extends AbstractController
                 return $this->redirectToRoute('home');
         }
 
-        $questionForm = $this->createForm(formQuestionc::class);
-        $questionForm->handleRequest($request);
-        if ($questionForm->isSubmitted() && $questionForm->isValid()) {
-            if ($nb == 0) {
-                return $this->render('quizzCreate/questionCreate.html.twig', ["fin" => "fin"]);
-            }else {
-                $this->entityManager = $this->entityManager->getManager();
+        $questioncForm = $this->createForm(formQuestionc::class);
+        $questioncForm->handleRequest($request);
+        if ($questioncForm->isSubmitted() && $questioncForm->isValid()) {
 
 
                 $question = new Questions();
-                $question->setQtQuestion($questionForm->get('question')->getData());
+                $question->setQtQuestion($questioncForm->get('question')->getData());
                 $question->setQtQuizz($quiz);
 
-                $choice1 = new Choices();
-                $choice1->setChChoice($questionForm->get('choice1')->getData());
-                $choice1->setChTrue(true);
-                $choice1->setChQuestion($question);
-
-                $choice2 = new Choices();
-                $choice2->setChChoice($questionForm->get('choice2')->getData());
-                $choice2->setChTrue(false);
-                $choice2->setChQuestion($question);
-
-                $choice3 = new Choices();
-                $choice3->setChChoice($questionForm->get('choice3')->getData());
-                $choice3->setChTrue(false);
-                $choice3->setChQuestion($question);
-
-                $choice4 = new Choices();
-                $choice4->setChChoice($questionForm->get('choice4')->getData());
-                $choice4->setChTrue(false);
-                $choice4->setChQuestion($question);
+                $choices = array();
+                for($i=1; $i<=4; $i++){
+                    $choice = new Choices();
+                    $choice->setChChoice($questioncForm->get('choice'.$i)->getData());
+                    if($i=1){
+                        $choice->setChTrue(true);
+                    }
+                    else{
+                        $choice->setChTrue(false);
+                    }
+                    $choice->setChQuestion($question);
+                    $choices[] = $choice;
+                }
 
                 $this->entityManager->persist($question);
-                $this->entityManager->persist($choice1);
-                $this->entityManager->persist($choice2);
-                $this->entityManager->persist($choice3);
-                $this->entityManager->persist($choice4);
+                foreach ($choices as $choice){
+                    $this->entityManager->persist($choice);
+                }
 
                 $this->entityManager->flush();
 
+            if ($nb == 1) {
+                return $this->render('quizzCreate/questionCreate.html.twig', ["fin" => "fin"]);
+            }
+
                 return $this->redirectToRoute('creationQuestion', ['idQz' => $quiz->getId(), 'nb' => $nb - 1]);
 
-            }
+
         }
 
-
-
-
-        return $this->renderForm('quizzCreate/questionCreate.html.twig', ["formquest"=>$questionForm, "nombre"=>$nb, "img"=> $quiz->getQzImg()]);
+        return $this->renderForm('quizzCreate/questionCreate.html.twig', ["formquest"=>$questioncForm, "nombre"=>$nb, "img"=> $quiz->getQzImg()]);
     }
 
     /**
@@ -163,39 +158,43 @@ class quizzController extends AbstractController
     public function question(int $quizzId, Request $request): Response
     {
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
-        $correction = [];
+        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $quizzId));
 
-        //var_dump($listQuestions);
-        foreach($listQuestions as $ea){
-            //liste imbriqué
-            //recup les choix String
-            $choice = $ea->getChoices();
-            foreach ($choice as $ch){
-                if($ch->getChTrue()) {
-                    $correction[$ea->getId()] = $ch->getChChoice();
-                }
-            }
-
-                //= $this->>entityManager->getRepository(Choices::class)->findBy(array('chQuestion' => $ea->getId()));
-            //si bool true, on ajoute à la liste de correction
-
-        }
-        //var_dump($correction);
 
         $questionForm = $this->createForm(formQuestion::class, $listQuestions);
-
-
-        //$questionForm = $this->createForm('Form/formQuestion.php');
         $questionForm->handleRequest($request);
 
         if ($questionForm->isSubmitted() && $questionForm->isValid()) {
-            var_dump($questionForm->getData());
-            //array_diff($correction,$questionForm->getData());
 
-            return $this->redirectToRoute('creationQuestion');
+            $count = 0;
+            for ($i=0; $i<sizeof($listQuestions);$i++){
+                if('true' == $questionForm->get('choice'.$i)->getData()){
+                    $count++;
+                }
+            }
+
+//            $user = $this->getUser();
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(array('id' => 1));
+
+            $ancienScore = $this->entityManager->getRepository(Score::class)->findOneBy(array('scQuizz' => $quizzId,'scUser'=> $user));
+            if(!$ancienScore){
+                $ancienScore = new Score();
+                $ancienScore->setScScore($count);
+                $ancienScore->setScQuizz($quiz);
+                $ancienScore->setScUser($user);
+            }
+            elseif($ancienScore<$count){
+                $ancienScore->setScScore($count);
+            }
+
+            $this->entityManager->persist($ancienScore);
+            $this->entityManager->flush();
+
+            return $this->render('quizzPlay/quizzResult.html.twig',["img"=> $quiz->getQzImg(),"score"=> $count]);
+
         }
 
-        return $this->renderForm('quizzPlay/quizzPlay.html.twig', ['form' => $questionForm, 'numberQuestion' => sizeof($listQuestions)]);
+        return $this->renderForm('quizzPlay/quizzPlay.html.twig', ['qstform' => $questionForm, 'numberQuestion' => sizeof($listQuestions), "img"=> $quiz->getQzImg()]);
     }
 
     /**

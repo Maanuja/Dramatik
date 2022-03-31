@@ -17,12 +17,12 @@ class homepageController extends AbstractController
     }
 
     /**
-     * @Route("/apropos")
+     * @Route("/apropos", name="apropos")
      */
-    public function apropos(): Response
+/*    public function apropos(): Response
     {
         return $this->render('apropos.html.twig');
-    }
+    }*/
 
     /**
      * @Route("/login")

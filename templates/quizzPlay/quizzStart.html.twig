@@ -5,14 +5,13 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzPlay') }}
-    {% if quizz is defined %}
+
     <style>
         body {
-            background: center no-repeat url({{ quizz.qzImg ? asset('uploads/imageQuizz/' ~ quizz.qzImg)  : "none" }});
-            background-size: cover;
+            background-image: url({{ quizz.qzImg ? asset('uploads/imageQuizz/' ~ quizz.qzImg)  : "none" }});
         }
     </style>
-    {% endif %}
+
 {% endblock %}
 
 {% block content %}

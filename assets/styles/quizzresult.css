@@ -1,12 +1,23 @@
-.cleop{
-    width:96%;
-    height:400px;
-    margin: auto;
-    background-color: lightsteelblue;
-    padding: 10px;
+#success-box {
+    margin: 40px 10% 10%;
+    padding: 20px;
+    width: 80%;
+    height: 35rem;
+    background: linear-gradient(to bottom right, #B0DB7D, #99DBB4);
+    border-radius: 20px;
+    box-shadow: 5px 5px 20px rgb(203 205 211);
+    color: darkgreen;
+    font-size: 2.3rem;
 }
 
-.cleop h1{
+#success-box>a{
+    margin: 0 35% 26px;
+    background: #db9f99;
+    text-align: center;
+    font-size: 1.3rem !important;
+}
+
+#success-box h1{
     margin: 40px auto;
     color: lavenderblush;
     text-shadow: 1px 1px 2px darkred;
@@ -56,7 +67,7 @@
     top: 143px;
     left: 60px;
     position:absolute;
-    height:250px;
+    height:150px;
     width:1px;
     margin:0 auto;
     content:"";

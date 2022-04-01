@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\formQuestion;
 use App\Entity\Quizz;
 use App\Entity\Questions;
 use App\Entity\Score;
@@ -22,9 +23,9 @@ class quizzPlayController extends AbstractController
     }
 
     /**
-     * @Route("/quizzBook", name="quizB")
+     * @Route("/quizzBook/{created}", name="quizzB")
      */
-    public function quizBook(Request $request, PaginatorInterface $paginator): Response
+    public function quizBook(Request $request, PaginatorInterface $paginator, string $created=""): Response
     {
         $data = $this->entityManager->getRepository(Quizz::class)->findAll();
         $recent = $this->entityManager->getRepository(Quizz::class)->findRecentQuizz();
@@ -35,7 +36,7 @@ class quizzPlayController extends AbstractController
             2
         );
 
-        return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent]);
+        return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent, 'created'=>$created]);
     }
 
     /**
@@ -44,10 +45,8 @@ class quizzPlayController extends AbstractController
     public function question(int $quizzId, Request $request): Response
     {
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
-
+        //shuffle($listQuestions);
         $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $quizzId));
-
-
 
         $questionForm = $this->createForm(formQuestion::class, $listQuestions);
         $questionForm->handleRequest($request);
@@ -71,7 +70,7 @@ class quizzPlayController extends AbstractController
                 $ancienScore->setScQuizz($quiz);
                 $ancienScore->setScUser($user);
             }
-            elseif($ancienScore<$count){
+            elseif($ancienScore->getScScore()<$count){
                 $ancienScore->setScScore($count);
             }
 

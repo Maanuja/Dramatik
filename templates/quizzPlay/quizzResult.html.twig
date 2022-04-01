@@ -7,15 +7,15 @@
     {{ encore_entry_link_tags('quizzPlay') }}
     <style>
         body {
-            background: center no-repeat url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
-            background-size: cover;
+            background-image: url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
         }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="cleop">
+    <div id="success-box">
         <h1>Votre score est de {{ score }}</h1>
+        <a type="button" class="btn" href="{{ path('quizzB') }}">Jouer à d'autres quizz</h4></a>
         <div class="cle">
     <div class="balloon"></div>
     <div class="balloon"></div>

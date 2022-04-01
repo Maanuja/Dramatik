@@ -1,6 +1,7 @@
 import './styles/quizzPlay.css';
+import './styles/quizzStart.css';
 import './styles/quizzresult.css';
-import './bootstrap';
+
 
 
 document.querySelectorAll('#nxtqst').forEach(item => {

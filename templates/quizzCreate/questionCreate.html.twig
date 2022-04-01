@@ -50,7 +50,7 @@
                 {{ form_widget(formquest.choice4, {'attr': {'class':'form-control'}}) }}
             </div>
 
-            <button type="submit" name="submit" class="btn">
+            <button type="submit" name="submit" class="btn next">
 
                 {% if nombre==1 %}
 
@@ -62,12 +62,6 @@
         </div>
         {{ form_end(formquest) }}
     {% endif %}
-
-    {% if fin is defined %}
-        <h1>Vous avez soumis votre quizz ! Il sera accessible à tous une fois validé par nos admins. Merci !</h1>
-    {% endif %}
-
-
 
 {% endblock %}
 

@@ -118,7 +118,7 @@ class quizzController extends AbstractController
 
 
             if ($nb == 1) {
-                return $this->render('quizzCreate/questionCreate.html.twig', ["fin" => "fin"]);
+                return $this->redirectToRoute('quizzB',  ["created" => "created"]);
             }
 
 

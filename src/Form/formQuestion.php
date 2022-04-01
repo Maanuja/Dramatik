@@ -16,6 +16,7 @@ class formQuestion extends AbstractType
         $question = $options['data'];
         for ($i = 0; $i < sizeof($question); $i++) {
             $choices = [];
+            $new = [];
             $choice = $question[$i]->getChoices();
 
             foreach ($choice as $ch){
@@ -27,11 +28,17 @@ class formQuestion extends AbstractType
                 }
 
             }
+
+            $keys = array_keys($choices);
+            shuffle($keys);
+            foreach($keys as $key) {
+                $new[$key] = $choices[$key];
+            }
+            $choices = $new;
+
             $builder
                 ->add('choice'.$i, ChoiceType::class, [
-
                     'label'=> $question[$i]->getQtQuestion(),
-
                     'choices' => $choices,
                     'expanded' => true,
                     'multiple' => false,

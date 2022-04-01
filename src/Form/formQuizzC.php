@@ -34,11 +34,11 @@ class formQuizzC extends AbstractType
 
                 'constraints' => [
                     new File([
-                        'maxSize' => '3024k',
+                        'maxSize' => '5024k',
                         'mimeTypes' => [
                             'image/*'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],
             ]);

@@ -17,4 +17,5 @@ import './styles/bootstrap-grid.css';
 import './styles/bootstrap-grid.min.css';
 import './styles/bootstrap.min.css';
 // start the Stimulus application
-import './bootstrap';
+import 'bootstrap';
+

@@ -10,7 +10,11 @@
     font-size: 20px !important;
     margin: 1.3rem auto;
     width: fit-content;
+}
 
+.next{
+    margin: 1.3rem 40% !important;
+    background-color: lavenderblush;
 }
 
 .form-floating{
@@ -98,4 +102,7 @@
     display:none;
     margin-bottom:30px;
 }
+
+
+
 

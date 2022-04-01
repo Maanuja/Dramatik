@@ -4,17 +4,29 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('quizzPlay') }}
+    {{ encore_entry_link_tags('quizzBook') }}
 {% endblock %}
 
 {% block nav %}
     <div class="img-top">
         {{ parent() }}
+
+        {% if created is defined and created == "created" %}
+            <div id="created" class="toast success-box m-3" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-autohide="false">
+                <div class="toast-header">
+                    <strong class="me-auto">Creation de Quizz</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Vous avez soumis votre quizz ! Il sera accessible à tous une fois validé par nos admins. Merci !
+                </div>
+            </div>
+        {% endif %}
+
     </div>
 {% endblock %}
 
 {% block content %}
-
 
     {% if recent is defined %}
         <div class="apercu row row-cols-1 row-cols-md-3 g-4">
@@ -68,4 +80,9 @@
     </nav>
 
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quizzBook') }}
 {% endblock %}

@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\formQuestion;
+use App\Form\FormQuestion;
 use App\Entity\Quizz;
 use App\Entity\Questions;
 use App\Entity\Score;
@@ -48,7 +48,7 @@ class quizzPlayController extends AbstractController
         //shuffle($listQuestions);
         $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $quizzId));
 
-        $questionForm = $this->createForm(formQuestion::class, $listQuestions);
+        $questionForm = $this->createForm(FormQuestion::class, $listQuestions);
         $questionForm->handleRequest($request);
 
         if ($questionForm->isSubmitted() && $questionForm->isValid()) {

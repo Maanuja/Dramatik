@@ -10,7 +10,7 @@
 {% block nav %}
     <div class="img-top">
         {{ parent() }}
-
+{% set created="created" %}
         {% if created is defined and created == "created" %}
             <div id="created" class="toast success-box m-3" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-autohide="false">
                 <div class="toast-header">

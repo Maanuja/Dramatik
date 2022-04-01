@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\File;
 use App\Entity\Quizz;
 use App\Entity\Drama;
 
-class formQuizzC extends AbstractType
+class FormQuizzC extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options = []) : void
     {

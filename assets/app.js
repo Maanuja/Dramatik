@@ -18,4 +18,4 @@ import './styles/bootstrap-grid.min.css';
 import './styles/bootstrap.min.css';
 // start the Stimulus application
 import 'bootstrap';
-
+window.bootstrap = require("bootstrap")

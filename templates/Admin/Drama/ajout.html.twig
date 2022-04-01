@@ -29,11 +29,17 @@
                             <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
                                 {{ form_row(form.drDateEnd, {'attr': {'class': 'form-control display-7"'}}) }}
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
-                                {{ form_row(form.drImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'placeholder': 'Image Drama'}}) }}
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="genre">
+                                {{ form_row(form.drGenre, {'attr': {'class': 'form-control display-7','placeholder': 'Genre'}}) }}
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="Plot">
+                                {{ form_row(form.drPlot, {'attr': {'class': 'form-control display-7','placeholder': 'Resumé'}}) }}
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
-                                {{ form_row(form.drBannerImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'placeholder': 'Image Banniere'}}) }}
+                                {{ form_row(form.drImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)"}}) }}
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                                {{ form_row(form.drBannerImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)"}}) }}
                             </div>
                             <div data-for="Rate" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
                                 {{ form_row(form.drRate, {'attr': {'class': 'form-control display-7"','placeholder': 'Note Général'}}) }}

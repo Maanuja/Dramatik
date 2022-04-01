@@ -57,6 +57,16 @@ class Drama
     #[ORM\Column(type: 'date', nullable: true)]
     private $drDateEnd;
 
+    #[ORM\ManyToOne(targetEntity: Genre::class, inversedBy: 'dramas')]
+    private $drGenre;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'UsDramas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $drAdminId;
+
+    #[ORM\Column(type: 'text')]
+    private $drPlot;
+
     public function __construct()
     {
         $this->characters = new ArrayCollection();
@@ -306,6 +316,42 @@ class Drama
     public function setDrDateEnd(?\DateTimeInterface $drDateEnd): self
     {
         $this->drDateEnd = $drDateEnd;
+
+        return $this;
+    }
+
+    public function getDrGenre(): ?Genre
+    {
+        return $this->drGenre;
+    }
+
+    public function setDrGenre(?Genre $drGenre): self
+    {
+        $this->drGenre = $drGenre;
+
+        return $this;
+    }
+
+    public function getDrAdminId(): ?User
+    {
+        return $this->drAdminId;
+    }
+
+    public function setDrAdminId(?User $drAdminId): self
+    {
+        $this->drAdminId = $drAdminId;
+
+        return $this;
+    }
+
+    public function getDrPlot(): ?string
+    {
+        return $this->drPlot;
+    }
+
+    public function setDrPlot(string $drPlot): self
+    {
+        $this->drPlot = $drPlot;
 
         return $this;
     }

@@ -39,6 +39,8 @@ class DramaController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $drama->setDrAdminId($this->getUser());
+
             $image = $form->get('drImg')->getData();
             $newFilename = md5(uniqid()).'.'.$image->guessExtension();
             $image->move(

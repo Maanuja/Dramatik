@@ -11,7 +11,6 @@ import'./newsletter.js';
 import './styles/app.css';
 import './styles/bootstrapOver.css';
 import './styles/style.css';
-import './styles/search.css';
 import './styles/form.css';
 
 

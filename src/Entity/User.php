@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -50,6 +52,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'drAdminId', targetEntity: Drama::class, orphanRemoval: true)]
+    private $UsDramas;
+
+    public function __construct()
+    {
+        $this->UsDramas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +199,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Drama[]
+     */
+    public function getUsDramas(): Collection
+    {
+        return $this->UsDramas;
+    }
+
+    public function addUsDrama(Drama $usDrama): self
+    {
+        if (!$this->UsDramas->contains($usDrama)) {
+            $this->UsDramas[] = $usDrama;
+            $usDrama->setDrAdminId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsDrama(Drama $usDrama): self
+    {
+        if ($this->UsDramas->removeElement($usDrama)) {
+            // set the owning side to null (unless already changed)
+            if ($usDrama->getDrAdminId() === $this) {
+                $usDrama->setDrAdminId(null);
+            }
+        }
 
         return $this;
     }

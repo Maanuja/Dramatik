@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resultat{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzPlay') }}
+    <style>
+        body {
+            background-image: url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="success-box">
+        <h1>Votre score est de {{ score }}</h1>
+        <a type="button" class="btn" href="{{ path('quizzB') }}">Jouer à d'autres quizz</h4></a>
+        <div class="cle">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('quizzPlay') }}
+
+    {% endblock %}

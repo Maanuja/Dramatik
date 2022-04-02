@@ -32,10 +32,6 @@ class Quizz
     #[ORM\Column(type: 'string', length: 100)]
     private $qzImg;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'quizzs')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $qzUser;
-
     #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'quizzs')]
     #[ORM\JoinColumn(nullable: false)]
     private $qzDrama;
@@ -45,6 +41,10 @@ class Quizz
 
     #[ORM\OneToMany(mappedBy: 'qtQuizz', targetEntity: Questions::class)]
     private $questions;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'quizzs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $qzUser;
 
     public function __construct()
     {
@@ -117,19 +117,7 @@ class Quizz
         return $this;
     }
 
-    public function getQzUser(): User
-    {
-        return $this->qzUser;
-    }
-
-    public function setQzUser(User $qzUser): self
-    {
-        $this->qzUser = $qzUser;
-
-        return $this;
-    }
-
-    public function getQzDrama(): Drama
+    public function getQzDrama(): ?Drama
     {
         return $this->qzDrama;
     }
@@ -197,6 +185,18 @@ class Quizz
                 $question->setQtQuizz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQzUser(): ?User
+    {
+        return $this->qzUser;
+    }
+
+    public function setQzUser(?User $qzUser): self
+    {
+        $this->qzUser = $qzUser;
 
         return $this;
     }

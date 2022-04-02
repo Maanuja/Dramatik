@@ -1,0 +1,22 @@
+#quizzbox{
+    color: black;
+    font-family: Calibri;
+    margin: 100px 40px;
+    background: linear-gradient(rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.4));
+}
+
+/*#quizzbox>h1{
+    text-shadow: oldlace 1px 0 10px;
+}*/
+
+#quizzbox:before, #quizzbox:after{
+    content: "";
+    bottom  : 0;
+    height  : 1px;
+    width   : auto;  /* or 100px */
+    border-bottom:4px solid indianred;
+}
+
+.playcolor{
+    color: brown;
+}

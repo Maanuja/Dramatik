@@ -12,3 +12,18 @@ function newsletter() {
     document.getElementById("inscription").submit();
     
 }
+
+function contact() {
+    var x, text;
+
+    phone = document.getElementById("phone").value;
+
+    if (!phone.match(/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/)) {
+
+        document.getElementById("err").innerHTML= "Le numero est incorrect!";
+        return false;
+    }
+
+    document.getElementById("contact").submit();
+
+}

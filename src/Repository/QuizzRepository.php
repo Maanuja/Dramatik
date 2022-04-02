@@ -46,7 +46,22 @@ class QuizzRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    $qzCreatedAt
     */
+
+     /**
+      * @return Quizz[] Returns an array of Quizz objects
+      */
+    public function findRecentQuizz(): array
+    {
+        return $this->createQueryBuilder('q')
+            ->orderBy('q.qzCreatedAt', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
 
 }

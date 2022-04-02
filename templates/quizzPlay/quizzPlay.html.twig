@@ -5,33 +5,64 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzPlay') }}
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
+
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-{# progess n°question/total question avec while(?) et enchainement de question à l'aide de card/carrousel, 1 form submit à la fin #}
-    <form action="/valideQuizz" method="post">
-        <div class="d-flex flex-column justify-content-center ">
+    <div class="container content">
+        <div class="row">
+            <div class="col-1">
+                <ul class="moving-steps">
+                    {% for i in range(0,numberQuestion-1)%}
+                        <li></li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-            <h1 class="tab text-center display-5 my-4">Enoncé de la question</h1>
-            <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio1" value="Choix" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio1">Choix 1</label>
+            <div class="col-11 align-self-center">
+                {{ form_start(qstform) }}
 
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio2" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio2">Choix 2</label>
+                {% for i in range(0,numberQuestion-1)%}
+                    <div class="taille flex-column justify-content-center" id="form_question_choice{{ i }}" >
+                        <h1 class="text-center my-4">{{ form_label(qstform['choice' ~ i]) }}</h1>
 
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio3" autocomplete="off">
-                <label class="btn btn-lg border-dark" for="btnradio3">Choix 3</label>
+                        <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
 
-                <input type="radio" class="btn-check" name="questionnumber" id="btnradio4" autocomplete="off">
-                <label class="btn btn-lg border-dark px-5" for="btnradio4">Choix 4</label>
+                            {% for child in qstform['choice' ~ i].children %}
+
+                                {{ form_widget(child, {'attr': {'class': 'btn-check'}}) }}
+                                <label class="btn btn-outline-selected px-5" for="{{ child.vars.id }}" >{{ child.vars.label }}</label>
+
+                            {% endfor %}
+
+                        </div>
+
+                        {% if i==numberQuestion-1 %}
+                            {{ form_widget(qstform.submit, {'attr': {'class':'btn'}, 'id': 'nxtqst'}) }}
+                        {% else %}
+                            <button type="button" name="next" id="nxtqst" value="{{ i }}" class="btn">
+                                Next Question  <i class="fa fa-arrow-right" ></i>
+                            </button>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+                {{ form_end(qstform) }}
             </div>
         </div>
-    </form>
+    </div>
 
 {% endblock %}
 
-{% block javascripts %}
-    {{ encore_entry_script_tags('quizzPlay') }}
-    {{ parent() }}
-{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('quizzPlay') }}
+
+    {% endblock %}

@@ -27,9 +27,11 @@ Encore
     .addEntry('account', './assets/account.js')
     .addEntry('quizzCreate', './assets/quizzCreate.js')
     .addEntry('quizzPlay', './assets/quizzPlay.js')
+
     .addEntry('abcdaire', './assets/abcdaire.js')
     .addEntry('search', './assets/search.js')
     .addEntry('dramaView', './assets/dramaView.js')
+    .addEntry('quizzBook', './assets/quizzBook.js')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

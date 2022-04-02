@@ -53,12 +53,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+
     #[ORM\OneToMany(mappedBy: 'drAdminId', targetEntity: Drama::class, orphanRemoval: true)]
     private $UsDramas;
+
+    #[ORM\OneToMany(mappedBy: 'qzUser', targetEntity: Quizz::class, orphanRemoval: true)]
+    private $quizzs;
+
+    #[ORM\OneToMany(mappedBy: 'crUser', targetEntity: Critic::class, orphanRemoval: true)]
+    private $critics;
+
+    #[ORM\OneToMany(mappedBy: 'scUser', targetEntity: Score::class, orphanRemoval: true)]
+    private $scores;
 
     public function __construct()
     {
         $this->UsDramas = new ArrayCollection();
+        $this->quizzs = new ArrayCollection();
+        $this->critics = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -204,6 +217,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+
      * @return Collection|Drama[]
      */
     public function getUsDramas(): Collection
@@ -221,12 +235,102 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+     * @return Collection|Quizz[]
+     */
+    public function getQuizzs(): Collection
+    {
+        return $this->quizzs;
+    }
+
+    public function addQuizz(Quizz $quizz): self
+    {
+        if (!$this->quizzs->contains($quizz)) {
+            $this->quizzs[] = $quizz;
+            $quizz->setQzUser($this);
+        }
+
+        return $this;
+    }
+
+
     public function removeUsDrama(Drama $usDrama): self
     {
         if ($this->UsDramas->removeElement($usDrama)) {
             // set the owning side to null (unless already changed)
             if ($usDrama->getDrAdminId() === $this) {
                 $usDrama->setDrAdminId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function removeQuizz(Quizz $quizz): self
+    {
+        if ($this->quizzs->removeElement($quizz)) {
+            // set the owning side to null (unless already changed)
+            if ($quizz->getQzUser() === $this) {
+                $quizz->setQzUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Critic[]
+     */
+    public function getCritics(): Collection
+    {
+        return $this->critics;
+    }
+
+    public function addCritic(Critic $critic): self
+    {
+        if (!$this->critics->contains($critic)) {
+            $this->critics[] = $critic;
+            $critic->setCrUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritic(Critic $critic): self
+    {
+        if ($this->critics->removeElement($critic)) {
+            // set the owning side to null (unless already changed)
+            if ($critic->getCrUser() === $this) {
+                $critic->setCrUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Score[]
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
+    }
+
+    public function addScore(Score $score): self
+    {
+        if (!$this->scores->contains($score)) {
+            $this->scores[] = $score;
+            $score->setScUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScore(Score $score): self
+    {
+        if ($this->scores->removeElement($score)) {
+            // set the owning side to null (unless already changed)
+            if ($score->getScUser() === $this) {
+                $score->setScUser(null);
             }
         }
 

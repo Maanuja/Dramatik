@@ -53,6 +53,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+
+    #[ORM\OneToMany(mappedBy: 'drAdminId', targetEntity: Drama::class, orphanRemoval: true)]
+    private $UsDramas;
+
     #[ORM\OneToMany(mappedBy: 'qzUser', targetEntity: Quizz::class, orphanRemoval: true)]
     private $quizzs;
 
@@ -64,6 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->UsDramas = new ArrayCollection();
         $this->quizzs = new ArrayCollection();
         $this->critics = new ArrayCollection();
         $this->scores = new ArrayCollection();
@@ -212,6 +217,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+
+     * @return Collection|Drama[]
+     */
+    public function getUsDramas(): Collection
+    {
+        return $this->UsDramas;
+    }
+
+    public function addUsDrama(Drama $usDrama): self
+    {
+        if (!$this->UsDramas->contains($usDrama)) {
+            $this->UsDramas[] = $usDrama;
+            $usDrama->setDrAdminId($this);
+        }
+
+        return $this;
+    }
+
      * @return Collection|Quizz[]
      */
     public function getQuizzs(): Collection
@@ -224,6 +247,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->quizzs->contains($quizz)) {
             $this->quizzs[] = $quizz;
             $quizz->setQzUser($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeUsDrama(Drama $usDrama): self
+    {
+        if ($this->UsDramas->removeElement($usDrama)) {
+            // set the owning side to null (unless already changed)
+            if ($usDrama->getDrAdminId() === $this) {
+                $usDrama->setDrAdminId(null);
+            }
         }
 
         return $this;

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ABCDAIRE{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('abcdaire') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="justify-content: center;  display: flex;">
+        <nav>
+            <ul class="pagination">
+                <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                <li><a href="#">TOUS</a></li>
+                <li><a href="#">A</a></li>
+                <li class="active"><a href="#">B <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">C</a></li>
+                <li><a href="#">D</a></li>
+                <li><a href="#">E</a></li>
+                <li><a href="#">F</a></li>
+                <li><a href="#">G</a></li>
+                <li><a href="#">H</a></li>
+                <li><a href="#">I</a></li>
+                <li class="disabled"><span class="hint--bottom hint--always" data-hint="Disabled button when no record to show">J</span></li>
+                <li class="disabled"><span>K</span></li>
+                <li><a href="#">L</a></li>
+                <li><a href="#">M</a></li>
+                <li><a href="#">N</a></li>
+                <li><a href="#">O</a></li>
+                <li><a href="#">P</a></li>
+                <li><a href="#">Q</a></li>
+                <li><a href="#">R</a></li>
+                <li><a href="#">S</a></li>
+                <li><a href="#">T</a></li>
+                <li><a href="#">U</a></li>
+                <li><a href="#">V</a></li>
+                <li class="disabled"><a href="#">W</a></li>
+                <li class="disabled"><a href="#">X</a></li>
+                <li class="disabled"><a href="#">Y</a></li>
+                <li><a href="#">Z</a></li>
+                <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="album py-5">
+            <div class="row">
+                {% for drama in dramas %}
+                <div class="col-md-3">
+                    <div class="card mb-3 box-shadow">
+                        <div class="card-body">
+                            <img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 275px; width: 100%; display: block;" src="{{ asset('uploads/Drama/') }}{{ drama.drImg }}" data-holder-rendered="true">
+                            <h5 class="card-title">{{ drama.drName }}</h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('dramaview',{'drName': drama.drName , 'id': drama.id}) }}" class="nav-link px-2 text-secondary">View</a></button>
+                                </div>
+                                <small class="text-muted">{{ drama.drNbEp }} Episodes
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

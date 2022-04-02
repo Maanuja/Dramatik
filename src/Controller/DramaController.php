@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Drama;
+use App\Entity\Genre;
 use App\Entity\Quizz;
+use App\Entity\User;
 use App\Repository\DramaRepository;
-use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
-//use Knp\Component\Pager\PaginatorInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,28 +40,31 @@ class DramaController extends AbstractController
     }
 
     #[Route('/drama/{drName}/{id}', name: 'dramaview')]
-    //PaginatorInterface $paginator
-    public function read(Request $request, string $drName,int $id,DramaRepository $dramaRepo, GenreRepository $genreRepo): Response
+    public function read(Request $request, string $drName,int $id,PaginatorInterface $paginator): Response
     {
-        $drama = $dramaRepo->find($id);
+        $drama = $this->entityManager->getRepository(Drama::class)->find($id);
 
         $genreId = $drama->getDrGenre();
-        $genreName = $genreRepo->find($genreId);
+        $genreName = $this->entityManager->getRepository(Genre::class)->find($genreId);
         $genre = $genreName->getGrName();
+
+        $adminId = $drama->getDrAdminId();
+        $adminName = $this->entityManager->getRepository(User::class)->find($adminId);
+        $admin = $adminName->getUsFname();
 
         $data = $this->entityManager->getRepository(Quizz::class)->findAll();
 
-//        $quizzes = $paginator->paginate(
-//            $data,
-//            $request->query->getInt('page', 1),
-//            2
-//        );
+        $quizzes = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            2
+        );
 
         return $this->render('drama/readDrama.html.twig', [
             'drama' => $drama,
-            'Admin' => $this->getUser(),
+            'Admin' => $admin,
             'genre' => $genre,
-            //'quizzes'=>$quizzes,
+            'quizzes'=>$quizzes,
         ]);
     }
 }

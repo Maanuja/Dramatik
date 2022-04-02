@@ -18,6 +18,11 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% for message in app.flashes('DramaNotSupprimer') %}
+        <div class="alert alert-warning ">
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1>Gérer les Dramas</h1>
     <a href="{{ path("admin_drama_ajout") }}" class="btn blue">Ajouter un Drama</a>
     <table class="table striped">

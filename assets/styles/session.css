@@ -88,12 +88,19 @@ form .p-viewer{
     z-index: 1;
     cursor:pointer;
     align-items: flex-end !important;
-    align-items: flex-end;
     display: flex;
     flex-direction: column;
     margin-inline-start: auto;
 }
-
+form .p-viewer2{
+    float: right;
+    position: sticky;
+    z-index: 1;
+    cursor:pointer;
+    align-items: flex-end !important;
+    display: flex;
+    margin-inline-start: auto;
+}
 form i{
     margin-top: -37px;
 }

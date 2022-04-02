@@ -235,6 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
      * @return Collection|Quizz[]
      */
     public function getQuizzs(): Collection

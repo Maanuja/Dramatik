@@ -17,28 +17,6 @@ class homepageController extends AbstractController
     }
 
     /**
-     * @Route("/apropos", name="apropos")
-     */
-/*    public function apropos(): Response
-    {
-        return $this->render('apropos.html.twig');
-    }*/
-
-    /**
-     * @Route("/login")
-     */
-    public function login(): Response
-    {
-        return $this->render('account/session.html.twig');
-    }
-    /**
-     * @Route("/register")
-     */
-    public function signup(): Response
-    {
-        return $this->render('account/session.html.twig');
-    }
-    /**
      * @Route("/search")
      */
     public function search(): Response

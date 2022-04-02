@@ -1,0 +1,49 @@
+{% extends 'user/user.html.twig'%}
+{% block title %}Mes critiques {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+{% block rightbox %}
+<div class="right col-md-9 coord">
+    <div class="right col">
+        <div class="col" id="comments">
+            <h2 class="display-5">MES Comments</h2>
+            <!-- COMMENT 1 - START -->
+            <div class="comment">
+                <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
+                <div class="comment-body">
+                    <h4 class="comment-heading">Maanu User</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="comment-detail pull-left">
+                        <i class="fa fa-calendar"></i>07/02/2022
+                        <i class="fa fa-thumbs-up"></i>10
+                    </div>
+                    <div class="comment-detail pull-right">
+                        <a href="">View drama</a>
+                    </div>
+                </div>
+            </div>
+            <!-- COMMENT - END -->
+            <div class="comment">
+                <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
+                <div class="comment-body">
+                    <h4 class="comment-heading">Maanu User</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="comment-detail pull-left">
+                        <i class="fa fa-calendar"></i>07/02/2022
+                        <i class="fa fa-thumbs-up"></i>10
+                    </div>
+                    <div class="comment-detail pull-right">
+                        <a href="">View drama</a>
+                    </div>
+                </div>
+            </div>
+            <!-- COMMENT - END -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

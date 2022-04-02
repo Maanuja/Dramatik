@@ -32,6 +32,16 @@ class UserController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             if ( $form->get('UsImg')->getData() != null){
+                $imageDel = $entityManager->getRepository(User::class)->find($user)->getUsImg();
+                if($imageDel){
+                    //chemin physique de l'image
+                    $imgNom=$this->getParameter('imguser_directory') . '/' . $imageDel;
+                    if(file_exists($imgNom)){
+                        //suppression
+                        unlink($imgNom);
+                    }
+                }
+
                 $uploadedFile = $form->get('UsImg')->getData();
                 $newFilename = md5(uniqid()).'.'.$uploadedFile->guessExtension();
                 $uploadedFile->move(
@@ -47,6 +57,16 @@ class UserController extends AbstractController
             }
 
             if ( $form->get('UsBanImg')->getData() != null){
+                $imageDel2 = $user->getUsBanImg();
+                if($imageDel2){
+                    //chemin physique de l'image
+                    $imgNom=$this->getParameter('imguser_directory') . '/' . $imageDel2;
+                    if(file_exists($imgNom)){
+                        //suppression
+                        unlink($imgNom);
+                    }
+                }
+
                 $uploadedFile = $form->get('UsBanImg')->getData();
                 $newFilename = md5(uniqid()).'.'.$uploadedFile->guessExtension();
                 $uploadedFile->move(

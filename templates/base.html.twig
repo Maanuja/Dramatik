@@ -61,8 +61,8 @@
                         <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('account') }}">Account</a></button>
                         <button type="submit" class="btn btn-g btn-round"><a href="{{ path('app_logout') }}">Log out</a></button>
                         {% else %}
-                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_homepage_login') }}">Login</a></button>
-                        <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_homepage_signup') }}">Sign-up</a></button>
+                        <button type="button" class="btn btn-outline-light me-2 btn-round"><a href="{{ path('app_login') }}">Login</a></button>
+                        <button type="button" class="btn btn-g btn-round"><a href="{{ path('app_register') }}">Sign-up</a></button>
                         {% endif %}
                     </div>
                 </div>
@@ -76,7 +76,6 @@
     </main>
 
 
-<div class="bglight">
     {% block footer %}
         <!--------------------------------------------- TOP BUTTON ------------------------->
         <div class="top">
@@ -87,7 +86,6 @@
             {% endblock %}
         </div>
         <!--------------------------------------------- TOP BUTTON FIN------------------------>
-
         <div class="container">
             <!------------------------------------------ LA NEWSLETTER HIDDEN----------------------------------------->
             <div id="fenetre" class="overlay">
@@ -135,25 +133,20 @@
             <!------------------------------------------------ HIDDDEN FIN ------------------------------------------->
 
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
-                <p class="col-md-4 mb-0 text-muted">© 2021 Maanuja, Mithunah, Yasmine, Tous les droits reservés.</p>
-
-                <!-- <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                </a> -->
+                <p class="col-md-4 mb-0 text-muted">© 2021 Maanuja, Mithunah, Tous les droits reservés.</p>
                 <div class="nlt col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                     <a class="button-onpage" href="#fenetre">S'inscrire à la Newsletter</a>
                 </div>
 
                 <ul class="nav col-md-4 justify-content-end">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Dramas</a></li>
+                    <li class="nav-item"><a href="{{ path('home') }}" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="{{ path('drama') }}" class="nav-link px-2 text-muted">Dramas</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Suggestion</a></li>
                     <li class="nav-item"><a href="{{ path('apropos') }}" class="nav-link px-2 text-muted">Apropos</a></li>
                 </ul>
             </footer>
         </div>
     {% endblock %}
-</div>
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}

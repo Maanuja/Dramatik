@@ -143,30 +143,35 @@ class DramaController extends AbstractController
      */
     public function supprimer(Drama $drama,EntityManagerInterface $entityManager)
     {
-        $imagedel=$drama->getDrImg();
-        if($imagedel){
-            //chemin physique de l'image
-            $imgnom=$this->getParameter('images_directory') . '/' . $imagedel;
-            if(file_exists($imgnom)){
-                //suppression
-                unlink($imgnom);
+        if ($drama->getQuizzs() == null){
+            $imagedel = $drama->getDrImg();
+            if ($imagedel) {
+                //chemin physique de l'image
+                $imgnom = $this->getParameter('images_directory') . '/' . $imagedel;
+                if (file_exists($imgnom)) {
+                    //suppression
+                    unlink($imgnom);
+                }
             }
+
+            $imagedel2 = $drama->getDrBannerImg();
+            if ($imagedel2) {
+                //chemin physique de l'image
+                $imgnom2 = $this->getParameter('images_directory') . '/' . $imagedel2;
+                if (file_exists($imgnom2))
+                    //suppression
+                    unlink($imgnom2);
+            }
+
+            $entityManager->remove($drama);
+            $entityManager->flush();
+
+            $this->addFlash('DramaSupprimer', 'Drama supprimé avec succès');
+            return $this->redirectToRoute('admin_drama_home');
         }
-
-        $imagedel2 = $drama->getDrBannerImg();
-        if($imagedel2){
-            //chemin physique de l'image
-            $imgnom2 = $this->getParameter('images_directory') . '/' . $imagedel2;
-            if(file_exists($imgnom2))
-                //suppression
-                unlink($imgnom2);
+        else {
+            $this->addFlash('DramaNotSupprimer', 'Drama non supprimé car il a des quizzs');
+            return $this->redirectToRoute('admin_drama_home');
         }
-
-        $entityManager->remove($drama);
-        $entityManager->flush();
-
-        $this->addFlash('DramaSupprimer', 'Drama supprimé avec succès');
-        return $this->redirectToRoute('admin_drama_home');
     }
-
 }

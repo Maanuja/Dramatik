@@ -5,6 +5,8 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('dramaView') }}
+    {{ encore_entry_link_tags('quizzBook') }}
+
 {% endblock %}
 
 {% block content %}
@@ -19,7 +21,7 @@
                     <div class="blog-post">
                         <h2 class="blog-post-title">{{ drama.drName }}
                         </h2>
-                        <p class="blog-post-meta">{{ drama.createdAt|date }} <a href="#">{{ Admin.UsFname }}</a></p>
+                        <p class="blog-post-meta">{{ drama.createdAt|date }} <a href="#">{{ Admin }}</a></p>
                         <hr>
                         <p>{{  drama.drPlot }}</p>
                     </div>
@@ -113,6 +115,9 @@
                 </div>
             </div>
         </section>
+        <h3 class="pb-3 mb-4 font-italic">
+            Video Trailer
+        </h3>
         <section>
             <div class="album py-5 bg-light">
                 {% if quizzes is defined %}

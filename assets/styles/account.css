@@ -188,46 +188,46 @@ padding: 0.2em 0;
 /*--------------------------------------------------------------
 	COMMENTS
 --------------------------------------------------------------*/
-#mcritk .comment {
+.comment {
     background-color: rgb(232,194,176);
     padding: 30px;
     margin: 15px 0;
 }
 
-#mcritk .comment > .pull-left {
+.comment > .pull-left {
     margin-right:20px;
 }
 
-#mcritk .comment img {
+.comment img {
     max-width:106px;
     border-radius: 50%;
 }
 
-#mcritk .comment h4 {
+.comment h4 {
     margin:0 0 10px;
 }
 
-#mcritk .comment p {
+.comment p {
     margin-bottom:15px;
     text-align:justify;
 }
 
-#mcritk .comment-detail {
+.comment-detail {
     margin:0;
 }
 
-#mcritk .comment-detail {
+.comment-detail {
     color: var(--sage-green);
     font-size:12px;
     padding-right: 10px;
     font-weight:600;
 }
 
-#mcritk .comment-detail a:hover {
+.comment-detail a:hover {
     text-decoration:underline;
 }
 
-#mcritk .comment-detail  i {
+.comment-detail  i {
     color: var(--sage-green);
     font-size:15px;
     margin-right:10px;

@@ -13,22 +13,7 @@
         {% else %}
             <div class="movebox right-panel-active" id="movebox">
         {% endif %}
-{#        <div class="movebox" id="movebox">#}
             <div class="form-container sign-up-container">
-                {#<form action="{{ path('app_register') }}" method="post">
-                    <h1>Créer un Compte</h1>
-                    <input type="text" placeholder="Nom d'Utilisateur" />
-                    <input type="email" placeholder="Email"/>
-                    <input type="password" placeholder="Mot de passe " id="mdpsu"/>
-                    <div class="p-viewer">
-                      <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
-                    </div>
-                    <input type="password" placeholder="Confirmer Mot de passe" id="mdpsd"/>
-                    <div class="p-viewer">
-                      <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
-                    </div>
-                    <button type="submit">S'inscrire</button>
-                </form>#}
                 {% if 'register' in currentPath%}
 
                 {{ form_start(registrationForm) }}
@@ -49,17 +34,12 @@
                             'placeholder': "Mot de passe ",
                         }
                     }) }}
-                    <div class="p-viewer">
+                    <div class="p-viewer2">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
                     </div>
-                    {#{{ form_row(registrationForm.password_confirm, {
-                        'attr': {
-                            'placeholder': "Confirmer Mot de passe",
-                        }
-                    }) }}#}
-                   {# <div class="p-viewer">
+                    <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
-                    </div>#}
+                    </div>
                     {{ form_row(registrationForm.agreeTerms) }}
                     <button type="submit" class="btn">Register</button>
                 {{ form_end(registrationForm) }}
@@ -67,7 +47,6 @@
             </div>
             <div class="form-container sign-in-container">
             {% if 'login' in currentPath%}
-
                 <form action="{{ path('app_login') }}" method="post">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -76,7 +55,7 @@
                         {% if last_username is defined%}
                         <input type="email" placeholder="Email" value="{{ last_username }}" name="_username" id="inputEmail" autocomplete="email"/>
                         {% endif %}
-                    <input type="password" placeholder="Mot de passe "  name="_password" id="inputPassword" autocomplete="current-password" />
+                    <input type="password" placeholder="Mot de passe"  name="_password" id="inputPassword" autocomplete="current-password" />
                     <div class="p-viewer">
                       <i class="fa fa-eye-slash" id="pass-status-mdpco" aria-hidden="true" onClick="mdpc()"></i>
                     </div>
@@ -137,7 +116,7 @@
     }
     function mdpsu()
     {
-        var passwordInput = document.getElementById('registration_form_password');
+        var passwordInput = document.getElementById('registration_form_password_second');
         var passStatus = document.getElementById('pass-status-mdpsu');
 
         if (passwordInput.type == 'password'){
@@ -152,7 +131,7 @@
     }
     function mdpsd()
     {
-        var passwordInput = document.getElementById('registration_form_password_confirm');
+        var passwordInput = document.getElementById('registration_form_password_first');
         var passStatus = document.getElementById('pass-status-mdpsd');
 
         if (passwordInput.type == 'password'){

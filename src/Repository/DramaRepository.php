@@ -47,4 +47,16 @@ class DramaRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @return Drama[] Returns an array of Dramas objects
+     */
+    public function findDramaGenre($value): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.drGenre = :val')
+            ->setParameter('val',$value)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

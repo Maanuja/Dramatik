@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,12 +43,13 @@ class DramaType extends AbstractType
                     'min' => 1,
                 ]
             ])
-            ->add('drRate',IntegerType::class, [
+            ->add('drRate',NumberType::class, [
                 'label' => false,
                 'attr' => [
                     'min' => 0,
                     'minMessage' => 'Note Minimal 0 :)!',
                     'max' => 10,
+                    'step' => 'any',
                 ]
             ])
             ->add('drGenre', EntityType::class, [

@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un Drama{% endblock %}
+{% block title %}
+    {% if app.request.attributes.get('_route') == 'admin_drama_ajout' %}
+        Ajouter Drama
+    {% else %}
+        Modifier Drama
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <section class="form formstyle">
@@ -10,9 +16,15 @@
                     <!--Formbuilder Form-->
                         {{ form_start(form) }}
                         <div class="dragArea form-row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <h5 class="mbr-fonts-style pb-2 display-2">Ajouter un Drama</h5>
-                            </div>
+                            {% if app.request.attributes.get('_route') == 'admin_drama_ajout' %}
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h5 class="mbr-fonts-style pb-2 display-2">Ajouter un Drama</h5>
+                                </div>
+                            {% else %}
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h5 class="mbr-fonts-style pb-2 display-2">Modifier un Modifier</h5>
+                                </div>
+                            {% endif %}
                             <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
                                 <div class="form-row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">

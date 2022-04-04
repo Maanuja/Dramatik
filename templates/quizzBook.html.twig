@@ -10,7 +10,6 @@
 {% block nav %}
     <div class="img-top">
         {{ parent() }}
-{% set created="created" %}
         {% if created is defined and created == "created" %}
             <div id="created" class="toast success-box m-3" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-autohide="false">
                 <div class="toast-header">
@@ -46,7 +45,7 @@
     {% endif %}
 
 
-    {% if not app.session.get('name')  %}
+    {% if not (is_granted('ROLE_USER') or is_granted('ROLE_ADMIN'))  %}
         <h4 class="alert alert-primary m-4 bg-transparent"> Veuillez vous connecter/inscrire pour profiter de nos fonctionnalités </h4>
     {% endif %}
 
@@ -68,15 +67,6 @@
 
     <nav class="m-5" aria-label="quizz navigation">
         {{ knp_pagination_render(quizzes) }}
-        {#<ul class="pagination  justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-<<<<<<< HEAD
-        </ul>#}
-
     </nav>
 
 

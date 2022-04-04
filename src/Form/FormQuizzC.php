@@ -29,8 +29,9 @@ class FormQuizzC extends AbstractType
             ->add('qzFormat', ChoiceType::class,['required'=>true, 'placeholder' => 'Sélectionner le nombre de question souhaité', 'choices'  => ['5-Cinq' => '5','7-Sept' => '7','10-Dix' => '10']])
             ->add('qzImg', FileType::class,['label'=>'Upload File',
                 'label_attr' => ['class' => 'input-group-text'],
+                'attr'=> ['class'=>'form-control'],
                 'mapped' => false,
-                'required' => true,
+                'required' => false,
 
                 'constraints' => [
                     new File([
@@ -38,7 +39,7 @@ class FormQuizzC extends AbstractType
                         'mimeTypes' => [
                             'image/*'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid image',
+                        'mimeTypesMessage' => 'Veuillez sélectionner une image de la la bonne taille et du bon format',
                     ])
                 ],
             ]);

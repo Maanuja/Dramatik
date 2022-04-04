@@ -6,11 +6,13 @@
 {% endblock %}
 {% block content %}
     {% block boxprofil %}
+        {% block banner %}
         {%if app.user.UsBanImg != null %}
             <img class="header-banner" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsBanImg }}">
         {% else %}
             <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
         {% endif %}
+            {% endblock %}
         <div class="box-profil">
             <div class="row mx-auto h-100">
                 <div class="left col-md-3">
@@ -35,7 +37,7 @@
         <div class="left col-md-3">
             <div id="nav-account">
                 <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
-                <div class="nav-item-account"><a href="#mquizz">Mes Quizzs</a></div>
+                <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
                 <div class="nav-item-account"><a href="#mcritk">Mes Critik</a></div>
                 <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
                 <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
@@ -82,5 +84,6 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('account') }}
 {% endblock %}
 

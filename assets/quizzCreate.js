@@ -10,10 +10,6 @@ const preview = document.getElementById("quizz-preview");
 
 file.addEventListener("change", function () {
     getImage();
-        /*const src = URL.createObjectURL(file.files[0]);
-        //console.log(src);
-        preview.src = src;
-        preview.style.display = "block";*/
     }
 );
 

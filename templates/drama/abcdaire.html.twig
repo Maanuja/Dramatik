@@ -14,9 +14,17 @@
                 <li><a href="{{ path('abcdaire') }}">TOUS</a></li>
                 {% for a in ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] %}
                     {% if a in alphabet %}
-                        <li><a href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% if a in app.request.uri %}
+                            <li class="text-decoration-underline" ><a href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% else %}
+                            <li ><a href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% endif %}
                     {% else %}
-                        <li ><a class="text-secondary" href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {%  if a in app.request.uri %}
+                            <li ><a class="text-secondary text-decoration-underline" href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% else %}
+                            <li ><a class="text-secondary" href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </ul>

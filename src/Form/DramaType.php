@@ -50,6 +50,7 @@ class DramaType extends AbstractType
                     'minMessage' => 'Note Minimal 0 :)!',
                     'max' => 10,
                     'step' => 'any',
+                    'required' => false,
                 ]
             ])
             ->add('drGenre', EntityType::class, [

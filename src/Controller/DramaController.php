@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Entity\Critic;
 use App\Entity\Drama;
 use App\Entity\Genre;
 use App\Entity\Quizz;
 use App\Entity\User;
+use App\Form\CritiqueFormType;
 use App\Repository\DramaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -45,17 +48,15 @@ class DramaController extends AbstractController
         ]);
     }
     #[Route('/drama/{drName}/{id}', name: 'dramaview')]
+    #[Route('/drama/critique/{drName}/{id}', name: 'critique')]
+    #[Route('/drama/commentaire/{drName}/{id}', name: 'comments')]
+
     public function read(Request $request, string $drName,int $id,PaginatorInterface $paginator): Response
     {
         $drama = $this->entityManager->getRepository(Drama::class)->find($id);
+        $critiques= $this->entityManager->getRepository(Critic::class)->findAll();
+        $comments= $this->entityManager->getRepository(Comment::class)->findAll();
 
-        $genreId = $drama->getDrGenre();
-        $genreName = $this->entityManager->getRepository(Genre::class)->find($genreId);
-        $genre = $genreName->getGrName();
-
-        $adminId = $drama->getDrAdminId();
-        $adminName = $this->entityManager->getRepository(User::class)->find($adminId);
-        $admin = $adminName->getUsFname();
 
         $data = $this->entityManager->getRepository(Quizz::class)->findAll();
 
@@ -65,11 +66,28 @@ class DramaController extends AbstractController
             2
         );
 
+        $critique= new Critic();
+        $form = $this->createForm(CritiqueFormType::class, $critique);
+
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $user= $this->getUser();
+            if($user == null){
+                $this->addFlash('login plz','Il faut se connecter pour critiquer!');
+            }
+            $critique->setCrCreatedAt(new \DateTime());
+            $critique->setCrDrama($drama);
+            $critique->setCrUser($user);
+            $this->entityManager->flush();
+        }
         return $this->render('drama/readDrama.html.twig', [
             'drama' => $drama,
-            'Admin' => $admin,
-            'genre' => $genre,
             'quizzes'=>$quizzes,
+            'form' =>$form->createView(),
+            'comments' => $comments,
+            'critiques' => $critiques,
         ]);
     }
 }

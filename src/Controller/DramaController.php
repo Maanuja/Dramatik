@@ -26,19 +26,24 @@ class DramaController extends AbstractController
     #[Route('/drama', name: 'drama')]
     public function index(): Response
     {
+        $dramas= $this->entityManager->getRepository(Drama::class)->findAll();
+        $genres= $this->entityManager->getRepository(Genre::class)->findAll();
+
         return $this->render('drama/index.html.twig', [
-            'controller_name' => 'DramaController',
+            'dramas' => $dramas,
+            'genres' => $genres,
         ]);
     }
-
-    #[Route('/drama/abcdaire', name: 'abcdaire')]
-    public function abcdaire(DramaRepository $dramaRepo): Response
+    #[Route('/drama/genre/{genre}/{id}', name: 'filter_genre')]
+    public function filter(int $id): Response
     {
-        return $this->render('drama/abcdaire.html.twig', [
-            'dramas' => $dramaRepo->findAll()
+        $filter = $this->entityManager->getRepository(Drama::class)->findDramaGenre($id);
+        $genres= $this->entityManager->getRepository(Genre::class)->findAll();
+        return $this->render('drama/index.html.twig', [
+            'genres' => $genres,
+            'dramas' => $filter
         ]);
     }
-
     #[Route('/drama/{drName}/{id}', name: 'dramaview')]
     public function read(Request $request, string $drName,int $id,PaginatorInterface $paginator): Response
     {

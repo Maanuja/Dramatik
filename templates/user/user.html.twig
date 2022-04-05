@@ -38,7 +38,7 @@
             <div id="nav-account">
                 <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
                 <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
-                <div class="nav-item-account"><a href="#mcritk">Mes Critik</a></div>
+                <div class="nav-item-account"><a href="{{ path('myCritiq',{'id': app.user.id }) }}">Mes Critik</a></div>
                 <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
                 <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
             </div>

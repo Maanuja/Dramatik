@@ -80,6 +80,7 @@ class DramaController extends AbstractController
             $critique->setCrCreatedAt(new \DateTime());
             $critique->setCrDrama($drama);
             $critique->setCrUser($user);
+            $this->entityManager->persist($critique);
             $this->entityManager->flush();
         }
         return $this->render('drama/readDrama.html.twig', [

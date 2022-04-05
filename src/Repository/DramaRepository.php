@@ -85,4 +85,17 @@ class DramaRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
+    /**
+     * @return Drama[] Returns an array of Dramas objects
+     */
+    public function getSearch($string): array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.drName like :val')
+            ->setParameter('val', '%'.$string.'%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

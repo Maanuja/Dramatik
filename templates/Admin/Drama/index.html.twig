@@ -3,23 +3,15 @@
 {% block title %}Gérer les catégories{% endblock %}
 
 {% block content %}
-    {% for message in app.flashes('DramaAjouter') %}
-        <div class="alert alert-warning">
-            {{ message }}
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('DramaModifier') %}
-        <div class="alert alert-warning">
-            {{ message }}
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('DramaSupprimer') %}
-        <div class="alert alert-success ">
-            {{ message }}
-        </div>
+    {% for messages in app.flashes(['DramaAjouter','DramaModifier','DramaSupprimer']) %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
     {% endfor %}
     {% for message in app.flashes('DramaNotSupprimer') %}
-        <div class="alert alert-warning ">
+        <div class="alert alert-danger ">
             {{ message }}
         </div>
     {% endfor %}

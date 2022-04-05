@@ -8,7 +8,6 @@ section {
     margin-bottom: 12px;
     margin-left: 100PX;
     margin-right: 100px;
-
 }
 
 .full-height {
@@ -20,7 +19,7 @@ section {
     height: 100%;
     color: #fff;
     background: var(--tuscany);
-    padding: 100px;
+    padding: 50px 90px;
     white-space: break-spaces;
     text-align: center;
 }

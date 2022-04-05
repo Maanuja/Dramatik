@@ -68,13 +68,14 @@ nav .btn.btn-g {
 }
 
 .search__box {
-  float: left;
-  padding-right: 1rem;
-  width: 10px;
-  height: 1rem;
+  	float: left;
+	padding-right: 1rem;
+	width: 10px;
+	height: 1rem;
 	color: black;
-  font-size: 1rem;
-  outline: none;
+	font-size: 1rem;
+	outline: none;
+	opacity: 50%
 }
 
 /* .search__box:focus, .search__box:hover {

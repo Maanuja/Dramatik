@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GenreController!{% endblock %}
+
+{% block content %}
+    {% for messages in app.flashes(['GenreAjouter','GenreModifier','GenreSupprimer']) %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for message in app.flashes('GenreNotSupprimer') %}
+        <div class="alert alert-danger ">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1>Gérer les Genres</h1>
+    <a href="{{ path("admin_genre_ajout") }}" class="btn blue">Ajouter un Genre</a>
+    <table class="table striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom du Genre</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td>{{genre.id}}</td>
+                <td>{{genre.grName}}</td>
+                <td class="text-center">
+                    <a href="{{ path("admin_genre_modifier", {id: genre.id}) }}" class="btn blue">Modifier</a>
+                    <a href="{{ path("admin_genre_supprimer", {id: genre.id}) }}" class="btn blue">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

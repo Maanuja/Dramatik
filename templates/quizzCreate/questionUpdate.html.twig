@@ -21,39 +21,35 @@
 
 {% block content %}
 
-    {% if nombre is defined %}
+    {% if (question is defined) and (nombre is defined) %}
         {{ form_start(formquest) }}
         <div class="container-sm p-5" id="boxcreate" role="group" aria-label="Basic input text group">
 
             <div class="form-floating">
-                {{ form_widget(formquest.question, {'id': 'floatingInput', 'attr': {'class':'form-control'}}) }}
+                {{ form_widget(formquest.question, {'id': 'floatingInput', 'attr': {'class':'form-control'}, 'value': question.qtQuestion }) }}
                 <label for="floatingInput">Enonce de la Question</label>
             </div>
 
+            {% for choice in question.choices %}
+            {% if choice.chTrue == true %}
             <div class="input-group p-3">
                 <span class="input-group-text" style="background-color: lightgreen" id="Choix1">Correcte</span>
-                {{ form_widget(formquest.choice1, {'attr': {'class':'form-control'}}) }}
+                {{ form_widget(formquest.choice1, {'attr': {'class':'form-control'}, 'value': choice.chChoice}) }}
             </div>
 
-            <div class="input-group p-3">
-                <span class="input-group-text" id="Choix2">Fausse</span>
-                {{ form_widget(formquest.choice2, {'attr': {'class':'form-control'}}) }}
-            </div>
+            {% else %}
 
             <div class="input-group p-3">
-                <span class="input-group-text" id="Choix3">Fausse</span>
-                {{ form_widget(formquest.choice3, {'attr': {'class':'form-control'}}) }}
+                <span class="input-group-text" id="Choix{{ loop.index }}">Fausse</span>
+                {{ form_widget(formquest['choice' ~ loop.index], {'attr': {'class':'form-control'}, 'value': choice.chChoice}) }}
             </div>
 
-            <div class="input-group p-3">
-                <span class="input-group-text" id="Choix4">Fausse</span>
-                {{ form_widget(formquest.choice4, {'attr': {'class':'form-control'}}) }}
-            </div>
+            {% endif %}
+            {% endfor %}
 
             <button type="submit" name="submit" class="btn next">
 
                 {% if nombre==1 %}
-
                     Soumettre  <i class="fa fa-arrow-right" id="nxtqst"></i>
                 {% else %}
                     Next Question  <i class="fa fa-arrow-right" id="nxtqst"></i>

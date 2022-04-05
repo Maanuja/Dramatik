@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Quizz;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -27,7 +27,7 @@ class quizzPlayController extends AbstractController
      */
     public function quizBook(Request $request, PaginatorInterface $paginator, string $created=""): Response
     {
-        $data = $this->entityManager->getRepository(Quizz::class)->findAll();
+        $data = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>true));
         $recent = $this->entityManager->getRepository(Quizz::class)->findRecentQuizz();
 
         $quizzes = $paginator->paginate(
@@ -46,7 +46,7 @@ class quizzPlayController extends AbstractController
     {
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
         //shuffle($listQuestions);
-        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $quizzId));
+        $quiz = $this->entityManager->getRepository(Quizz::class)->find(array('id' => $quizzId));
 
         $questionForm = $this->createForm(FormQuestion::class, $listQuestions);
         $questionForm->handleRequest($request);
@@ -88,7 +88,10 @@ class quizzPlayController extends AbstractController
      * @Route("/quizz/{id}", name="quizzStart")
      */
     public function quizz(int $id){
-        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $id));
+        if(!$this->getUser()){
+            return $this->redirectToRoute('app_register');
+        }
+        $quiz = $this->entityManager->getRepository(Quizz::class)->find(array('id' => $id));
         return $this->render('quizzPlay/quizzStart.html.twig', ['quizz'=> $quiz]);
     }
 

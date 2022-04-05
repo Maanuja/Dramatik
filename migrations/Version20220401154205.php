@@ -32,4 +32,9 @@ final class Version20220401154205 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_C855ABB4F3698322 ON drama');
         $this->addSql('ALTER TABLE drama DROP dr_genre_id');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

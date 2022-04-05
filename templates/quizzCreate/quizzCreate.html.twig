@@ -11,7 +11,6 @@
         <div class="row">
             <div class="col-md-7" >
                 <div class="row">
-                    {#                {{ form_widget(formquizz.titre, {'id': 'quizzcreate', 'attr': {'class':'form-control'}}) }}#}
                     {{ form_widget(formquizz.qzName, {'id': 'quizzcreate'}) }}
                 </div>
                 <div class="row">
@@ -26,19 +25,21 @@
                 </div>
 
 
-                {#  <img src="{{ asset('images/logoDramatik.png') }}" class="ratio ratio-16x9"> #}
             </div>
             <div class="col-md">
                 <div class="form-input">
                     <div class="preview">
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                         <img id="quizz-preview">
                     </div>
 
-                    {{ form_row(formquizz.qzImg, {'id':'file-cq-1', 'attr': {'class':'form-control'}}) }}
+                    {{ form_row(formquizz.qzImg, {'id':'file-cq-1'}) }}
                 </div>
 
-
-                {#  <img src="{{ asset('images/logoDramatik.png') }}" class="ratio ratio-16x9"> #}
             </div>
         </div>
     </div>

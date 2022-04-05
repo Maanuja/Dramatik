@@ -32,6 +32,9 @@ class Quizz
     #[ORM\Column(type: 'string', length: 100)]
     private $qzImg;
 
+    #[ORM\Column(type: 'boolean', options:["default" => false])]
+    private $qzApproved;
+
     #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'quizzs')]
     #[ORM\JoinColumn(nullable: false)]
     private $qzDrama;
@@ -45,6 +48,7 @@ class Quizz
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'quizzs')]
     #[ORM\JoinColumn(nullable: false)]
     private $qzUser;
+
 
     public function __construct()
     {
@@ -113,6 +117,18 @@ class Quizz
     public function setQzImg(string $qzImg): self
     {
         $this->qzImg = $qzImg;
+
+        return $this;
+    }
+
+    public function getQzApproved(): ?bool
+    {
+        return $this->qzApproved;
+    }
+
+    public function setQzApproved(bool $qzApproved): self
+    {
+        $this->qzApproved = $qzApproved;
 
         return $this;
     }

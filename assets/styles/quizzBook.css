@@ -106,17 +106,3 @@
     color: thistle !important;
     font-weight: lighter !important;
 }
-
-
-.toast{
-    background: linear-gradient(to bottom right, #B0DB7D, #99DBB4);
-    box-shadow: 5px 5px 20px rgb(124, 128, 136);
-    color: darkgreen;
-    width: 400px;
-    font-size: 1rem;
-}
-
-.toast-header {
-    background: linear-gradient(to bottom right, #95be61, #87c49f);
-    color: darkslategrey;
-}

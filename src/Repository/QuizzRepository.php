@@ -56,6 +56,8 @@ class QuizzRepository extends ServiceEntityRepository
     public function findRecentQuizz(): array
     {
         return $this->createQueryBuilder('q')
+            ->andWhere('q.qzApproved = :val')
+            ->setParameter('val', true)
             ->orderBy('q.qzCreatedAt', 'DESC')
             ->setMaxResults(3)
             ->getQuery()

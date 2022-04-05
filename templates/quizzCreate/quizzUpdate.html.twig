@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzCreate') }}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(formquizz) }}
+    <div id="boxcreate" class="container-sm p-5">
+        <div class="row">
+            <div class="col-md-7" >
+                    <div class="row">
+                        {{ form_widget(formquizz.qzName, {'id':'quizzcreate', 'value': quizz.qzName }) }}
+                    </div>
+                    <div class="row">
+                        {{ form_widget(formquizz.qzDrama, {'id': 'quizzcreate', 'value': quizz.qzDrama.id}) }}
+                    </div>
+                    <div class="row">
+
+                        {{ form_widget(formquizz.qzFormat, {'id':'quizzcreate', 'value': quizz.qzFormat}) }}
+                    </div>
+                    <div class="row">
+                        <button type="submit" name="detailQuizz" class="btn btn-outline-secondary" >Create quizz </button>
+                    </div>
+            </div>
+            <div class="col-md">
+                <div class="form-input">
+                    <div class="preview">
+                        <img id="quizz-preview" src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" style="display:block">
+                    </div>
+                    {{ form_row(formquizz.qzImg, {'id':'file-cq-1'}) }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{ form_end(formquizz) }}
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('quizzCreate') }}
+    {{ parent() }}
+{% endblock %}

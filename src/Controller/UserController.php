@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Critic;
 use App\Entity\User;
 use App\Entity\Quizz;
 use App\Form\UpdateUserFormType;
@@ -20,7 +21,9 @@ class UserController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/account', name: 'account')]
+    /**
+     * @Route("/account", name= "account")
+     */
     public function index(): Response
     {
         return $this->render('user/user.html.twig', [
@@ -112,5 +115,16 @@ class UserController extends AbstractController
         $qzWait = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>false));
         $qzVal = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>true));
         return $this->render("user/myquizzes.html.twig", ['approved'=>$qzVal, 'waiting'=>$qzWait]);
+    }
+
+    /**
+     * @Route("/account/myCritiq/{id}", name="myCritiq")
+     */
+    public function myCritiq(int $id): Response
+    {
+        $mesCritiks = $this->entityManager->getRepository(Critic::class)->findBy(array('crUser'=>$id));
+        return $this->render("user/mycritik.html.twig", [
+            'critiques' => $mesCritiks
+        ]);
     }
 }

@@ -28,16 +28,16 @@ class Critic
     #[ORM\Column(type: 'integer', nullable: true)]
     private $crLike;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
     private $crStory;
 
-    #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
     private $crMusic;
 
-    #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
     private $crCasting;
 
-    #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 1)]
     private $crRate;
 
     #[ORM\ManyToOne(targetEntity: Drama::class, inversedBy: 'critics')]
@@ -113,12 +113,12 @@ class Critic
         return $this;
     }
 
-    public function getCrStory(): ?int
+    public function getCrStory(): ?string
     {
         return $this->crStory;
     }
 
-    public function setCrStory(int $crStory): self
+    public function setCrStory(string $crStory): self
     {
         $this->crStory = $crStory;
 

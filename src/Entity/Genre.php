@@ -6,7 +6,11 @@ use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+/**
+ * @UniqueEntity(fields={"grName"}, message="Il y a déja ce genre dans la liste !")
+ */
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
 class Genre
 {

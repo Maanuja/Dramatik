@@ -17,6 +17,13 @@ use Symfony\Contracts\Cache\CacheInterface;
  */
 class DramaController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/", name="home")
      */
@@ -30,7 +37,7 @@ class DramaController extends AbstractController
     /**
      * @Route("/ajout", name="ajout")
      */
-    public function ajoutDrama(Request $request, CacheInterface $cache,EntityManagerInterface $entityManager)
+    public function ajoutDrama(Request $request)
     {
         $drama = new Drama();
 
@@ -58,11 +65,8 @@ class DramaController extends AbstractController
             $drama->setDrBannerImg($newFilename2);
             $drama->setCreatedAt(new \DateTimeImmutable());
 
-            $entityManager->persist($drama);
-            $entityManager->flush();
-
-            // On efface le cache
-            $cache->delete('drama_list');
+            $this->entityManager->persist($drama);
+            $this->entityManager->flush();
 
             $this->addFlash('DramaAjouter', 'Drama ajouté avec succès');
             return $this->redirectToRoute('admin_drama_home');
@@ -76,7 +80,7 @@ class DramaController extends AbstractController
     /**
      * @Route("/modifier/{id}", name="modifier")
      */
-    public function ModifCategorie(Drama $drama, Request $request, CacheInterface $cache,EntityManagerInterface $entityManager)
+    public function ModifDrama(Drama $drama, Request $request)
     {
         $form = $this->createForm(DramaType::class, $drama);
 
@@ -85,10 +89,10 @@ class DramaController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             if($form->get('drImg')->getData()) {
-                $imagedel=$drama->getDrImg();
-                if($imagedel){
+                $imageDel=$drama->getDrImg();
+                if($imageDel){
                     //chemin physique de l'image
-                    $imgnom=$this->getParameter('images_directory') . '/' . $imagedel;
+                    $imgnom=$this->getParameter('images_directory') . '/' . $imageDel;
                     if(file_exists($imgnom)){
                         //suppression
                         unlink($imgnom);
@@ -123,17 +127,14 @@ class DramaController extends AbstractController
             $drama->setUpdatedAt(new \DateTimeImmutable());
 
 
-            $entityManager->persist($drama);
-            $entityManager->flush();
-
-            // On supprime le cache
-            $cache->delete('drama_list');
+            $this->entityManager->persist($drama);
+            $this->entityManager->flush();
 
             $this->addFlash('DramaModifier', 'Drama modifié avec succès');
             return $this->redirectToRoute('admin_drama_home');
         }
 
-        return $this->render('admin/drama/modif.html.twig', [
+        return $this->render('admin/drama/ajout.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -141,7 +142,7 @@ class DramaController extends AbstractController
     /**
      * @Route("/supprimer/{id}", name="supprimer")
      */
-    public function supprimer(Drama $drama,EntityManagerInterface $entityManager)
+    public function supprimer(Drama $drama)
     {
         if ($drama->getQuizzs() == null){
             $imagedel = $drama->getDrImg();
@@ -154,24 +155,23 @@ class DramaController extends AbstractController
                 }
             }
 
-            $imagedel2 = $drama->getDrBannerImg();
-            if ($imagedel2) {
+            $imageDel2 = $drama->getDrBannerImg();
+            if ($imageDel2) {
                 //chemin physique de l'image
-                $imgnom2 = $this->getParameter('images_directory') . '/' . $imagedel2;
+                $imgnom2 = $this->getParameter('images_directory') . '/' . $imageDel2;
                 if (file_exists($imgnom2))
                     //suppression
                     unlink($imgnom2);
             }
 
-            $entityManager->remove($drama);
-            $entityManager->flush();
+            $this->entityManager->remove($drama);
+            $this->entityManager->flush();
 
             $this->addFlash('DramaSupprimer', 'Drama supprimé avec succès');
-            return $this->redirectToRoute('admin_drama_home');
         }
         else {
             $this->addFlash('DramaNotSupprimer', 'Drama non supprimé car il a des quizzs');
-            return $this->redirectToRoute('admin_drama_home');
         }
+        return $this->redirectToRoute('admin_drama_home');
     }
 }

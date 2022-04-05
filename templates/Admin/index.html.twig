@@ -29,9 +29,12 @@
                 <p class="lead text-muted">Hello {{ app.user.username }},</br> \°u°/</p>
                 <p>
                     <a href="{{ path('admin_modify_admininfo') }}" class="btn btn-primary my-2">Profil Info</a>
-                    <a href="{{ path("admin_drama_ajout") }}" class="btn btn-primary my-2">Ajoute Drama</a>
+                    <br>
                     <a href="{{ path("admin_drama_home") }}" class="btn btn-primary my-2">Dramas</a>
+                    <a href="{{ path("admin_genre_home") }}" class="btn btn-primary my-2">Genres</a>
+                    <br>
                     <a href="{{ path('approveQuizz') }}" class="btn btn-primary my-2">Valider Quizz</a>
+
                 </p>
             </div>
         </div>

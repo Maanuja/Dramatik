@@ -3,18 +3,37 @@
 {% block title %}Hello DramaController{% endblock %}
 
 {% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/MiageProject/dramatik/src/Controller/DramaController.php'|file_link(0) }}">src/Controller/DramaController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/MiageProject/dramatik/templates/drama/index.html.twig'|file_link(0) }}">templates/drama/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container" style="justify-content: center;  display: flex;">
+        <nav>
+            <ul class="pagination">
+                <li><a href="{{ path('drama') }}">TOUS</a></li>
+                {% for genre in genres %}
+                <li><a href="{{ path('filter_genre',{'genre': genre.grName,'id': genre.id }) }}">{{ genre.grName }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="album py-5">
+            <div class="row">
+                {% for drama in dramas %}
+                    <div class="col-md-3">
+                        <div class="card mb-3 box-shadow">
+                            <div class="card-body">
+                                <img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 275px; width: 100%; display: block;" src="{{ asset('uploads/Drama/') }}{{ drama.drImg }}" data-holder-rendered="true">
+                                <h5 class="card-title">{{ drama.drName }}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('dramaview',{'drName': drama.drName , 'id': drama.id}) }}" class="nav-link px-2 text-secondary">View</a></button>
+                                    </div>
+                                    <small class="text-muted">{{ drama.drNbEp }} Episodes
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -172,22 +172,24 @@
             {% endif %}
         </section>
         <h3 class="pb-3 mb-4 font-italic">
-            Video Trailer
+            Bibliothéque de Quizz
         </h3>
         <section>
             <div class="album py-5 bg-light">
                 {% if quizzes is defined %}
                     <div class="deck row row-cols-1 row-cols-md-3 g-4">
                     {% for quizz in quizzes %}
-                        <div class="col">
-                            <div class="card">
-                                <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <h2 class="card-title">PLAY</h2>
-                                    <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                        {% if quizz.qzDrama.id == drama.id %}
+                            <div class="col">
+                                <div class="card">
+                                    <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                                    <div class="card-img-overlay">
+                                        <h2 class="card-title">PLAY</h2>
+                                        <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}

@@ -2,7 +2,7 @@
     background-color: transparent;
     width: 250px;
     height: 250px;
-    margin: 10px 40px 40px 10px;
+    margin: 10px 40px 50px 10px;
     perspective: 1000px;
 }
 
@@ -15,7 +15,6 @@
 .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
 }
-
 
 .flip-card-front, .flip-card-back {
     position: absolute;
@@ -31,7 +30,7 @@
 
 .flip-card-back {
     width: 250px;
-    height: 250px;
+    height: 282px;
     background: burlywood;
     transform: rotateY(180deg);
     padding-top: 20px;

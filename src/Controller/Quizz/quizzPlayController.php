@@ -33,7 +33,7 @@ class quizzPlayController extends AbstractController
         $quizzes = $paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
-            2
+            12
         );
 
         return $this->render('quizzBook.html.twig', ['quizzes'=>$quizzes, 'recent'=>$recent, 'created'=>$created]);
@@ -46,7 +46,7 @@ class quizzPlayController extends AbstractController
     {
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId));
         //shuffle($listQuestions);
-        $quiz = $this->entityManager->getRepository(Quizz::class)->find(array('id' => $quizzId));
+        $quiz = $this->entityManager->getRepository(Quizz::class)->find($quizzId);
 
         $questionForm = $this->createForm(FormQuestion::class, $listQuestions);
         $questionForm->handleRequest($request);
@@ -77,7 +77,7 @@ class quizzPlayController extends AbstractController
             $this->entityManager->persist($ancienScore);
             $this->entityManager->flush();
 
-            return $this->render('quizzPlay/quizzResult.html.twig',["img"=> $quiz->getQzImg(),"score"=> $count]);
+            return $this->render('quizzPlay/quizzResult.html.twig',["quizz"=> $quiz,"score"=> $count]);
 
         }
 
@@ -91,7 +91,7 @@ class quizzPlayController extends AbstractController
         if(!$this->getUser()){
             return $this->redirectToRoute('app_register');
         }
-        $quiz = $this->entityManager->getRepository(Quizz::class)->find(array('id' => $id));
+        $quiz = $this->entityManager->getRepository(Quizz::class)->find($id);
         return $this->render('quizzPlay/quizzStart.html.twig', ['quizz'=> $quiz]);
     }
 

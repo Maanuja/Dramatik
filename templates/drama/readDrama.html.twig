@@ -7,6 +7,7 @@
     {{ encore_entry_link_tags('dramaView') }}
     {{ encore_entry_link_tags('quizzBook') }}
 
+
 {% endblock %}
 
 {% block content %}
@@ -172,10 +173,12 @@
             </div>
             {% endif %}
         </section>
-        <h3 class="pb-3 mb-4 font-italic">
-            Video Trailer
+
+        <h3 class="pb-3 mb-2 font-italic">
+            Quizzes
         </h3>
-        <section>
+
+{#        <section>
             <div class="album py-5 bg-light">
                 {% if quizzes is defined %}
                     <div class="deck row row-cols-1 row-cols-md-3 g-4">
@@ -193,7 +196,88 @@
                 </div>
                 {% endif %}
             </div>
-        </section>
+        </section>#}
+
+        {% if quizzes is defined and quizzes is not empty %}
+        <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+                {% for quizz in quizzes %}
+                    {% if loop.first %}
+                        <div class="carousel-item active">
+                            <div class="deck row row-cols-auto">
+                    {% elseif loop.index is divisible by(4) %}
+                        <div class="carousel-item">
+                            <div class="deck row row-cols-auto">
+                    {% endif %}
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                                        <div class="card-img-overlay">
+                                            <h2 class="card-title">PLAY</h2>
+                                            <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if loop.index is divisible by(3) or loop.last %}
+                            </div>
+                        </div>
+                                {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% set indicator = 1 %}
+                {% for quizz in quizzes %}
+                    {% if loop.index is divisible by(4)  %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ indicator }}" aria-label="Slide {{ indicator+1 }}"></button>
+                        {% set indicator = indicator+1 %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+            <div class="alert noquiz" role="alert">
+                Il n'y a pas encore de Quiz pour ce drama.
+            </div>
+        {% endif %}
+
+
+{#        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>#}
+
     </div>
 {% endblock %}
 {% block javascripts %}

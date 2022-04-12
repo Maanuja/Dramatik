@@ -109,8 +109,8 @@ class UserController extends AbstractController
      */
     public function myQuizzes(): Response
     {
-        $qzWait = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>false));
-        $qzVal = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>true));
+        $qzWait = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzUser'=>$this->getUser(),'qzApproved'=>false));
+        $qzVal = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzUser'=>$this->getUser(),'qzApproved'=>true));
         return $this->render("user/myquizzes.html.twig", ['approved'=>$qzVal, 'waiting'=>$qzWait]);
     }
 }

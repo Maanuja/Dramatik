@@ -23,6 +23,7 @@
                                     <i class="fa fa-calendar"></i>{{ critik.crCreatedAt | date}}
                                 </div>
                                 <div class="comment-detail pull-right">
+                                    <a href="{{ path('dramaview',{'drName': critik.crDrama.drName , 'id': critik.crDrama.id}) }}">Lire Fiche</a>
                                     <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
                                 </div>
                             </div>

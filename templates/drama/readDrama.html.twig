@@ -37,9 +37,6 @@
                             <b class="inline">Période de diffusion : </b>{{ drama.drDate|date('d-m-Y') }} - {{ drama.drDateEnd|date('d-m-Y') }}
                         </li>
                         <li class="list-item">
-                            <b class="inline">Director : </b>Yoo Je Won
-                        </li>
-                        <li class="list-item">
                             <b class="inline">Genre : </b>{{ drama.drGenre.grName }}
                         </li>
                     </ul>
@@ -98,8 +95,6 @@
                                 <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
                             </div>
                         {{ form_end(formComment) }}
-                        <ul class="posts">
-                        </ul>
                     </div>
                     {% for comment in comments %}
                         {% if comment.cmDrama.drName == drama.drName %}
@@ -158,11 +153,10 @@
                             </div>
                         </div>
                         <div class="button-group pull-right">
-                            <button type="submit" class="btn btn-g btn-tube">ENVOYER</button>
+                            <p class="counterCritik"></p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit2">ENVOYER</button>
                         </div>
                     {{ form_end(form) }}
-                    <ul class="posts">
-                    </ul>
                 </div>
                 {% for critik in critiques %}
                     {% if critik.crDrama.drName == drama.drName %}
@@ -188,10 +182,11 @@
             </div>
             {% endif %}
         </section>
-        <h3 class="pb-3 mb-4 font-italic">
-            Bibliothéque de Quizz
-        </h3>
+        <hr>
         <section>
+            <h3 class="pb-3 mb-4 font-italic">
+                Bibliothéque de Quizz
+            </h3>
             <div class="album py-5 bg-light">
                     <div class="deck row row-cols-1 row-cols-md-3 g-4">
                     {% for quizz in quizzes %}

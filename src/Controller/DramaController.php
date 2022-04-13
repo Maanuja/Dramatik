@@ -56,7 +56,7 @@ class DramaController extends AbstractController
     {
         $drama = $this->entityManager->getRepository(Drama::class)->find($id);
         $critiques= $this->entityManager->getRepository(Critic::class)->findAll();
-        $dataComment = $this->entityManager->getRepository(Comment::class)->findAll();
+        $dataComment = $this->entityManager->getRepository(Comment::class)->findBy(array('cmDrama'=>$drama));
         $comments= $paginator->paginate(
             $dataComment,
             $request->query->getInt('page', 1),
@@ -75,31 +75,29 @@ class DramaController extends AbstractController
         $form = $this->createForm(CritiqueFormType::class, $critique,[
             'action' => $id."#critiksection"
         ]);
+        $comment= new Comment();
+        $formComment = $this->createForm(CommentType::class, $comment,[
+            'action' => $id."#commentsection"
+        ]);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $user= $this->getUser();
             if($user == null){
                 $this->addFlash('login plz','Il faut se connecter pour critiquer!');
-                return $this->render('drama/readDrama.html.twig', [
-                    'drama' => $drama,
-                    'quizzes'=>$quizzes,
-                    'form' =>$form->createView(),
-                    'comments' => $comments,
-                    'critiques' => $critiques,
-                ]);
+                return $this->redirectToRoute('dramaview', ['drName'=>$drName,'id'=>$id]);
+
             }
             $critique->setCrCreatedAt(new \DateTime());
             $critique->setCrDrama($drama);
             $critique->setCrUser($user);
             $this->entityManager->persist($critique);
             $this->entityManager->flush();
+
+            return $this->redirectToRoute('critique', ['drName'=>$drName,'id'=>$id]);
         }
 
-        $comment= new Comment();
-        $formComment = $this->createForm(CommentType::class, $comment,[
-            'action' => $id."#commentsection"
-        ]);
         $formComment->handleRequest($request);
 
         if($formComment->isSubmitted() && $formComment->isValid()){
@@ -109,6 +107,7 @@ class DramaController extends AbstractController
             $this->entityManager->persist($comment);
             $this->addFlash('CommentPosted','Votre commentaire est posté!!');
             $this->entityManager->flush();
+            return $this->redirectToRoute('comments', ['drName'=>$drName,'id'=>$id]);
         }
         return $this->render('drama/readDrama.html.twig', [
             'drama' => $drama,

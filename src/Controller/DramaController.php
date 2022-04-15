@@ -63,13 +63,8 @@ class DramaController extends AbstractController
             3
         );
 
-        $data = $this->entityManager->getRepository(Quizz::class)->findAll();
+        $quizzes = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzDrama'=>$drama, 'qzApproved'=>true));
 
-        $quizzes = $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            2
-        );
 
         $critique= new Critic();
         $form = $this->createForm(CritiqueFormType::class, $critique,[

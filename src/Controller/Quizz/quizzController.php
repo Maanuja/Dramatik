@@ -13,6 +13,7 @@ use App\Form\FormQuizzC;
 use App\Entity\Quizz;
 use App\Entity\Questions;
 use App\Entity\Choices;
+use App\Entity\Score;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class quizzController extends AbstractController
@@ -108,6 +109,13 @@ class quizzController extends AbstractController
 
             $imageFile = $formquiz->get('qzImg')->getData();
             if ($imageFile != null) {
+                //chemin physique de la précedente image
+                $imgNom=$this->getParameter('imgquizz_directory') . '/' . $quizz->getQzImg();
+                if(file_exists($imgNom)){
+                    //suppression
+                    unlink($imgNom);
+                }
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $this->slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
@@ -139,6 +147,13 @@ class quizzController extends AbstractController
     {
         $quizz = $this->entityManager->getRepository(Quizz::class)->find($quizzId);
         $questions = $quizz->getQuestions();
+        $scores = $this->entityManager->getRepository(Score::class)->findBy(array('scQuizz' => $quizzId));
+
+        if(!empty($scores)){
+            foreach ($scores as $score){
+                $this->entityManager->remove($score);
+            }
+        }
 
         foreach ($questions as $question){
             $choices = $question->getChoices();
@@ -147,6 +162,14 @@ class quizzController extends AbstractController
             }
             $this->entityManager->remove($question);
         }
+
+        //chemin physique de l'image
+        $imgNom=$this->getParameter('imgquizz_directory') . '/' . $quizz->getQzImg();
+        if(file_exists($imgNom)){
+            //suppression
+            unlink($imgNom);
+        }
+
         $name = $quizz->getQzName();
         $this->entityManager->remove($quizz);
         $this->entityManager->flush();

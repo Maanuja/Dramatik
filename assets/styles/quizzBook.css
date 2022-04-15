@@ -9,17 +9,15 @@
     border-bottom: .5px solid black;
 }
 
-
 .apercu{
     justify-content: space-evenly;
-
 }
 
 .apercu .card{
     width: 19rem;
     min-height: fit-content;
     position: relative;
-    max-width : 300px;
+    max-width : 320px;
     height : 190px;
     background-color: indianred;
     margin : 30px 10px;
@@ -29,26 +27,25 @@
     box-shadow : 0 5px 20px rosybrown;
     transition : 0.3s ease-in-out;
     border-radius : 15px;
+    color: bisque;
 
 }
 
-.apercu .card .image {
+.apercu .card .image, .card-title {
     position : relative;
-    width : 260px;
-    height : 260px;
+    width : 270px;
     top : -40%;
-    bootom:0;
     margin: auto;
-    z-index : 1;
 }
+
 .apercu .card .image img{
     max-width : 100%;
+    width: inherit;
+    height: 152px;
     border-radius : 15px;
-    object-fit: cover;
 }
 
-
-.apercu .card-title{
+.apercu .card-body{
     position: relative;
     padding:10px !important;
     top: -30%;
@@ -56,22 +53,19 @@
     text-align: center;
 }
 
-.apercu .card-title a{
+.apercu .card-body a{
     font-size: 25px !important;
     font-style: italic ;
 }
 .apercu .card:hover {
-    height : 200px;
+    height : 230px;
 }
 
-.apercu .card:hover .card-title {
+.apercu .card:hover .card-body {
     visibility: visible;
-    transition : 0.3s ease-in-out;
+    transition : 0.1s ease-in-out;
 }
 
-.row .col{
-    width: auto;
-}
 .deck{
     justify-content: space-evenly;
     margin-top: 5rem;
@@ -81,10 +75,11 @@
     width: 19rem;
     min-height: fit-content;
 
-}.deck .card img{
+}
+
+.deck .card img{
      height: 19rem;
      object-fit: cover;
-
  }
 
 .deck >.card-body{

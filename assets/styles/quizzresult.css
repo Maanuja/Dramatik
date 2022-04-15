@@ -10,8 +10,8 @@
     font-size: 2.3rem;
 }
 
-#success-box>a{
-    margin: 0 35% 26px;
+#success-box a{
+    width: 15rem;
     background: #db9f99;
     text-align: center;
     font-size: 1.3rem !important;

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Critic;
 use App\Entity\User;
 use App\Entity\Quizz;
+use App\Entity\Score;
 use App\Form\UpdateUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,8 +27,11 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
+        $bestScore = $this->entityManager->getRepository(Score::class)->findOneBy(array('scUser'=> $this->getUser()), array('scScore'=>'DESC'));
+
         return $this->render('user/user.html.twig', [
             'controller_name' => 'UserController',
+            'scores' => $bestScore,
         ]);
     }
 
@@ -112,8 +116,8 @@ class UserController extends AbstractController
      */
     public function myQuizzes(): Response
     {
-        $qzWait = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>false));
-        $qzVal = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzApproved'=>true));
+        $qzWait = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzUser'=>$this->getUser(),'qzApproved'=>false));
+        $qzVal = $this->entityManager->getRepository(Quizz::class)->findBy(array('qzUser'=>$this->getUser(),'qzApproved'=>true));
         return $this->render("user/myquizzes.html.twig", ['approved'=>$qzVal, 'waiting'=>$qzWait]);
     }
 

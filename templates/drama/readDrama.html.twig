@@ -37,9 +37,6 @@
                             <b class="inline">Période de diffusion : </b>{{ drama.drDate|date('d-m-Y') }} - {{ drama.drDateEnd|date('d-m-Y') }}
                         </li>
                         <li class="list-item">
-                            <b class="inline">Director : </b>Yoo Je Won
-                        </li>
-                        <li class="list-item">
                             <b class="inline">Genre : </b>{{ drama.drGenre.grName }}
                         </li>
                     </ul>
@@ -78,35 +75,50 @@
                 {% endif %}
             </ul>
             {% if 'comment' in app.request.uri %}
-                <div class="container">
+                {% for messages in app.flashes(['CommentPosted','Comment Deleted']) %}
+                    {% for message in messages %}
+
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class="container" id="commentsection">
                     <h3 class="heading">Ajouter un commentaire :) !</h3>
                     <div class="container">
-                        <form>
+                        {{ form_start(formComment) }}
                             <div class="form-group">
-                                <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
+                                {{ form_row(formComment.cmComment, {'attr': {'class': 'form-control statut-box', 'placeholder': 'Commentaire'}}) }}
                             </div>
                             <div class="button-group pull-right">
                                 <p class="counter">250</p>
-                                <a href="#" class="btn btn-primary">Post</a>
+                                <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
                             </div>
-                        </form>
-                        <ul class="posts">
-                        </ul>
+                        {{ form_end(formComment) }}
                     </div>
-                    <div class="right" id="mcritk">
-                        <div class="comment">
-                            <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
-                            <div class="comment-body">
-                                <h2 class="comment-heading">User</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <div class="comment-detail pull-left">
-                                    <i class="fa fa-calendar"></i>07/02/2022
-                                </div>
-                                <div class="comment-detail pull-right">
-                                    <i class="fa fa-thumbs-up"></i>10
+                    {% for comment in comments %}
+                        {% if comment.cmDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">User</h2>
+                                        <p>{{ comment.cmComment }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ comment.cmDate | date }}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>10
+                                            <a href="{{ path('deleteComment',{'drName' : drama.drName, 'id' : drama.id, 'idc' : comment.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="text-center">
+                        {{ knp_pagination_render(comments) }}
                     </div>
                 </div>
 
@@ -116,7 +128,7 @@
                         {{ message }}
                     </div>
                 {% endfor %}
-            <div class="container">
+            <div class="container" id="critiksection">
                 <h3 class="heading">Ajouter un Critique :) !</h3>
                 <div class="container">
                     {{ form_start(form) }}
@@ -141,11 +153,10 @@
                             </div>
                         </div>
                         <div class="button-group pull-right">
-                            <button type="submit" class="btn btn-submit display-7">ENVOYER</button>
+                            <p class="counterCritik"></p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit2">ENVOYER</button>
                         </div>
                     {{ form_end(form) }}
-                    <ul class="posts">
-                    </ul>
                 </div>
                 {% for critik in critiques %}
                     {% if critik.crDrama.drName == drama.drName %}
@@ -171,32 +182,34 @@
             </div>
             {% endif %}
         </section>
-        <h3 class="pb-3 mb-4 font-italic">
-            Video Trailer
-        </h3>
+        <hr>
         <section>
+            <h3 class="pb-3 mb-4 font-italic">
+                Bibliothéque de Quizz
+            </h3>
             <div class="album py-5 bg-light">
-                {% if quizzes is defined %}
                     <div class="deck row row-cols-1 row-cols-md-3 g-4">
                     {% for quizz in quizzes %}
-                        <div class="col">
-                            <div class="card">
-                                <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <h2 class="card-title">PLAY</h2>
-                                    <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                        {% if quizz.qzDrama.id == drama.id %}
+                            <div class="col">
+                                <div class="card">
+                                    <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                                    <div class="card-img-overlay">
+                                        <h2 class="card-title">PLAY</h2>
+                                        <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
-                {% endif %}
             </div>
         </section>
     </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('search') }}
     <script>
         function findTotal() {
             var tot = 0;

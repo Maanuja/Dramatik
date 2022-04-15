@@ -38,7 +38,7 @@ class GenreController extends AbstractController
     /**
      * @Route("/ajout", name="ajout")
      */
-    public function ajoutDrama(Request $request)
+    public function ajoutGenre(Request $request)
     {
         $genre = new Genre();
 

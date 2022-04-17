@@ -1,10 +1,9 @@
 {% extends 'user/user.html.twig'%}
-{% block title %}Mes quizzes{% endblock %}
 
+{% block title %}Mes quizzes{% endblock %}
 
 {% block rightbox %}
     <div class="right col-md-9 coord">
-
         {% for message in app.flashes('modified') %}
             <div id="modified" class="toast mb-3" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-autohide="false">
                 <div class="toast-header">
@@ -16,6 +15,7 @@
                 </div>
             </div>
         {% endfor %}
+
         <h2 class="display-5">MES QUIZZS</h2>
 
         <h4>En Attente</h4>
@@ -55,10 +55,6 @@
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
 {% endblock %}

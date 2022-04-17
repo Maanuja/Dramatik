@@ -62,5 +62,4 @@ class AbcdaireController extends AbstractController
         }
         return $al;
     }
-
 }

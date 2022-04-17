@@ -1,18 +1,21 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Account{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('account') }}
 {% endblock %}
+
 {% block content %}
     {% block boxprofil %}
         {% block banner %}
-        {%if app.user.UsBanImg != null %}
-            <img class="header-banner" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsBanImg }}">
-        {% else %}
-            <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
-        {% endif %}
-            {% endblock %}
+            {%if app.user.UsBanImg != null %}
+                <img class="header-banner" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsBanImg }}">
+            {% else %}
+                <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+            {% endif %}
+        {% endblock %}
         <div class="box-profil">
             <div class="row mx-auto h-100">
                 <div class="left col-md-3">
@@ -33,54 +36,54 @@
             </div>
         </div>
     {% endblock %}
-<div class="container">
-    <div class="row">
-        <div class="left col-md-3">
-            <div id="nav-account">
-                <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
-                <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
-                <div class="nav-item-account"><a href="{{ path('myCritiq',{'id': app.user.id }) }}">Mes Critik</a></div>
-                <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
-                <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
+    <div class="container">
+        <div class="row">
+            <div class="left col-md-3">
+                <div id="nav-account">
+                    <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
+                    <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
+                    <div class="nav-item-account"><a href="{{ path('myCritiq',{'id': app.user.id }) }}">Mes Critik</a></div>
+                    <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
+                    <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
+                </div>
             </div>
+            {% block rightbox %}
+                <div class="right col-md-9">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('fail') %}
+                        <div class="alert alert-warning">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('ppsuccess') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}{% for message in app.flashes('ppfail') %}
+                        <div class="alert alert-warning ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('ppbsuccess') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}{% for message in app.flashes('ppbfail') %}
+                        <div class="alert alert-warning ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <p>Nom : {{ app.user.UsLname }}</p>
+                    <p>Prénom : {{ app.user.UsFname }}</p>
+                    <p>E-mail : {{ app.user.email }}</p>
+                </div>
+            {% endblock %}
         </div>
-        {% block rightbox %}
-        <div class="right col-md-9">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success ">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('fail') %}
-                <div class="alert alert-warning">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('ppsuccess') %}
-                <div class="alert alert-success ">
-                    {{ message }}
-                </div>
-            {% endfor %}{% for message in app.flashes('ppfail') %}
-                <div class="alert alert-warning ">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('ppbsuccess') %}
-                <div class="alert alert-success ">
-                    {{ message }}
-                </div>
-            {% endfor %}{% for message in app.flashes('ppbfail') %}
-                <div class="alert alert-warning ">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            <p>Nom : {{ app.user.UsLname }}</p>
-            <p>Prénom : {{ app.user.UsFname }}</p>
-            <p>E-mail : {{ app.user.email }}</p>
-        </div>
-        {% endblock %}
     </div>
-</div>
 {% endblock %}
 
 {% block javascripts %}

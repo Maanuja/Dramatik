@@ -28,4 +28,9 @@ final class Version20220331162617 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE drama DROP created_at, DROP updated_at, DROP dr_date_end');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

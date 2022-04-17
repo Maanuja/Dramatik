@@ -34,4 +34,9 @@ final class Version20220315093445 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_9474526CC2725C77 ON comment (cm_user_id)');
         $this->addSql('ALTER TABLE `user` CHANGE us_role us_role ENUM(\'5\', \'7\', \'10\') CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci` COMMENT \'(DC2Type:enumFormat)\'');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

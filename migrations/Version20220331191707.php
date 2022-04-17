@@ -28,4 +28,9 @@ final class Version20220331191707 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE drama CHANGE dr_rate dr_rate NUMERIC(2, 1) DEFAULT NULL');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

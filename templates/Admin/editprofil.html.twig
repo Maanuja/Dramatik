@@ -3,49 +3,47 @@
 {% block title %}Editer Profil{% endblock %}
 
 {% block content %}
-
-<section class="form formstyle">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-md-12 mx-auto mbr-form">
-                {{ form_start(form_userinfo) }}
-                <div class="form-row">
-                    <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
-                        {{ form_row(form_userinfo.username, {'attr': {'class': 'form-control display-7', 'placeholder': 'Pseudo'}}) }}
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
-                        <div class="form-row">
-                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                {{ form_row(form_userinfo.UsLname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Nom'}}) }}
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                {{ form_row(form_userinfo.UsFname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Prénom'}}) }}
+    <section class="form formstyle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 mx-auto mbr-form">
+                    {{ form_start(form_userinfo) }}
+                    <div class="form-row">
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="pseudo">
+                            {{ form_row(form_userinfo.username, {'attr': {'class': 'form-control display-7', 'placeholder': 'Pseudo'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
+                            <div class="form-row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form_userinfo.UsLname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Nom'}}) }}
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form_userinfo.UsFname, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Prénom'}}) }}
+                                </div>
                             </div>
                         </div>
+                        <div data-for="email" class="col-lg-12 col-md-12 col-sm-12">
+                            {{ form_row(form_userinfo.email, {'attr': {'class': 'form-control display-7', 'placeholder': 'Email'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                            {{ form_row(form_userinfo.UsImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'value': "yes"}}) }}
+                            {%if app.user.UsImg != null %}
+                                <img class="photo card__image" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsImg }}" id="output"/>
+                            {% else %}
+                                <img class="photo card__image" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
+                            {% endif %}
+                        </div>
+                        <div class="col-auto m-auto pt-5">
+                            <button type="submit" class="btn btn-submit display-7">ENVOYER</button>
+                        </div>
                     </div>
-                    <div data-for="email" class="col-lg-12 col-md-12 col-sm-12">
-                        {{ form_row(form_userinfo.email, {'attr': {'class': 'form-control display-7', 'placeholder': 'Email'}}) }}
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
-                        {{ form_row(form_userinfo.UsImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'value': "yes"}}) }}
-                        {#                        <input name="password" placeholder="Mot de passe" class="form-control display-7">#}
-                        {%if app.user.UsImg != null %}
-                            <img class="photo card__image" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsImg }}" id="output"/>
-                        {% else %}
-                            <img class="photo card__image" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
-                        {% endif %}
-
-                    </div>
-                    <div class="col-auto m-auto pt-5">
-                        <button type="submit" class="btn btn-submit display-7">ENVOYER</button>
-                    </div>
+                    {{ form_end(form_userinfo) }}
                 </div>
-                {{ form_end(form_userinfo) }}
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     <script>

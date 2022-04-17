@@ -32,4 +32,9 @@ final class Version20220313194011 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_7C77973D8F6D2B2D ON quizz');
         $this->addSql('ALTER TABLE quizz CHANGE qz_drama_id qz_drama INT NOT NULL');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

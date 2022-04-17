@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Apropos{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('apropos') }}
 {% endblock %}
+
 {% block content %}
     <section class="apropos-intro">
         {% for message in app.flashes('success') %}
@@ -35,10 +38,9 @@
                     </h2>
                     <div class="text-wrap">
                         <p class="mbr-text pb-2 intro-waffer align-center intro-fonts-style display-7">
-                            Hello bienvenue sur DRAMATIK. Le site de réference pour les dramasLovers ainsi que les curieux. Vous retrouverez ici les
-                            Tous les dramas du moment ainsi que l'avis des experts K-drama. Vous aussi en faire parti donc rejoignez nous dans cette
-                            folle aventure. Et amusez vous à créer des quizz!</p>
-
+                            Hello bienvenue sur DRAMATIK. Le site de réference pour les dramasLovers ainsi que les curieux. Vous retrouverez ici
+                            tous les dramas du moment ainsi que l'avis des experts K-drama. Vous aussi rejoignez nous dans cette
+                            folle aventure et amusez vous à créer des quizz!</p>
                     </div>
                 </div>
             </div>
@@ -50,9 +52,7 @@
                 <div class="title col-12 pb-5 align-center">
                     <h2 class="pb-3 mbr-bold mbr-fonts-style display-2">
                         La TEAM</h2>
-                    <h3 class="mbr-section-subtitle pb-3 mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Fusce ornare risus vel tellus tempor tempor. Suspendisse ut lobortis sem, aliquam consequat nisi.
-                    </h3>
+                    <h3 class="mbr-section-subtitle pb-3 mbr-fonts-style display-7">Les créatrices de ce site et les admins à votre écoute.</h3>
                 </div>
             </div>
         </div>
@@ -74,9 +74,7 @@
                                 </h4>
                             </div>
                             <p class="mbr-text mbr-fonts-style display-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ornare risus vel tellus
-                                tempor tempor. Suspendisse ut lobortis sem, aliquam consequat nisi. Praesent ac scelerisque
-                                nulla. Maecenas sed magna quis leo fringilla molestie.</p>
+                                Passionnée & Experte de drama, heureuse de partager cette passion avec vous.</p>
                         </div>
                 </div>
 
@@ -97,9 +95,7 @@
                                 </h4>
                             </div>
                             <p class="mbr-text mbr-fonts-style display-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ornare risus vel tellus
-                                tempor tempor. Suspendisse ut lobortis sem, aliquam consequat nisi. Praesent ac scelerisque
-                                nulla. Maecenas sed magna quis leo fringilla molestie.</p>
+                                Novice en drama et heureuse de vous aider à développer votre passion des dramas à nos côtés.</p>
                         </div>
                 </div>
 
@@ -110,18 +106,16 @@
                             </div>
                             <div class="card-footer">
                                 <h3 class="mbr-author-name pb-4 mbr-black mbr-bold mbr-fonts-style display-2">
-                                    Yasmine NABBAD</h3>
+                                    Futur·e PARTENAIRE</h3>
                                 <h4 class="mbr-author-desc pb-1 mbr-black mbr-bold mbr-light mbr-fonts-style display-7">
                                     Designer</h4>
                                 <h4 class="phone pb-1 mbr-black mbr-fonts-style display-7">00 11 22 33 44</h4>
                                 <h4 class="mail pb-1 mbr-black mbr-fonts-style display-7">
-                                    yasmine@gmail.com
+                                    dramatik@gmail.com
                                 </h4>
                             </div>
                             <p class="mbr-text mbr-fonts-style display-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ornare risus vel tellus
-                                tempor tempor. Suspendisse ut lobortis sem, aliquam consequat nisi. Praesent ac scelerisque
-                                nulla. Maecenas sed magna quis leo fringilla molestie.</p>
+                                Rejoignez nous pour découvrir l'envers du décors et participer à l'évolution du site et de la communauté.</p>
                         </div>
                 </div>
             </div>
@@ -150,27 +144,22 @@
                                 <div class="form-row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
                                         {{ form_row(contact_form.ctFName, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Prénom'}}) }}
-{#                                        <input type="text" name="nameFirst" placeholder="Prénom" class="form-control text-multiple" value="">#}
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 form-group">
                                         {{ form_row(contact_form.ctLName, {'attr': {'class': 'form-control text-multiple'}}) }}
-{#                                        <input type="text" name="nameLast" placeholder="Nom" class="form-control text-multiple" value="">#}
                                     </div>
                                 </div>
                             </div>
                             <div data-for="phone" class="col-lg-6 col-md-12 col-sm-12 form-group">
                                 <p id="err"></p>
                                 {{ form_row(contact_form.ctTel, {'attr': {'class': 'form-control text-multiple'}}) }}
-{#                                <input type="text" name="phone" placeholder="00 00 00 00 00" class="form-control display-7" value="">#}
                             </div>
                             <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
                                 <p id="err2"></p>
                                 {{ form_row(contact_form.ctMail, {'attr': {'class': 'form-control display-7"'}}) }}
-{#                                <input type="email" name="email" placeholder="Email" class="form-control display-7" value="">#}
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12" data-for="message">
                                 {{ form_row(contact_form.ctMessage, {'attr': {'class': 'form-control display-7"'}}) }}
-{#                                <textarea name="message" placeholder="Message" class="form-control display-7"></textarea>#}
                             </div>
                             <div class="col-auto m-auto pt-5"><input type="submit" value="ENVOYER" class="btn btn-submit display-7" ></div>
                         </div>

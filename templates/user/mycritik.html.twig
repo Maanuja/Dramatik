@@ -1,16 +1,19 @@
 {% extends 'user/user.html.twig'%}
+
 {% block title %}Mes critiques {% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('account') }}
 {% endblock %}
+
 {% block rightbox %}
-<div class="right col-md-9 coord">
-    <div class="right col">
-        <div class="col" id="comments">
-            <h2 class="display-5">MES Comments</h2>
-            <!-- COMMENT 1 - START -->
-            {% for critik in critiques %}
+    <div class="right col-md-9 coord">
+        <div class="right col">
+            <div class="col" id="comments">
+                <h2 class="display-5">MES Comments</h2>
+                <!-- COMMENT 1 - START -->
+                {% for critik in critiques %}
                     <div class="right">
                         <div class="comment">
                             <img class="pull-left comment-object" src="{{ asset('uploads/imageUser/') }}{{ critik.crUser.UsImg }}" alt="">
@@ -29,12 +32,9 @@
                             </div>
                         </div>
                     </div>
-            {% endfor %}
-            <!-- COMMENT - END -->
+                {% endfor %}
+                <!-- COMMENT - END -->
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
-{% block javascripts %}
-
 {% endblock %}

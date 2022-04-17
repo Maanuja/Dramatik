@@ -27,7 +27,7 @@ class questionController extends AbstractController
      */
     public function questionc(int $idQz, int $nb, Request $request): Response
     {
-        $quiz = $this->entityManager->getRepository(Quizz::class)->findOneBy(array('id' => $idQz));
+        $quiz = $this->entityManager->getRepository(Quizz::class)->find($idQz);
         if ($nb<0 || !$quiz) {
             return $this->redirectToRoute('home');
         }
@@ -56,8 +56,6 @@ class questionController extends AbstractController
                 $this->entityManager->persist($choice);
             }
 
-
-
             $this->entityManager->flush();
 
 
@@ -82,10 +80,10 @@ class questionController extends AbstractController
     {
         $quizz = $this->entityManager->getRepository(Quizz::class)->find(array('id' => $quizzId));
         $listQuestions = $this->entityManager->getRepository(Questions::class)->findBy(array('qtQuizz' => $quizzId),array('id'=>'ASC'));
-        if($nb == $quizz->getQzFormat()){
+        if($nb == $quizz->getQzFormat() && !empty($listQuestions)){
             $question = $listQuestions[0];
         }
-        else{
+        elseif(($quizz->getQzFormat() - $nb)< count($listQuestions) && !empty($listQuestions)){
             $question = $listQuestions[$quizz->getQzFormat() - $nb];
         }
 
@@ -93,14 +91,26 @@ class questionController extends AbstractController
         $questioncForm->handleRequest($request);
 
         if ($questioncForm->isSubmitted() && $questioncForm->isValid()) {
+            if(isset($question)){
+                $choices = $this->entityManager->getRepository(Choices::class)->findBy(array('chQuestion' => $question->getId()));
+            }
+            else{
+                $question = new Questions();
+                $quiz = $this->entityManager->getRepository(Quizz::class)->find($quizzId);
+                $question->setQtQuizz($quiz);
+            }
             $question->setQtQuestion($questioncForm->get('question')->getData());
 
-
             $quizz->setQzUpdatedAt(\DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'), new DateTimeZone('Europe/Paris')));
-            $choices = $this->entityManager->getRepository(Choices::class)->findBy(array('chQuestion' => $question->getId()));
+            $this->entityManager->persist($question);
 
             for($i=1; $i<=4; $i++){
-                $choice = $choices[$i-1];
+                if (isset($choices)) {
+                    $choice = $choices[$i - 1];
+                }
+                else{
+                    $choice =new Choices();
+                }
                 $choice->setChChoice($questioncForm->get('choice'.$i)->getData());
                 if($i == 1){
                     $choice->setChTrue(true);
@@ -109,7 +119,9 @@ class questionController extends AbstractController
                     $choice->setChTrue(false);
                 }
                 $choice->setChQuestion($question);
+                $this->entityManager->persist($choice);
             }
+
 
             $this->entityManager->flush();
 
@@ -121,6 +133,12 @@ class questionController extends AbstractController
 
             return $this->redirectToRoute('modifyQuestion', ['quizzId' => $quizzId, 'nb' => $nb - 1]);
         }
-        return $this->renderForm('quizzCreate/questionUpdate.html.twig', ["formquest"=>$questioncForm, "nombre"=>$nb, 'question'=>$question, "img"=> $quizz->getQzImg()]);
+
+        if (isset($question)) {
+            return $this->renderForm('quizzCreate/questionUpdate.html.twig', ["formquest" => $questioncForm, "nombre" => $nb, 'question' => $question, "img" => $quizz->getQzImg()]);
+        }
+        else {
+            return $this->renderForm('quizzCreate/questionUpdate.html.twig', ["formquest" => $questioncForm, "nombre" => $nb, "img" => $quizz->getQzImg()]);
+        }
     }
 }

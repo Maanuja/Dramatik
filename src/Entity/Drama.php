@@ -36,9 +36,6 @@ class Drama
     #[ORM\Column(type: 'string', length: 300)]
     private $drVideo;
 
-    #[ORM\OneToMany(mappedBy: 'chDrama', targetEntity: Character::class)]
-    private $characters;
-
     #[ORM\OneToMany(mappedBy: 'crDrama', targetEntity: Critic::class)]
     private $critics;
 
@@ -69,7 +66,6 @@ class Drama
 
     public function __construct()
     {
-        $this->characters = new ArrayCollection();
         $this->critics = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->quizzs = new ArrayCollection();
@@ -160,36 +156,6 @@ class Drama
     public function setDrVideo(string $drVideo): self
     {
         $this->drVideo = $drVideo;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Character[]
-     */
-    public function getCharacters(): Collection
-    {
-        return $this->characters;
-    }
-
-    public function addCharacter(Character $character): self
-    {
-        if (!$this->characters->contains($character)) {
-            $this->characters[] = $character;
-            $character->setChDrama($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCharacter(Character $character): self
-    {
-        if ($this->characters->removeElement($character)) {
-            // set the owning side to null (unless already changed)
-            if ($character->getChDrama() === $this) {
-                $character->setChDrama(null);
-            }
-        }
 
         return $this;
     }

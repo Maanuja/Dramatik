@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Critic;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +19,7 @@ class CritiqueFormType extends AbstractType
                 'label' => 'Titre de votre Commentaire',
             ])
             ->add('crCritic', TextareaType::class, [
-            'label' => 'Votre Critique',
+                'label' => 'Votre Critique',
             ])
             ->add('crStory',NumberType::class, [
                 'label' => 'Notez la storyLine',

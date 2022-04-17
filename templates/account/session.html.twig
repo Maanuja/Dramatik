@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Utilisateur{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('session') }}
 {% endblock %}
+
 {% block body %}
     <div class="text-center">
     {% set currentPath = path(app.request.attributes.get('_route'),
@@ -61,9 +64,7 @@
                     </div>
                     <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
                     <button>Se conecter</button>
-                     <input type="hidden" name="_csrf_token"
-                        value="{{ csrf_token('authenticate') }}"
-                    >
+                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </form>
             {% endif %}
             </div>

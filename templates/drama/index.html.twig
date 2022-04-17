@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DramaController{% endblock %}
+{% block title %}Catalogue{% endblock %}
 
 {% block content %}
     <div class="container" style="justify-content: center;  display: flex;">
@@ -8,7 +8,7 @@
             <ul class="pagination">
                 <li><a href="{{ path('drama') }}">TOUS</a></li>
                 {% for genre in genres %}
-                <li><a href="{{ path('filter_genre',{'genre': genre.grName,'id': genre.id }) }}">{{ genre.grName }}</a></li>
+                    <li><a href="{{ path('filter_genre',{'genre': genre.grName,'id': genre.id }) }}">{{ genre.grName }}</a></li>
                 {% endfor %}
             </ul>
         </nav>

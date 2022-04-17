@@ -20,7 +20,6 @@
 
 
 {% block content %}
-
     {% if nombre is defined %}
         {{ form_start(formquest) }}
         <div class="container-sm p-5" id="boxcreate" role="group" aria-label="Basic input text group">
@@ -51,7 +50,6 @@
             </div>
 
             <button type="submit" name="submit" class="btn next">
-
                 {% if nombre==1 %}
 
                     Soumettre  <i class="fa fa-arrow-right" id="nxtqst"></i>

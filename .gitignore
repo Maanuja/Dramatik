@@ -21,7 +21,6 @@
 
 ###< others ###
 .idea/
-/public/uploads/
 ###< others ###
 ###> symfony/webpack-encore-bundle ###
 /node_modules/

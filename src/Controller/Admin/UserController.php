@@ -64,7 +64,6 @@ class UserController extends AbstractController
      */
     public function supprimer(User $user,int $id)
     {
-
         if ($this->entityManager->getRepository(User::class)->find($id)){
 
             $this->entityManager->remove($user);
@@ -73,7 +72,6 @@ class UserController extends AbstractController
             $this->addFlash('UserSupprimer', 'User supprimé avec succès');
         }
         else{
-
             $this->addFlash('UserNotSupprimer', 'Vous ne pouvez pas supprimé ce user il est lié à des dramas');
         }
         return $this->redirectToRoute('admin_user_home');

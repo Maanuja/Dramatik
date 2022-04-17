@@ -16,53 +16,50 @@
 
     {% if quizzes is defined %}
         <div class="row row-cols-1 row-cols-md-3 g-4 m-3">
-        {% for quizz in quizzes %}
-
-            <div class="col">
-                <div class="card" style="border: white;">
-                    <div class="card-body">
-                        <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="rounded mx-auto d-block" style="width:100%; height:auto;" alt="couverture de {{ quizz.qzName}} ">
-                        </a>
+            {% for quizz in quizzes %}
+                <div class="col">
+                    <div class="card" style="border: white;">
+                        <div class="card-body">
+                            <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="rounded mx-auto d-block" style="width:100%; height:auto;" alt="couverture de {{ quizz.qzName}} ">
+                            </a>
+                        </div>
+                        <div class="card-footer text-center">
+                            <i>{{ quizz.qzName }}</i>
+                            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#quizzModal{{ quizz.id }}">
+                                Valider
+                            </button>
+                        </div>
                     </div>
-                    <div class="card-footer text-center">
-                        <i>{{ quizz.qzName }}</i>
-                        <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#quizzModal{{ quizz.id }}">
-                            Valider
-                        </button>
-                        {#  <a href="{{ path('approveQuizz', {'quizzId' : quizz.id}) }}">Valider</a>#}
-                    </div>
-                </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="quizzModal{{ quizz.id }}" tabindex="-1" aria-labelledby="quizzModal" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" >Quizz ~ <i>{{ quizz.qzName }}</i></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                {% for qst in quizz.questions %}
-                                    <div class="row m-3">
-                                        <h4>{{ qst.qtQuestion  }}</h4>
-                                        <div class="col-xxl">
-                                            {% for ch in qst.choices %}
-                                                {{ ch.chChoice }} {{ ch.chTrue ? '- true':none }}<br>
-                                            {% endfor %}
+                    <!-- Modal -->
+                    <div class="modal fade" id="quizzModal{{ quizz.id }}" tabindex="-1" aria-labelledby="quizzModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >Quizz ~ <i>{{ quizz.qzName }}</i></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {% for qst in quizz.questions %}
+                                        <div class="row m-3">
+                                            <h4>{{ qst.qtQuestion  }}</h4>
+                                            <div class="col-xxl">
+                                                {% for ch in qst.choices %}
+                                                    {{ ch.chChoice }} {{ ch.chTrue ? '- true':none }}<br>
+                                                {% endfor %}
+                                            </div>
                                         </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <a type="button" class="btn btn-primary" href="{{ path('approveQuizz',{'quizzId': quizz.id}) }}">Valider le Quizz</a>
+                                    {% endfor %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    <a type="button" class="btn btn-primary" href="{{ path('approveQuizz',{'quizzId': quizz.id}) }}">Valider le Quizz</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        {% endfor %}
+            {% endfor %}
         </div>
     {% endif %}
 

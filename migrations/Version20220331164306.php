@@ -28,4 +28,9 @@ final class Version20220331164306 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE drama CHANGE dr_date_end dr_date_end DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

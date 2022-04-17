@@ -8,7 +8,6 @@
     <style>
         body {
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url({{ img ? asset('uploads/imageQuizz/' ~ img)  : "none" }});
-
         }
     </style>
 {% endblock %}
@@ -26,20 +25,14 @@
 
             <div class="col-11 align-self-center">
                 {{ form_start(qstform) }}
-
                 {% for i in range(0,numberQuestion-1)%}
                     <div class="taille flex-column justify-content-center" id="form_question_choice{{ i }}" >
                         <h1 class="text-center my-4">{{ form_label(qstform['choice' ~ i]) }}</h1>
-
                         <div class="d-grid btn-group-vertical gap-4 p-3"  role="group" aria-label="Basic radio toggle button group">
-
                             {% for child in qstform['choice' ~ i].children %}
-
                                 {{ form_widget(child, {'attr': {'class': 'btn-check'}}) }}
                                 <label class="btn btn-outline-selected px-5" for="{{ child.vars.id }}" >{{ child.vars.label }}</label>
-
                             {% endfor %}
-
                         </div>
 
                         {% if i==numberQuestion-1 %}
@@ -49,20 +42,17 @@
                                 Next Question  <i class="fa fa-arrow-right" ></i>
                             </button>
                         {% endif %}
-
                     </div>
                 {% endfor %}
-
                 {{ form_end(qstform) }}
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('quizzPlay') }}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quizzPlay') }}
 
-    {% endblock %}
+{% endblock %}

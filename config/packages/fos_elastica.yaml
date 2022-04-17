@@ -1,0 +1,28 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { url: '%env(ELASTICSEARCH_URL)%' }
+    indexes:
+        drama:
+            properties:
+                drName: ~
+                drGenre: ~
+                drPlot: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Drama
+        user:
+            properties:
+                email: ~
+                username: ~
+            persistence:
+                driver: orm
+                model: App\Entity\User
+        quizz:
+            properties:
+                qzApproved: ~
+                qzName: ~
+                qzDrama: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Quizz

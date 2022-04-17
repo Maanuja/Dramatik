@@ -52,4 +52,8 @@ final class Version20220215172157 extends AbstractMigration
         $this->addSql('DROP TABLE score');
         $this->addSql('DROP TABLE `user`');
     }
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

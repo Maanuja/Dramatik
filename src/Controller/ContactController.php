@@ -30,8 +30,8 @@ class ContactController extends AbstractController
             $message = (new TemplatedEmail())
                 ->from($form->get('ctMail')->getData())
                 ->to('noreply.dramatik@gmail.com')
-                ->subject('You got mail')
-                ->text('Sender : '.$form->get('ctMail')->getData().\PHP_EOL.
+                ->subject('Vous avez reçu un mail concernant le site')
+                ->text('Celui qui vous envoyez la demande: '.$form->get('ctMail')->getData().\PHP_EOL.
                     $form->get('ctMessage')->getData(),
                     'text/plain');
             $mailer->send($message);

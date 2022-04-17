@@ -249,4 +249,18 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('search') }}
+    <script>
+        function findTotal() {
+            var tot = 0;
+            for (let i = 0; i < 3; i++) {
+                let arr = document.getElementsByClassName('text-multiple')[i].value;
+                if (parseFloat(arr))
+                    tot += parseFloat(arr);
+            }
+            tot = tot / 3;
+            parseFloat(tot).toFixed(2);
+            console.log(tot);
+            document.getElementById('critique_form_crRate').value = tot;
+        }
+    </script>
 {% endblock %}

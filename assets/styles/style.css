@@ -319,6 +319,13 @@ form li{
 	padding: 10px 10px;
 }
 
+label{
+	font-weight: bold;
+	color: var(--lightbrown);
+	text-decoration: underline;
+	font-size: medium;
+	text-transform: uppercase;
+}
 
 .alertempty{
 	color: darkslateblue;

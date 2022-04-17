@@ -59,71 +59,23 @@
         <hr>
         <section>
             <ul class="nav nav-tabs">
-                {% if 'comment' in app.request.uri %}
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
-                    </li>
-                {% else %}
+                {% if 'critique' in app.request.uri %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
                     </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
+                    </li>
                 {% endif %}
             </ul>
-            {% if 'comment' in app.request.uri %}
-                {% for messages in app.flashes(['CommentPosted','Comment Deleted']) %}
-                    {% for message in messages %}
-
-                        <div class="alert alert-success ">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-                <div class="container" id="commentsection">
-                    <h3 class="heading">Ajouter un commentaire :) !</h3>
-                    <div class="container">
-                        {{ form_start(formComment) }}
-                        <div class="form-group">
-                            {{ form_row(formComment.cmComment, {'attr': {'class': 'form-control statut-box', 'placeholder': 'Commentaire'}}) }}
-                        </div>
-                        <div class="button-group pull-right">
-                            <p class="counter">250</p>
-                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
-                        </div>
-                        {{ form_end(formComment) }}
-                    </div>
-                    {% for comment in comments %}
-                        {% if comment.cmDrama.drName == drama.drName %}
-                            <div class="right" id="mcritk">
-                                <div class="comment">
-                                    <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
-                                    <div class="comment-body">
-                                        <h2 class="comment-heading">User</h2>
-                                        <p>{{ comment.cmComment }}</p>
-                                        <div class="comment-detail pull-left">
-                                            <i class="fa fa-calendar"></i>{{ comment.cmDate | date }}
-                                        </div>
-                                        <div class="comment-detail pull-right">
-                                            <i class="fa fa-thumbs-up"></i>10
-                                            <a href="{{ path('deleteComment',{'drName' : drama.drName, 'id' : drama.id, 'idc' : comment.id}) }}"><i class="fa fa-trash-o"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-
-                    <div class="text-center">
-                        {{ knp_pagination_render(comments) }}
-                    </div>
-                </div>
-
-            {% else %}
+            {% if 'critique' in app.request.uri %}
                 {% for message in app.flashes('login plz') %}
                     <div class="alert alert-danger ">
                         {{ message }}
@@ -180,6 +132,59 @@
                             </div>
                         {% endif %}
                     {% endfor %}
+                </div>
+            {% else %}
+                {% for messages in app.flashes(['CommentPosted','Comment Deleted']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for messages in app.flashes(['CommentDel']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class="container" id="commentsection">
+                    <h3 class="heading">Ajouter un commentaire :) !</h3>
+                    <div class="container">
+                        {{ form_start(formComment) }}
+                        <div class="form-group">
+                            {{ form_row(formComment.cmComment, {'attr': {'class': 'form-control statut-box', 'placeholder': 'Commentaire'}}) }}
+                        </div>
+                        <div class="button-group pull-right">
+                            <p class="counter">250</p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
+                        </div>
+                        {{ form_end(formComment) }}
+                    </div>
+                    {% for comment in comments %}
+                        {% if comment.cmDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">User</h2>
+                                        <p>{{ comment.cmComment }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ comment.cmDate | date }}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>10
+                                            <a href="{{ path('deleteComment',{'drName' : drama.drName, 'id' : drama.id, 'idc' : comment.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="text-center">
+                        {{ knp_pagination_render(comments) }}
+                    </div>
                 </div>
             {% endif %}
         </section>
@@ -244,19 +249,4 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('search') }}
-    <script>
-        function findTotal() {
-            var tot = 0;
-            for (let i = 0; i < 3; i++) {
-                let arr = document.getElementsByClassName('text-multiple')[i].value;
-                if (parseFloat(arr))
-                    tot += parseFloat(arr);
-            }
-            tot = tot / 3;
-            parseFloat(tot).toFixed(2);
-            console.log(tot);
-
-            document.getElementById('critique_form_crRate').value = tot;
-        }
-    </script>
 {% endblock %}

@@ -16,27 +16,27 @@ class UpdateUserFormType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class, [
-                'label' => false,
+                'label' => 'Votre Email',
                 'attr' => ['placeholder' => "Pseudo@domain.com"],
             ])
             ->add('username',TextType::class, [
-                'label' => false,
+                'label' => 'Votre Pseudo',
             ])
             ->add('UsLname',TextType::class, [
-                'label' => false,
+                'label' => 'Votre Nom',
                 ])
             ->add('UsFname',TextType::class, [
-                'label' => false,
+                'label' => 'Votre prénom',
             ])
             ->add('UsImg', FileType::class,[
-                'label' => false,
+                'label' => 'Une image de profil',
                 'mapped' => false,
                 'required' => false,
                 'attr' => ['accept' => "image/png"],
                 'data_class' => null,
             ])
             ->add('UsBanImg', FileType::class,[
-                'label' => false,
+                'label' => 'Une Image de bannière',
                 'mapped' => false,
                 'required' => false,
                 'attr' => ['accept' => "image/png"],

@@ -1,0 +1,51 @@
+{% extends 'Admin/index.html.twig' %}
+
+{% block title %}Gérer les dramas{% endblock %}
+
+{% block content %}
+    {% for messages in app.flashes(['DramaAjouter','DramaModifier','DramaSupprimer']) %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for message in app.flashes('DramaNotSupprimer') %}
+        <div class="alert alert-danger ">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1>Gérer les Dramas</h1>
+    <a href="{{ path("admin_drama_ajout") }}" class="btn blue">Ajouter un Drama</a>
+    <table class="table striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Nbr d'ep</th>
+            <th>Note général</th>
+            <th>Date de sortie</th>
+            <th>Image</th>
+            <th>Bannier</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for drama in dramas %}
+            <tr>
+                <td>{{drama.id}}</td>
+                <td>{{drama.drName}}</td>
+                <td>{{drama.drNbEp}}</td>
+                <td>{{drama.drRate}}</td>
+                <td>{{drama.drDate|date('m-d-Y')}}</td>
+                <td>{{drama.drImg}}</td>
+                <td>{{drama.drBannerImg}}</td>
+                <td class="text-center">
+                    <a href="{{ path("admin_drama_modifier", {id: drama.id}) }}" class="btn blue">Modifier</a>
+                    <a href="{{ path("admin_drama_supprimer", {id: drama.id}) }}" class="btn blue">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

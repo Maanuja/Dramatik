@@ -1,0 +1,333 @@
+:root{
+
+  /* COULEURS */
+	--text-gray: #3f4954;
+	--text-light : #686666da;
+	--white: #ffffff;
+	--lightbrown:#BD9F7C;
+	--darkred: #5F0000;
+	--cutepink: #FFC1A3;
+	--pinktarn: #A26B69;
+
+
+	--wafer: #ECE3D7;
+	--armadillo: #4c4740;
+	--wafer-dark: #BD9F7C;
+	--tapa: #79766e;
+	--hunter-green: #192013;
+	--sage-green:#656b50;
+	--blue-emrald: #0E5E5D;
+	--manatee: #969ca4;
+	--tuscany: #b45c34;
+}
+
+
+
+/* Button TOP */
+.top .fa{
+	z-index: 100;
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    color: var(--darkred);
+}
+/*--------------------------------------------------------------
+	Navigator
+--------------------------------------------------------------*/
+nav a img{
+  display: block;
+  height:50px;
+  width:150px;
+}
+nav ul li{
+  padding-left: 1rem;
+
+}
+
+nav .btn.btn-g {
+	background-color: transparent;
+	/*background: var(--wafer-dark);*/
+	/*color: var(--lightbrown) !important;*/
+}
+
+@media all and (min-width: 992px) {
+	.nav .nav-item .dropdown-menu{ display: none; }
+	.nav .nav-item:hover .dropdown-menu{ display: block; }
+	/* .navbar .nav-item .dropdown-menu{ margin-top:0; } */
+  .dropdown> ul {left: 0; }
+  .dropdown> ul >li {   padding-bottom: 7px;  }
+  a.dropdown-item:hover {background-image: none; background-color: transparent;}
+  .dropdown-item{padding:.25rem;}
+}
+
+
+.dropdown-menu{
+  width: 100px;;
+  background-color: transparent !important;
+  border-style: none !important;
+}
+
+.search__box {
+	justify-content: center;
+	align-items: center;
+	padding-right: 1rem;
+	width: 10px;
+	height: 1rem;
+	color: black;
+	font-size: 1rem;
+	outline: none;
+	opacity: 50%
+}
+
+.search__icon {
+  position: absolute;
+  color: var(--tuscany);
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+}
+
+
+/*--------------------------------------------------------------
+	Footer
+--------------------------------------------------------------*/
+.circle-icon {
+    background: black;
+    margin-top: 40px;
+    padding:5px;
+    border-radius: 50%;
+}
+/*--------------------------------------------------------------
+	Buttons
+--------------------------------------------------------------*/
+.btn {
+  border-radius: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px !important;
+  color: var(--hunter-green) !important;
+  /* padding: 8px 37px; */
+}
+
+.btn.btn-tube {
+	/*border-radius: 21px;*/
+	border-bottom: black;
+	width: 125px;
+	border-radius: 0;
+}
+
+.btn.btn-round {
+  border-radius: 2px;
+  width: 100px;
+}
+
+.btn-primary{
+  background: var(--tuscany);
+
+}
+
+.btn-primary:hover{
+  background: #FADBD8;
+
+}
+
+.btn.btn-g {
+  background: #e5e5e5;
+  color: var(--hunter-green);
+  
+}
+
+.btn.btn-b {
+  background: #111111;
+  color: #fff;
+}
+
+.btn.btn-b:hover,
+.btn.btn-b:focus {
+  background: rgba(17, 17, 17, 0.8);
+}
+
+.btn.btn-font-w:hover {
+  background: #fff;
+  color: #111;
+}
+
+.btn-list .btn {
+  margin: 5px 0;
+}
+
+.form-control{
+  background-color: white;
+}
+
+/* -------------------*/
+/*  POP-UP NEWLETTER
+/* -------------------*/
+.button-onpage{
+	padding:6px 15px;
+	background:var(--white) !important;
+	color: black !important;
+	text-decoration:none;
+	font-family: "PT Serif";
+	border-radius:3px;
+	display:inline-block;
+}
+
+.overlay { 
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.7); /*background-color gris leger*/
+	transition: opacity 500ms;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 9999;
+}
+.overlay:target { 
+	visibility: visible;
+	opacity: 1;
+}
+#fenetre {
+	font-family: "PT Serif";
+}
+#fenetre .fenetre {
+	margin: 0px auto;
+	padding: 60px 20px;
+	background:var(--white);
+	border-radius: 0px;
+	height: 560px;
+	width:690px;
+	position: relative;
+	text-align: center;
+	top: 50% !important; /*center*/
+	position: fixed !important;
+	transform: translateY(-50%);
+	right: 0px;
+	left: 0;
+}
+#fenetre .fenetre h2 {
+	margin-top: 0;
+	color: black;
+}
+#fenetre .fenetre .close {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	font-size: 30px;
+	text-decoration: none;
+	text-align: center;
+	background: black;
+	cursor: pointer;/*pour voir une main*/
+	float: right;
+	padding: 0;
+	color:var(--white);
+	height: 40px;
+	width: 40px;
+	line-height: 45px;
+}
+#fenetre .fenetre .close:hover {
+	color: var(--cutepink);
+	opacity: 0.9;
+}
+
+.button-onpage:hover{
+	opacity: 0.9;
+}
+#fenetre .fenetre {
+	max-height: 50%;
+	overflow: hidden;
+}
+.newsletter-title h2 {
+	font-size: 24px;
+	text-transform: uppercase;
+	color: black;
+	font-weight: 700;
+	letter-spacing: 3px;
+	margin: 0 0 15px;
+}
+.box-content label {
+	font-weight: 400;
+	max-width: 560px;
+	display: inline-block;
+	margin-bottom: 5px;
+	font-size: 14px;
+	line-height: 26px;
+}
+
+#form_inscription #inscription_mail {
+	background: #EBEBEB; /*lightlightgrey*/
+	border: medium none;
+	height: 40px;
+	width: 65%;
+	margin: 20px 0;
+	padding-left: 15px;
+}
+#inscription_mail:focus{
+	border: 2px solid pink;
+}
+.news-button {
+	cursor: pointer;/*pour voir une main*/
+	border: none;
+	background: black;
+	padding: 3px 25px;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: var(--white);
+    font-weight: 600;
+    line-height: 34px;
+    display: inline-block;
+    letter-spacing: 2px;
+}
+.news-button:hover{
+	color: var(--white);
+	background-color: #201e1c;
+	border-style: outset;
+}
+.box-content .inscription-bottom {
+	margin-top: 20px;
+}
+.box-content .inscription-bottom #dont_show_again {
+	display: inline-block;
+	margin: 0;
+	vertical-align: middle;
+	margin-top: -1px;
+}
+
+.toast{
+	background: linear-gradient(to bottom right, #B0DB7D, #99DBB4);
+	box-shadow: 5px 5px 20px rgb(124, 128, 136);
+	color: darkgreen;
+	width: 100%;
+	font-size: 1rem;
+	margin-left: 0 !important;
+}
+
+.toast-header {
+	background: linear-gradient(to bottom right, #95be61, #87c49f);
+	color: darkslategrey !important;
+}
+form ul{
+	background-color: #87c49f;
+	border-radius: 8px;
+	margin: 10px 10px;
+}
+form li{
+	list-style: none;
+	padding: 10px 10px;
+}
+
+label{
+	font-weight: bold;
+	color: var(--lightbrown);
+	text-decoration: underline;
+	font-size: medium;
+	text-transform: uppercase;
+}
+
+.alertempty{
+	color: darkslateblue;
+	background-color: lavenderblush;
+}

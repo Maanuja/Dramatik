@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
+{% block content %}
+    {% block boxprofil %}
+        {% block banner %}
+            {%if app.user.UsBanImg != null %}
+                <img class="header-banner" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsBanImg }}">
+            {% else %}
+                <img class="header-banner" src="{{'images/apropos/banner.jpeg'}}">
+            {% endif %}
+        {% endblock %}
+        <div class="box-profil">
+            <div class="row mx-auto h-100">
+                <div class="left col-md-3">
+                    <div class="outer">
+                        {%if app.user.UsImg != null %}
+                            <img class="photo pull-right" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsImg }}" id="output"/>
+                        {% else %}
+                            <img class="photo pull-right" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="right col-md-9">
+                    <h3 class="display-4">Welcome, {{ app.user.username }}</h3>
+                    <h4>
+                        {% if scores is defined and scores is not null %}
+                            {{'Best score: '~scores.scScore~' ~ '~scores.scQuizz.qzName}}
+                        {% else %}
+                            Hello! Joue à l'ensemble de nos quiz!
+                            <br>
+                            Pour qu'on t'affiches ton BEST SCORE !
+                        {% endif %}
+                    </h4>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    <div class="container">
+        <div class="row">
+            <div class="left col-md-3">
+                <div id="nav-account">
+                    <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
+                    <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
+                    <div class="nav-item-account"><a href="{{ path('myCritiq',{'id': app.user.id }) }}">Mes Critik</a></div>
+                    <div class="nav-item-account" style="color: aliceblue">Mes Scores(Soon)</div>
+                    <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
+                </div>
+            </div>
+            {% block rightbox %}
+                <div class="right col-md-9">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('fail') %}
+                        <div class="alert alert-warning">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('ppsuccess') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}{% for message in app.flashes('ppfail') %}
+                        <div class="alert alert-warning ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('ppbsuccess') %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}{% for message in app.flashes('ppbfail') %}
+                        <div class="alert alert-warning ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <p>Nom : {{ app.user.UsLname }}</p>
+                    <p>Prénom : {{ app.user.UsFname }}</p>
+                    <p>E-mail : {{ app.user.email }}</p>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('account') }}
+{% endblock %}
+

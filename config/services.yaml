@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    imgquizz_directory: '%kernel.project_dir%/public/uploads/imageQuizz'
+    imguser_directory: '%kernel.project_dir%/public/uploads/imageUser'
+    images_directory: '%kernel.project_dir%/public/uploads/Drama'
 
 services:
     # default configuration for services in *this* file
@@ -23,3 +26,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Controller\DramaSearchController:
+        tags: ['controller.service_arguments']
+        public: true
+        arguments:
+            - '@fos_elastica.finder.drama'
+
+    App\Controller\QuizzSearchController:
+        tags: ['controller.service_arguments']
+        public: true
+        arguments:
+            - '@fos_elastica.finder.quizz'

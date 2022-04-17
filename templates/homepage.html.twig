@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container full-height">
+       <section class="column-center">
+          <div class="left-box">
+            <form action="{{ path('searchDr') }}" method="get" class="col-xl-4 mx-auto">
+              <label>
+                  <input name="search" class="search__box" type="text" placeholder="Search" required>
+              </label>
+              <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
+            </form>
+            <div class="jumbotron">
+              <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                  <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
+              </a>
+              <p class="lead">Hello, Bienvenue sur le site de Dramatik! Le site de référence pour les dramas ainsi
+              que pour rencontrer d'autres fans de dramas.
+              </p>
+           </div>
+        </div>
+        <div class="right-box">
+            <div><a href="{{ path('home') }}">ACCUEIL</a></div>
+            <div><a href="{{  path('drama') }}">DRAMA</a></div>
+            <div><a href="{{  path('quizzB') }}">QUIZZ</a></div>
+            <div><a href="{{ path('apropos') }}">A PROPOS</a></div>
+            <div>{% if app.user %}{%if is_granted('ROLE_ADMIN') %}<a href="{{ path('admin_admin') }}">COMPTE</a>{% else %}<a href="{{ path('account') }}">COMPTE</a>{% endif %}{% else %}<a href="{{ path('app_login') }}">SE CONNECTER</a>{% endif %}
+            </div>
+        </div>
+    </section>
+    {% block footer %}
+        <!--------------------------------------------- TOP BUTTON ------------------------->
+        <div class="top">
+            <a href="#top" title="Retourner en Haut">
+                <i class="fa fa-arrow-circle-up fa-4x"></i>
+            </a>
+        </div>
+        <!--------------------------------------------- TOP BUTTON FIN------------------------>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top border-dark">
+            <p class="col-md-4 mb-0 text-muted">© 2021 Maanuja, Mithunah, Tous les droits reservés.</p>
+
+            <ul class="nav col-md-4 justify-content-end">
+                <li class="nav-item"><a href="{{ path('home') }}" class="nav-link px-2 text-muted">Accueil</a></li>
+                <li class="nav-item"><a href="{{ path('drama') }}" class="nav-link px-2 text-muted">Dramas</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Suggestion</a></li>
+                <li class="nav-item"><a href="{{ path('apropos') }}" class="nav-link px-2 text-muted">A propos</a></li>
+            </ul>
+        </footer>
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

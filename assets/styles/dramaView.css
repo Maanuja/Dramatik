@@ -1,0 +1,104 @@
+#bootstrap-overrides .header-banner{
+    position: relative;
+    height: 350px;
+    width: 100%;
+    z-index: -1000;
+    object-fit: cover;
+    filter: brightness(75%);
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}
+
+.container {
+    margin-top: 20px;
+}
+
+section{
+    Margin-top:5vh;
+}
+
+.button-group {
+    margin-bottom: 20px;
+}
+
+.counter {
+    display: inline;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.counterCritik {
+    display: inline;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.carousel-control-next, .carousel-control-prev{
+    width: auto;
+}
+
+.deck{
+    justify-content: space-evenly;
+    margin-top: 1rem !important;
+}
+
+.carousel-indicators{
+    position: relative;
+    margin-top: 1rem;
+}
+
+@media (min-width: 500px) {
+    .deck .card{
+        width: 5rem;
+        min-height: fit-content;
+    }
+
+    .deck .card img{
+        height: 5rem;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 768px) {
+    .deck .card{
+        width: 10rem;
+        min-height: fit-content;
+    }
+
+    .deck .card img{
+        height: 10rem;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 992px) {
+    .deck .card{
+        width: 15rem;
+        min-height: fit-content;
+    }
+
+    .deck .card img{
+        height: 15rem;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1200px) {
+    .deck .card{
+        width: 22rem;
+        min-height: fit-content;
+    }
+
+    .deck .card img{
+        height: 22rem;
+        object-fit: cover;
+    }
+}

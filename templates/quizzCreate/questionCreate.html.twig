@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Création de Question
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quizzCreate') }}
+    {% if img is defined %}
+        <style>
+            body {
+                background: center no-repeat url({{ asset('uploads/imageQuizz/'~ img) }});
+                background-size: cover;
+            }
+        </style>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block content %}
+    {% if nombre is defined %}
+        {{ form_start(formquest) }}
+        <div class="container-sm p-5" id="boxcreate" role="group" aria-label="Basic input text group">
+
+            <div class="form-floating">
+                {{ form_widget(formquest.question, {'id': 'floatingInput', 'attr': {'class':'form-control'}}) }}
+                <label for="floatingInput">Enonce de la Question</label>
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" style="background-color: lightgreen" id="Choix1">Correcte</span>
+                {{ form_widget(formquest.choice1, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix2">Fausse</span>
+                {{ form_widget(formquest.choice2, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix3">Fausse</span>
+                {{ form_widget(formquest.choice3, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <div class="input-group p-3">
+                <span class="input-group-text" id="Choix4">Fausse</span>
+                {{ form_widget(formquest.choice4, {'attr': {'class':'form-control'}}) }}
+            </div>
+
+            <button type="submit" name="submit" class="btn next">
+                {% if nombre==1 %}
+
+                    Soumettre  <i class="fa fa-arrow-right" id="nxtqst"></i>
+                {% else %}
+                    Next Question  <i class="fa fa-arrow-right" id="nxtqst"></i>
+                {% endif %}
+            </button>
+        </div>
+        {{ form_end(formquest) }}
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('quizzCreate') }}
+    {{ parent() }}
+{% endblock %}

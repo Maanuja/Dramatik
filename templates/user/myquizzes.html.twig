@@ -1,0 +1,60 @@
+{% extends 'user/user.html.twig'%}
+
+{% block title %}Mes quizzes{% endblock %}
+
+{% block rightbox %}
+    <div class="right col-md-9 coord">
+        {% for message in app.flashes('modified') %}
+            <div id="modified" class="toast mb-3" role="alert" aria-live="assertive" aria-atomic="true"  data-bs-autohide="false">
+                <div class="toast-header">
+                    <strong class="me-auto">Modification de Quizz</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message | raw }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <h2 class="display-5">MES QUIZZS</h2>
+
+        <h4>En Attente</h4>
+        <div class="card-group">
+            {% for quizz in waiting %}
+                <div class="<card flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img data-src="holder.js/200x250?theme=thumb" alt="{{ quizz.qzName }}" src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" data-holder-rendered="true">
+                            <h5><i>{{ quizz.qzName }}</i></h5>
+                        </div>
+                        <div class="flip-card-back">
+                            <a type="button" class="btn" href="{{ path('updateQuizz',{'quizzId': quizz.id}) }}">Modifier Quizz</a>
+                            <a type="button" class="btn" href="{{ path('modifyQuestion',{'quizzId': quizz.id, 'nb' : quizz.qzFormat}) }}">Modifier Questions</a>
+                            <a type="button" class="btn" href="{{ path('deleteQuizz', {'quizzId' : quizz.id}) }}">Supprimer Quizz</a>
+                            <a type="button" class="btn mx-5" href="{{ path('quizzStart',{'id': quizz.id}) }}">Jouer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h4 class="mt-5">En ligne</h4>
+        <div class="card-group">
+            {% for quizz in approved %}
+                <div class="<card flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img data-src="holder.js/200x250?theme=thumb" alt="{{ quizz.qzName }}" src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" data-holder-rendered="true">
+                            <h5><i>{{ quizz.qzName }}</i></h5>
+                        </div>
+                        <div class="flip-card-back">
+                            <a type="button" class="btn" href="{{ path('updateQuizz',{'quizzId': quizz.id}) }}">Modifier Quizz</a>
+                            <a type="button" class="btn" href="{{ path('modifyQuestion',{'quizzId': quizz.id, 'nb' : quizz.qzFormat}) }}">Modifier Questions</a>
+                            <a type="button" class="btn" href="{{ path('deleteQuizz', {'quizzId' : quizz.id}) }}">Supprimer Quizz</a>
+                            <a type="button" class="btn mx-5" href="{{ path('quizzStart',{'id': quizz.id}) }}">Jouer</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'user/user.html.twig'%}
+
+{% block title %}Mes critiques {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('account') }}
+{% endblock %}
+
+{% block rightbox %}
+    <div class="right col-md-9 coord">
+        <div class="right col">
+            <div class="col" id="comments">
+                <h2 class="display-5">MES Comments</h2>
+                <!-- COMMENT 1 - START -->
+                {% for critik in critiques %}
+                    <div class="right">
+                        <div class="comment">
+                            <img class="pull-left comment-object" src="{{ asset('uploads/imageUser/') }}{{ critik.crUser.UsImg }}" alt="">
+                            <div class="comment-body">
+                                <h2 class="comment-heading">{{ critik.crUser.username }}</h2>
+                                <h4 class="comment-heading">{{ critik.crTitle }}</h4>
+                                <h4 class="comment-heading">Note : {{ critik.crRate }}/10</h4>
+                                <p>{{ critik.crCritic }}</p>
+                                <div class="comment-detail pull-left">
+                                    <i class="fa fa-calendar"></i>{{ critik.crCreatedAt | date}}
+                                </div>
+                                <div class="comment-detail pull-right">
+                                    <a href="{{ path('dramaview',{'drName': critik.crDrama.drName , 'id': critik.crDrama.id}) }}">Lire Fiche</a>
+                                    <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
+                                    <a href="{{ path('myCritiqDelete',{'id': app.user.id ,'idc' : critik.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- COMMENT - END -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

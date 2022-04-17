@@ -1,0 +1,266 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ drama.drName }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dramaView') }}
+    {{ encore_entry_link_tags('quizzBook') }}
+
+
+{% endblock %}
+
+{% block content %}
+    <img class="header-banner" src="{{ asset('uploads/Drama/') }}{{ drama.drBannerImg }}" alt="Banner">
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col-md-8 blog-main">
+                    <h3 class="pb-3 mb-4 font-italic border-bottom">
+                        GENRE - {{ drama.drGenre.grName }}
+                    </h3>
+                    <div class="blog-post">
+                        <h2 class="blog-post-title">{{ drama.drName }}
+                        </h2>
+                        <p class="blog-post-meta">{{ drama.createdAt|date }} <a href="#">{{ drama.drAdminId.usFname }}</a></p>
+                        <hr>
+                        <p>{{  drama.drPlot }}</p>
+                    </div>
+                    <hr>
+                    <ul class="list">
+                        <li class="list-item">
+                            <b class="inline">Nombre d'épisodes : </b>{{ drama.drNbEp }}
+                        </li>
+                        <li class="list-item">
+                            <b class="inline">Note général : </b>{{ drama.drRate }}/10
+                        </li>
+                        <li class="list-item">
+                            <b class="inline">Période de diffusion : </b>{{ drama.drDate|date('d-m-Y') }} - {{ drama.drDateEnd|date('d-m-Y') }}
+                        </li>
+                        <li class="list-item">
+                            <b class="inline">Genre : </b>{{ drama.drGenre.grName }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 blog-sidebar">
+                    <div class="p-3 mb-3 bg-light rounded">
+                        <img src="{{ asset('uploads/Drama/') }}{{ drama.drImg }}" style="height: 100%; width: 100%;" alt="DramaImg">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <h3 class="pb-3 mb-4 font-italic">
+            Video Trailer
+        </h3>
+        <hr>
+        <section>
+            <iframe width="100%" height="500" src="{{ drama.drVideo }}" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </section>
+        <hr>
+        <section>
+            <ul class="nav nav-tabs">
+                {% if 'critique' in app.request.uri %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
+                    </li>
+                {% endif %}
+            </ul>
+            {% if 'critique' in app.request.uri %}
+                {% for message in app.flashes('login plz') %}
+                    <div class="alert alert-danger ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="container" id="critiksection">
+                    <h3 class="heading">Ajouter un Critique :) !</h3>
+                    <div class="container">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_row(form.crTitle, {'attr': {'class':'form-control' , 'placeholder': 'Titre Commentaire'}}) }}
+                            {{ form_row(form.crCritic, {'attr': {'class': 'form-control', 'placeholder': 'Titre Commentaire'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
+                            <div class="form-row">
+                                <div class="col-lg-3 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.crStory, {'attr': {'class': 'form-control text-multiple'}}) }}
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.crMusic, {'attr': {'class': 'form-control text-multiple'}}) }}
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.crCasting, {'attr': {'class': 'form-control text-multiple'}}) }}
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.crRate, {'attr': {'class': 'form-control text-multiple'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-group pull-right">
+                            <p class="counterCritik"></p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit2">ENVOYER</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    {% for critik in critiques %}
+                        {% if critik.crDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('uploads/imageUser/') }}{{ critik.crUser.UsImg }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">{{ critik.crUser.username }}</h2>
+                                        <h4 class="comment-heading">{{ critik.crTitle }}</h4>
+                                        <h4 class="comment-heading">Note : {{ critik.crRate }}/10</h4>
+                                        <p>{{ critik.crCritic }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ critik.crCreatedAt | date}}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% for messages in app.flashes(['CommentPosted','Comment Deleted']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for messages in app.flashes(['CommentDel']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class="container" id="commentsection">
+                    <h3 class="heading">Ajouter un commentaire :) !</h3>
+                    <div class="container">
+                        {{ form_start(formComment) }}
+                        <div class="form-group">
+                            {{ form_row(formComment.cmComment, {'attr': {'class': 'form-control statut-box', 'placeholder': 'Commentaire'}}) }}
+                        </div>
+                        <div class="button-group pull-right">
+                            <p class="counter">250</p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
+                        </div>
+                        {{ form_end(formComment) }}
+                    </div>
+                    {% for comment in comments %}
+                        {% if comment.cmDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">User</h2>
+                                        <p>{{ comment.cmComment }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ comment.cmDate | date }}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>
+                                            <a href="{{ path('deleteComment',{'drName' : drama.drName, 'id' : drama.id, 'idc' : comment.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="text-center">
+                        {{ knp_pagination_render(comments) }}
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+
+        <h3 class="pb-3  mt-4 font-italic">
+            Quizzes
+        </h3>
+
+        {% if quizzes is defined and quizzes is not empty %}
+            <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for quizz in quizzes %}
+                        {% if loop.first %}
+                            <div class="carousel-item active">
+                                <div class="deck row row-cols-auto">
+                        {% elseif loop.index is divisible by(4) %}
+                            <div class="carousel-item">
+                                <div class="deck row row-cols-auto">
+                        {% endif %}
+                                    <div class="col">
+                                        <div class="card">
+                                            <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                                            <div class="card-img-overlay">
+                                                <h2 class="card-title">{{ quizz.qzName }}</h2>
+                                                <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                        {% if loop.index is divisible by(3) or loop.last %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    {% set indicator = 1 %}
+                    {% for quizz in quizzes %}
+                        {% if loop.index is divisible by(4)  %}
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ indicator }}" aria-label="Slide {{ indicator+1 }}"></button>
+                            {% set indicator = indicator+1 %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alertempty" role="alert">
+                Il n'y a pas encore de Quiz pour ce drama.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('search') }}
+    <script>
+        function findTotal() {
+            var tot = 0;
+            for (let i = 0; i < 3; i++) {
+                let arr = document.getElementsByClassName('text-multiple')[i].value;
+                if (parseFloat(arr))
+                    tot += parseFloat(arr);
+            }
+            tot = tot / 3;
+            parseFloat(tot).toFixed(2);
+            console.log(tot);
+            document.getElementById('critique_form_crRate').value = tot;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,108 @@
+
+#boxcreate{
+    width: 90%;
+    height: auto;
+    border: 5px solid black;
+    border-bottom-right-radius: 115px;
+    border-top-left-radius: 115px;
+}
+#boxcreate button{
+    font-size: 20px !important;
+    margin: 1.3rem auto;
+    width: fit-content;
+}
+
+.next{
+    margin: 1.3rem 40% !important;
+    background-color: lavenderblush;
+}
+
+.form-floating{
+    width: 80%;
+    text-align: center;
+    margin-left: 10%;
+}
+
+
+.form-floating input{
+    text-align: center;
+}
+
+#boxcreate span{
+    width: 5.2rem;
+    text-align: center;
+}
+
+.form-floating{
+    width: 80%;
+    text-align: center;
+    margin-left: 10%;
+}
+
+
+.form-floating input{
+    text-align: center;
+}
+
+#boxcreate span{
+    width: 5.2rem;
+    text-align: center;
+}
+#quizzcreate {
+    border: none;
+    background-color: var(--wafer);
+    font-size: 25px;
+    margin: 3rem auto;
+    text-align: center;
+    width: fit-content;
+    max-width: 100%;
+}
+
+#quizzcreate:focus{
+    border-bottom: 4px inset darkslateblue;
+
+    margin: 3rem auto;
+    text-align: center;
+    outline: 0;
+}
+
+.form-input {
+    width:auto;
+    height: 450px;
+    padding:10px;
+    background:#fff;
+    margin: auto;
+    box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
+    3px 3px 7px rgba(94, 104, 121, 0.377);
+}
+.form-input input {
+    display:none;
+}
+
+.form-input label {
+    display:block;
+    width:fit-content;
+    height:40px;
+    line-height:30px;
+    text-align:center;
+    background:#1172c2;
+    margin:auto;
+    color:#fff;
+    font-size:18px;
+    font-family:"Open Sans",sans-serif;
+    text-transform:Uppercase;
+    font-weight:600;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+
+.form-input img {
+    width:100%;
+    display:none;
+    margin-bottom:30px;
+}
+
+
+
+

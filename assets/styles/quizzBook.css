@@ -1,0 +1,112 @@
+.img-top {
+    height: 350px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-bottom: .5px solid black;
+}
+
+.search__box{
+    height: 2.5rem !important;
+    width: 250px !important;
+    padding-bottom: 0 !important;
+}
+
+.search__box::placeholder{
+    color: brown;
+    font-size: 1.5em;
+}
+.apercu{
+    justify-content: space-evenly;
+}
+
+.apercu .card{
+    width: 22rem;
+    min-height: fit-content;
+    position: relative;
+    max-width : 320px;
+    height : 190px;
+    background-color: indianred;
+    margin : 30px 10px;
+    padding : 20px 15px;
+    display : flex;
+    flex-direction : column;
+    box-shadow : 0 5px 20px rosybrown;
+    transition : 0.3s ease-in-out;
+    border-radius : 15px;
+    color: bisque;
+
+}
+
+.apercu .card .image, .card-title {
+    position : relative;
+    width : 270px;
+    top : -40%;
+    margin: auto;
+}
+
+.apercu .card .image img{
+    max-width : 100%;
+    width: inherit;
+    height: 152px;
+    border-radius : 15px;
+}
+
+.apercu .card-body{
+    position: relative;
+    padding:10px !important;
+    top: -30%;
+    visibility: hidden;
+    text-align: center;
+}
+
+.apercu .card-body a{
+    font-size: 25px !important;
+    font-style: italic ;
+}
+.apercu .card:hover {
+    height : 260px;
+}
+
+.apercu .card:hover .card-body {
+    visibility: visible;
+    transition : 0.1s ease-in-out;
+}
+
+.deck{
+    justify-content: space-evenly;
+    margin-top: 5rem;
+}
+
+.deck .card{
+    width: 19rem;
+    min-height: fit-content;
+
+}
+
+.deck .card img{
+     height: 19rem;
+     object-fit: cover;
+ }
+
+.deck >.card-body{
+    padding:10px !important;
+}
+.deck .card-img-overlay{
+    visibility: hidden;
+}
+.deck .card:hover .card-img-overlay{
+    visibility: visible;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+    color: thistle;
+    text-align: center;
+    padding: 30% 0;
+    transition : 0.2s ease-in-out;
+}
+.deck .card-img-overlay>a{
+    font-size: 50px;
+    color: thistle !important;
+    font-weight: lighter !important;
+}

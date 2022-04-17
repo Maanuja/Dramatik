@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == 'admin_drama_ajout' %}
+        Ajouter Drama
+    {% else %}
+        Modifier Drama
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <section class="form formstyle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 mx-auto mbr-form">
+                    <!--Formbuilder Form-->
+                    {{ form_start(form) }}
+                    <div class="dragArea form-row">
+                        {% if app.request.attributes.get('_route') == 'admin_drama_ajout' %}
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="mbr-fonts-style pb-2 display-2">Ajouter un Drama</h5>
+                            </div>
+                        {% else %}
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h5 class="mbr-fonts-style pb-2 display-2">Modifier un Modifier</h5>
+                            </div>
+                        {% endif %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group align-center">
+                            <div class="form-row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.drName, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Titre Drama'}}) }}
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                    {{ form_row(form.drNbEp, {'attr': {'class': 'form-control text-multiple', 'placeholder': 'Nombres dépisodes'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div data-for="Date" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                            {{ form_row(form.drDate, {'attr': {'class': 'form-control display-7"'}}) }}
+                        </div>
+                        <div data-for="email" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                            {{ form_row(form.drDateEnd, {'attr': {'class': 'form-control display-7"'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="genre">
+                            {{ form_row(form.drGenre, {'attr': {'class': 'form-control display-7','placeholder': 'Genre'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="Plot">
+                            {{ form_row(form.drPlot, {'attr': {'class': 'form-control display-7','placeholder': 'Resumé'}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                            {{ form_row(form.drImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)"}}) }}
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                            {{ form_row(form.drBannerImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)"}}) }}
+                        </div>
+                        <div data-for="Rate" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                            {{ form_row(form.drRate, {'attr': {'class': 'form-control display-7"','placeholder': 'Note Général'}}) }}
+                        </div>
+                        <div data-for="Video" class="col-lg-6 col-md-12 col-sm-12 form-group" style="">
+                            {{ form_row(form.drVideo, {'attr': {'class': 'form-control display-7"','placeholder': 'Url pour Trailer'}}) }}
+                        </div>
+                        {{ form_row(form._token, {'attr': {'class': 'form-control display-7"','placeholder': 'token'}}) }}
+                        <div class="col-auto m-auto pt-5"><button type="submit" class="btn btn-submit display-7">ENVOYER</button></div>
+                    </div>
+                    {{ form_end(form) }}
+                    <!--Formbuilder Form-->
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

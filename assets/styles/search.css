@@ -1,0 +1,34 @@
+
+#bootstrap-overrides .card-body{
+    border-radius: 0px;
+    border-style: solid ;
+    border-left: black;
+    height: 20rem;
+}
+#bootstrap-overrides hr:not([size]) {
+    height: 2px;
+    border-width: thick;
+    color: black;
+    opacity: 1;
+}
+
+
+.card{
+    background: none;
+    border: none;
+}
+.card img{
+    object-fit: cover;
+    width: -webkit-fill-available;
+    height:20rem;
+}
+
+.card-text{
+    max-height: 20rem;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ABCDAIRE{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('abcdaire') }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-start">
+        <form action="{{ path('searchDr') }}" method="get" class="col-xl-2 p-3">
+            <label>
+                <input name="search" class="search__box" type="text" placeholder="Search" required>
+            </label>
+            <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
+        </form>
+        <nav class="col-xl-9 p-3">
+            <ul class="pagination justify-content-center">
+                <li><a href="{{ path('abcdaire') }}">TOUS</a></li>
+                {% for a in ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] %}
+                    {% if a in alphabet %}
+                        {% if a in app.request.uri %}
+                            <li class="text-decoration-underline" ><a href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% else %}
+                            <li ><a href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        {%  if a in app.request.uri %}
+                            <li ><a class="text-secondary text-decoration-underline" href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% else %}
+                            <li ><a class="text-secondary" href="{{ path('abcdaire_filter',{'letter': a }) }}">{{ a }}</a></li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="album py-5">
+            <div class="row">
+                {% for message in app.flashes('NoDrama') %}
+                    <div class="alert alert-danger ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for drama in dramas %}
+                    <div class="col-md-3">
+                        <div class="card mb-3 box-shadow">
+                            <div class="card-body">
+                                <img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 275px; width: 100%; display: block;" src="{{ asset('uploads/Drama/') }}{{ drama.drImg }}" data-holder-rendered="true">
+                                <h5 class="card-title">{{ drama.drName }}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{{ path('dramaview',{'drName': drama.drName , 'id': drama.id}) }}" class="nav-link px-2 text-secondary">View</a></button>
+                                    </div>
+                                    <small class="text-muted">{{ drama.drNbEp }} Episodes
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}

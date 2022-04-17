@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('session') }}
+{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+    {% set currentPath = path(app.request.attributes.get('_route'),
+                       app.request.attributes.get('_route_params')) %}
+        {% if 'login' in currentPath %}
+            <div class="movebox" id="movebox">
+        {% else %}
+            <div class="movebox right-panel-active" id="movebox">
+        {% endif %}
+            <div class="form-container sign-up-container">
+                {% if 'register' in currentPath%}
+
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email,{
+                        'attr': {
+                                'placeholder': "Emails"
+                            }
+                    })
+                    }}
+                    {{ form_row(registrationForm.username,{
+                        'attr': {
+                            'placeholder': "Username"
+                        }
+                    })
+                    }}
+                    {{ form_row(registrationForm.password, {
+                        'attr': {
+                            'placeholder': "Mot de passe ",
+                        }
+                    }) }}
+                    <div class="p-viewer2">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsu" aria-hidden="true" onClick="mdpsu()"></i>
+                    </div>
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpsd" aria-hidden="true" onClick="mdpsd()"></i>
+                    </div>
+                    {{ form_row(registrationForm.agreeTerms) }}
+                    <button type="submit" class="btn">Register</button>
+                {{ form_end(registrationForm) }}
+                {% endif %}
+            </div>
+            <div class="form-container sign-in-container">
+            {% if 'login' in currentPath%}
+                <form action="{{ path('app_login') }}" method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                    <h1>Reconecte-Toi</h1>
+                        {% if last_username is defined%}
+                        <input type="email" placeholder="Email" value="{{ last_username }}" name="_username" id="inputEmail" autocomplete="email"/>
+                        {% endif %}
+                    <input type="password" placeholder="Mot de passe"  name="_password" id="inputPassword" autocomplete="current-password" />
+                    <div class="p-viewer">
+                      <i class="fa fa-eye-slash" id="pass-status-mdpco" aria-hidden="true" onClick="mdpc()"></i>
+                    </div>
+                    <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+                    <button>Se conecter</button>
+                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </form>
+            {% endif %}
+            </div>
+            <div class="overlayA-movebox">
+                <div class="overlayA">
+                    <div class="overlayA-panel overlayA-left">
+                        <button type="button" id="myBtn" class="ghost btn-close" aria-label="Close" href="{{ path('home') }}" ></button>
+                        <h1>Hey, Rebonjour!</h1>
+                        <p>Connecte-toi vite et fait les quizzs de la communauté</p>
+                        <button class="ghost" id="signIn" onclick="relocate_login()">Se conecter</button>
+                    </div>
+                    <div class="overlayA-panel overlayA-right">
+                        <button type="button" id="myBtnbis" class="ghost btn-close" aria-label="Close" ></button>
+                        <h1>Salut, DramaLover!</h1>
+                        <p>Créé toi un compte et rejoins nous dans cette aventure!</p>
+                        <button class="ghost" id="signUp" onclick="relocate_register()">S'inscrire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('session') }}
+    <script>
+    function relocate_login()
+    {
+         location.href = "{{ path('app_login') }}";
+    }
+    function relocate_register()
+    {
+         location.href = "{{ path('app_register') }}";
+    }
+    function mdpc()
+    {
+        var passwordInput = document.getElementById('inputPassword');
+        var passStatus = document.getElementById('pass-status-mdpco');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+    function mdpsu()
+    {
+        var passwordInput = document.getElementById('registration_form_password_second');
+        var passStatus = document.getElementById('pass-status-mdpsu');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+    function mdpsd()
+    {
+        var passwordInput = document.getElementById('registration_form_password_first');
+        var passStatus = document.getElementById('pass-status-mdpsd');
+
+        if (passwordInput.type == 'password'){
+            passwordInput.type='text';
+            passStatus.className='fa fa-eye';
+
+        }
+        else{
+            passwordInput.type='password';
+            passStatus.className='fa fa-eye-slash';
+        }
+    }
+
+    document.getElementById("myBtn").onclick = function ()
+    {
+        location.href = "{{ path('home') }}";
+    };
+    document.getElementById("myBtnbis").onclick = function ()
+    {
+        location.href = "{{ path('home') }}";
+    };
+    </script>
+{% endblock %}

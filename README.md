@@ -1,6 +1,6 @@
 # dramatik
 
-Un site pour mieux connaitre les kdramas à travers des fiches d'infos et des jeux.
+Un site développé avec Symfony pour mieux connaitre les kdramas à travers des fiches d'infos et des jeux.
 
 Vous pouvez créer un compte user pour jouer ou créer des quizz, ajouter des critiques sur les dramas. Dans votre espace compte, vous retrouvez vos critiques et les quizz que vous avez créé (bientot vous aurez aussi l'historique de vos quizz).
 
@@ -28,7 +28,7 @@ La recherche par ElasticSearch
 
  - avoir installé ElasticSearch: https://www.elastic.co/fr/downloads/elasticsearch
  
- - le lancer sur terminal avec la commande 
+ - le lancer sur terminal avec la commande (s'assurer d'avoir le bon network.host et port dans elasticsearch.yml)
    - bin\elasticsearch.bat (Windows) ou  bin/elasticsearch (autre)
  - dans le projet, installé le bundle pour effectuer les requêtes de recherche
  

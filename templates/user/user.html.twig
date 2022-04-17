@@ -29,8 +29,12 @@
                 </div>
                 <div class="right col-md-9">
                     <h3 class="display-4">Welcome, {{ app.user.username }}</h3>
-                    <h4>MM/DD/YYYY</h4>
-                    <h4>{{ scores.id ?? 'BEST SCORE'}}
+                    <h4>
+                        {% if scores is defined and scores is not null %}
+                            {{'Best score: '~scores.scScore~' ~ '~scores.scQuizz.qzName}}
+                        {% else %}
+                            pas encore de BEST SCORE
+                        {% endif %}
                     </h4>
                 </div>
             </div>
@@ -43,7 +47,7 @@
                     <div class="nav-item-account"><a href="{{ path('modify_userinfo') }}">Mes Coordonnées</a></div>
                     <div class="nav-item-account"><a href="{{ path('myQuizz') }}">Mes Quizzs</a></div>
                     <div class="nav-item-account"><a href="{{ path('myCritiq',{'id': app.user.id }) }}">Mes Critik</a></div>
-                    <div class="nav-item-account"><a href="#mscore">Mes Scores</a></div>
+                    <div class="nav-item-account" style="color: aliceblue">Mes Scores(Soon)</div>
                     <div class="nav-item-account"><a href="{{ path('quizzCreation') }}">Créer Quizz</a></div>
                 </div>
             </div>

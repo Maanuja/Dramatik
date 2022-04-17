@@ -5,7 +5,6 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class FormQuestion extends AbstractType
@@ -26,7 +25,6 @@ class FormQuestion extends AbstractType
                 else{
                     $choices[$ch->getChChoice()] = $ch->getChChoice();
                 }
-
             }
 
             $keys = array_keys($choices);
@@ -49,7 +47,6 @@ class FormQuestion extends AbstractType
                         // adds a class like attending_yes, attending_no, etc
                         return ['class' => 'btn-check'];
                     },
-
                 ]);
         }
         $builder

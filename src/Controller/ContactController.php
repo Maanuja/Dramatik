@@ -26,7 +26,7 @@ class ContactController extends AbstractController
 
             $entityManager->persist($contact);
             $entityManager->flush();
-            
+
             $message = (new TemplatedEmail())
                 ->from($form->get('ctMail')->getData())
                 ->to('noreply.dramatik@gmail.com')
@@ -35,9 +35,6 @@ class ContactController extends AbstractController
                     $form->get('ctMessage')->getData(),
                     'text/plain');
             $mailer->send($message);
-
-
-
 
             $this->addFlash('success', 'Votre message a été envoyé!');
 

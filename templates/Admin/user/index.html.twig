@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer les users{% endblock %}
+
+{% block content %}
+    {% for messages in app.flashes(['AdminAjouter','UserModifier','UserSupprimer']) %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for message in app.flashes('UserNotSupprimer') %}
+        <div class="alert alert-danger ">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <h1>Gérer les users</h1>
+    <a href="#" class="btn blue">Ajouter un User</a>
+    <table class="table striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom du User</th>
+            <th>User Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.usFname}}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }},
+                    {% endfor %}
+                </td>
+
+                <td class="text-center">
+                    <a href="#" class="btn blue">Modifier</a>
+                    <a href="{{ path("admin_user_supprimer", {id: user.id}) }}" class="btn blue">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

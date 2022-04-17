@@ -80,4 +80,9 @@ final class Version20220313183836 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_3299375144CD206E ON score');
         $this->addSql('ALTER TABLE score ADD sc_user INT NOT NULL, ADD sc_quizz INT NOT NULL, DROP sc_user_id, DROP sc_quizz_id');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

@@ -7,74 +7,74 @@
 {% endblock %}
 
 {% block opinion %}
-<section>
-    <ul class="nav nav-tabs">
-        {% if 'comment' in app.request.uri %}
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
-            </li>
-        {% endif %}
+    <section>
+        <ul class="nav nav-tabs">
+            {% if 'comment' in app.request.uri %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('comments',{'drName' : drama.drName, 'id': drama.Id}) }}">Commentaires</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ path('critique',{'drName' : drama.drName, 'id': drama.Id}) }}">Critik</a>
+                </li>
+            {% endif %}
 
-    </ul>
-    {% if 'comment' in app.request.uri %}
-        <div class="container">
-            <h3 class="heading">Ajouter un commentaire :) !</h3>
+        </ul>
+        {% if 'comment' in app.request.uri %}
             <div class="container">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
-                    </div>
-                    <div class="button-group pull-right">
-                        <p class="counter">250</p>
-                        <a href="#" class="btn btn-primary">Post</a>
-                    </div>
-                </form>
-                <ul class="posts">
-                </ul>
-            </div>
-            <div class="right" id="mcritk">
-                <div class="comment">
-                    <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
-                    <div class="comment-body">
-                        <h4 class="comment-heading">Maanu User</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="comment-detail pull-left">
-                            <i class="fa fa-calendar"></i>07/02/2022
-                            <i class="fa fa-thumbs-up"></i>10
+                <h3 class="heading">Ajouter un commentaire :) !</h3>
+                <div class="container">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
+                        </div>
+                        <div class="button-group pull-right">
+                            <p class="counter">250</p>
+                            <a href="#" class="btn btn-primary">Post</a>
+                        </div>
+                    </form>
+                    <ul class="posts">
+                    </ul>
+                </div>
+                <div class="right" id="mcritk">
+                    <div class="comment">
+                        <a class="pull-left" href="#"><img class="comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt=""></a>
+                        <div class="comment-body">
+                            <h4 class="comment-heading">Maanu User</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <div class="comment-detail pull-left">
+                                <i class="fa fa-calendar"></i>07/02/2022
+                                <i class="fa fa-thumbs-up"></i>10
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
 
-    {% if 'critique' in app.request.uri %}
-        <div class="container">
-            <h3 class="heading">Ajouter un Critique :) !</h3>
+        {% if 'critique' in app.request.uri %}
             <div class="container">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
-                    </div>
-                    <div class="button-group pull-right">
-                        <p class="counter">250</p>
-                        <a href="#" class="btn btn-primary">Post</a>
-                    </div>
-                </form>
-                <ul class="posts">
-                </ul>
+                <h3 class="heading">Ajouter un Critique :) !</h3>
+                <div class="container">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
+                        </div>
+                        <div class="button-group pull-right">
+                            <p class="counter">250</p>
+                            <a href="#" class="btn btn-primary">Post</a>
+                        </div>
+                    </form>
+                    <ul class="posts">
+                    </ul>
+                </div>
             </div>
-        </div>
-    {% endif %}
-</section>
+        {% endif %}
+    </section>
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if app.request.attributes.get('_route') == 'admin_genre_ajout' %}
+        Ajouter Genre
+    {% else %}
+        Modifier Genre
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <section class="form formstyle">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 mx-auto mbr-form">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

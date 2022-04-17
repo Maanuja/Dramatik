@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+
+{% block title %} Création de Quizz {% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzCreate') }}
@@ -17,14 +20,11 @@
                     {{ form_widget(formquizz.qzDrama, {'id': 'quizzcreate'}) }}
                 </div>
                 <div class="row">
-
                     {{ form_widget(formquizz.qzFormat, {'id': 'quizzcreate'}) }}
                 </div>
                 <div class="row">
                     <button type="submit" name="detailQuizz" class="btn btn-outline-secondary" >Create quizz </button>
                 </div>
-
-
             </div>
             <div class="col-md">
                 <div class="form-input">
@@ -36,15 +36,12 @@
                         {% endfor %}
                         <img id="quizz-preview">
                     </div>
-
                     {{ form_row(formquizz.qzImg, {'id':'file-cq-1'}) }}
                 </div>
-
             </div>
         </div>
     </div>
     {{ form_end(formquizz) }}
-
 
 {% endblock %}
 

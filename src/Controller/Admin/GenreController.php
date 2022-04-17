@@ -38,7 +38,7 @@ class GenreController extends AbstractController
     /**
      * @Route("/ajout", name="ajout")
      */
-    public function ajoutDrama(Request $request)
+    public function ajoutGenre(Request $request)
     {
         $genre = new Genre();
 
@@ -97,7 +97,6 @@ class GenreController extends AbstractController
             $this->addFlash('GenreSupprimer', 'Genre supprimé avec succès');
         }
         else{
-
             $this->addFlash('GenreNotSupprimer', 'Vous ne pouvez pas supprimé ce genre il est lié à des dramas');
         }
         return $this->redirectToRoute('admin_genre_home');

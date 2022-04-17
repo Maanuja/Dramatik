@@ -13,7 +13,7 @@ class Critic
     #[ORM\Column(type: 'integer')]
     private $id;
 
-        #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime')]
     private $crCreatedAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]

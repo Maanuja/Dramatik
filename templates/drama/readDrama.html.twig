@@ -38,9 +38,6 @@
                             <b class="inline">Période de diffusion : </b>{{ drama.drDate|date('d-m-Y') }} - {{ drama.drDateEnd|date('d-m-Y') }}
                         </li>
                         <li class="list-item">
-                            <b class="inline">Director : </b>Yoo Je Won
-                        </li>
-                        <li class="list-item">
                             <b class="inline">Genre : </b>{{ drama.drGenre.grName }}
                         </li>
                     </ul>
@@ -79,36 +76,50 @@
                 {% endif %}
             </ul>
             {% if 'comment' in app.request.uri %}
-                <div class="container">
+                {% for messages in app.flashes(['CommentPosted','Comment Deleted']) %}
+                    {% for message in messages %}
+
+                        <div class="alert alert-success ">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class="container" id="commentsection">
                     <h3 class="heading">Ajouter un commentaire :) !</h3>
                     <div class="container">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control status-box" rows="3" placeholder="Ecrivez ici ..."></textarea>
-                            </div>
-                            <div class="button-group pull-right">
-                                <p class="counter">250</p>
-                                <a href="#" class="btn btn-primary">Post</a>
-                            </div>
-                        </form>
-                        <ul class="posts">
-                        </ul>
-                    </div>
-                    <div class="right" id="mcritk">
-                        <div class="comment">
-                            <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
-                            <div class="comment-body">
-                                <h2 class="comment-heading">Maanu User</h2>
-                                <h4 class="comment-heading">Maanu User</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <div class="comment-detail pull-left">
-                                    <i class="fa fa-calendar"></i>07/02/2022
-                                </div>
-                                <div class="comment-detail pull-right">
-                                    <i class="fa fa-thumbs-up"></i>10
-                                </div>
-                            </div>
+                        {{ form_start(formComment) }}
+                        <div class="form-group">
+                            {{ form_row(formComment.cmComment, {'attr': {'class': 'form-control statut-box', 'placeholder': 'Commentaire'}}) }}
                         </div>
+                        <div class="button-group pull-right">
+                            <p class="counter">250</p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit">ENVOYER</button>
+                        </div>
+                        {{ form_end(formComment) }}
+                    </div>
+                    {% for comment in comments %}
+                        {% if comment.cmDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('images/admin/mithu.jpg') }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">User</h2>
+                                        <p>{{ comment.cmComment }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ comment.cmDate | date }}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>10
+                                            <a href="{{ path('deleteComment',{'drName' : drama.drName, 'id' : drama.id, 'idc' : comment.id}) }}"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    <div class="text-center">
+                        {{ knp_pagination_render(comments) }}
                     </div>
                 </div>
 
@@ -118,10 +129,10 @@
                         {{ message }}
                     </div>
                 {% endfor %}
-            <div class="container">
-                <h3 class="heading">Ajouter un Critique :) !</h3>
-                <div class="container">
-                    {{ form_start(form) }}
+                <div class="container" id="critiksection">
+                    <h3 class="heading">Ajouter un Critique :) !</h3>
+                    <div class="container">
+                        {{ form_start(form) }}
                         <div class="form-group">
                             {{ form_row(form.crTitle, {'attr': {'class':'form-control' , 'placeholder': 'Titre Commentaire'}}) }}
                             {{ form_row(form.crCritic, {'attr': {'class': 'form-control', 'placeholder': 'Titre Commentaire'}}) }}
@@ -143,34 +154,33 @@
                             </div>
                         </div>
                         <div class="button-group pull-right">
-                            <button type="submit" class="btn btn-submit display-7">ENVOYER</button>
+                            <p class="counterCritik"></p>
+                            <button type="submit" class="btn btn-g btn-tube" id="btnSubmit2">ENVOYER</button>
                         </div>
-                    {{ form_end(form) }}
-                    <ul class="posts">
-                    </ul>
-                </div>
-                {% for critik in critiques %}
-                    {% if critik.crDrama.drName == drama.drName %}
-                        <div class="right" id="mcritk">
-                            <div class="comment">
-                                <img class="pull-left comment-object" src="{{ asset('uploads/imageUser/') }}{{ critik.crUser.UsImg }}" alt="">
-                                <div class="comment-body">
-                                    <h2 class="comment-heading">{{ critik.crUser.username }}</h2>
-                                    <h4 class="comment-heading">{{ critik.crTitle }}</h4>
-                                    <h4 class="comment-heading">Note : {{ critik.crRate }}/10</h4>
-                                    <p>{{ critik.crCritic }}</p>
-                                    <div class="comment-detail pull-left">
-                                        <i class="fa fa-calendar"></i>{{ critik.crCreatedAt | date}}
-                                    </div>
-                                    <div class="comment-detail pull-right">
-                                        <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
+                        {{ form_end(form) }}
+                    </div>
+                    {% for critik in critiques %}
+                        {% if critik.crDrama.drName == drama.drName %}
+                            <div class="right" id="mcritk">
+                                <div class="comment">
+                                    <img class="pull-left comment-object" src="{{ asset('uploads/imageUser/') }}{{ critik.crUser.UsImg }}" alt="">
+                                    <div class="comment-body">
+                                        <h2 class="comment-heading">{{ critik.crUser.username }}</h2>
+                                        <h4 class="comment-heading">{{ critik.crTitle }}</h4>
+                                        <h4 class="comment-heading">Note : {{ critik.crRate }}/10</h4>
+                                        <p>{{ critik.crCritic }}</p>
+                                        <div class="comment-detail pull-left">
+                                            <i class="fa fa-calendar"></i>{{ critik.crCreatedAt | date}}
+                                        </div>
+                                        <div class="comment-detail pull-right">
+                                            <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             {% endif %}
         </section>
 
@@ -178,53 +188,51 @@
             Quizzes
         </h3>
 
-
         {% if quizzes is defined and quizzes is not empty %}
-        <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-ride="carousel">
-
-            <div class="carousel-inner">
-                {% for quizz in quizzes %}
-                    {% if loop.first %}
-                        <div class="carousel-item active">
-                            <div class="deck row row-cols-auto">
-                    {% elseif loop.index is divisible by(4) %}
-                        <div class="carousel-item">
-                            <div class="deck row row-cols-auto">
-                    {% endif %}
-                                <div class="col">
-                                    <div class="card">
-                                        <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
-                                        <div class="card-img-overlay">
-                                            <h2 class="card-title">PLAY</h2>
-                                            <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+            <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for quizz in quizzes %}
+                        {% if loop.first %}
+                            <div class="carousel-item active">
+                                <div class="deck row row-cols-auto">
+                        {% elseif loop.index is divisible by(4) %}
+                            <div class="carousel-item">
+                                <div class="deck row row-cols-auto">
+                        {% endif %}
+                                    <div class="col">
+                                        <div class="card">
+                                            <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                                            <div class="card-img-overlay">
+                                                <h2 class="card-title">PLAY</h2>
+                                                <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
                                         </div>
                                     </div>
+                        {% if loop.index is divisible by(3) or loop.last %}
                                 </div>
-                                {% if loop.index is divisible by(3) or loop.last %}
                             </div>
-                        </div>
-                                {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    {% set indicator = 1 %}
+                    {% for quizz in quizzes %}
+                        {% if loop.index is divisible by(4)  %}
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ indicator }}" aria-label="Slide {{ indicator+1 }}"></button>
+                            {% set indicator = indicator+1 %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                {% set indicator = 1 %}
-                {% for quizz in quizzes %}
-                    {% if loop.index is divisible by(4)  %}
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ indicator }}" aria-label="Slide {{ indicator+1 }}"></button>
-                        {% set indicator = indicator+1 %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
         {% else %}
             <div class="alert alertempty" role="alert">
                 Il n'y a pas encore de Quiz pour ce drama.
@@ -232,8 +240,10 @@
         {% endif %}
     </div>
 {% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
+    {{ encore_entry_script_tags('search') }}
     <script>
         function findTotal() {
             var tot = 0;

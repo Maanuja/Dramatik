@@ -28,4 +28,9 @@ final class Version20220404224709 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE critic CHANGE cr_story cr_story INT NOT NULL, CHANGE cr_music cr_music NUMERIC(2, 1) NOT NULL, CHANGE cr_casting cr_casting NUMERIC(2, 1) NOT NULL, CHANGE cr_rate cr_rate NUMERIC(2, 1) NOT NULL');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

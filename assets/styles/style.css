@@ -309,6 +309,16 @@ nav .btn.btn-g {
 	background: linear-gradient(to bottom right, #95be61, #87c49f);
 	color: darkslategrey !important;
 }
+form ul{
+	background-color: #87c49f;
+	border-radius: 8px;
+	margin: 10px 10px;
+}
+form li{
+	list-style: none;
+	padding: 10px 10px;
+}
+
 
 .alertempty{
 	color: darkslateblue;

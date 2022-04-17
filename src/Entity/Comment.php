@@ -4,7 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+/**
+ * @UniqueEntity(fields={"cmComment"}, message="Il y a deja ce commentaire")
+ */
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {

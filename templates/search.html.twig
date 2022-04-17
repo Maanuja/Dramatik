@@ -12,13 +12,20 @@
                 <h1 class="display-4 m-3">Votre Recherche:{{ resultDr.params.search ??none }}
                     {{ resultQz.params.search ??none }}
                 </h1>
+                <form action="{{ path(resultDr.route ?? 'searchQz') }}" method="get" class="col-md-2 ms-auto">
+                    <label>
+                        <input name="search" class="search__box" type="text" placeholder="Search" required>
+                    </label>
+                    <button type="submit" class="search__icon"><i class="fa fa-search"></i></button>
+                </form>
                 <hr class="my-4">
             </div>
         </div>
     </div>
 
+
     <div class="container justify-content-center">
-        {% if resultDr is defined %}
+    {% if resultDr is defined and resultDr is not empty %}
         {% for rs in resultDr %}
             <div class="card mb-3 flex-md-row box-shadow">
                 <div class="container">
@@ -30,18 +37,20 @@
                             <div class="card-body">
                                 <h5 class="card-title"><strong class="d-inline-block mb-2 text-primary">{{ rs.drGenre.grName }}</strong>
                                     <h3 class="mb-0">
-                                        <a class="text-dark" href="#">{{ rs.drName }}</a>
+                                        <a class="text-dark" href="{{ path('dramaview',{'drName': rs.drName , 'id': rs.id}) }}">{{ rs.drName }}</a>
                                     </h3></h5>
                                 <p class="card-text">{{ rs.drPlot }}</p>
                                 <p class="card-text"><small class="text-muted">{{ rs.drDate|date("m/d/Y") }}</small></p>
+                                <a href="{{ path('dramaview',{'drName': rs.drName , 'id': rs.id}) }}">View More</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
-            {{ knp_pagination_render(resultDr, null, {}, {'align': 'center'}) }}
-{% elseif resultQz is defined %}
+        {{ knp_pagination_render(resultDr, null, {}, {'align': 'center'}) }}
+    {% elseif resultQz is defined and resultQz is not empty %}
         {% for rs in resultQz %}
             <div class="card mb-3 flex-md-row box-shadow">
                 <div class="container">
@@ -55,8 +64,10 @@
                                     <h3 class="mb-0">
                                         <a class="text-dark" href="#">{{ rs.qzName  }}</a>
                                     </h3></h5>
-                                <p class="card-text">{{ rs.qzFormat~' questions' }}</p>
+                                <h4 class="card-text">{{ rs.qzFormat~' questions' }}</h4>
                                 <p class="card-text"><small class="text-muted">{{ rs.qzCreatedAt|date("m/d/Y") }}</small></p>
+                                <a href="{{ path('quizzStart',{'id': rs.id}) }}">View More</a>
+
                             </div>
                         </div>
                     </div>
@@ -69,6 +80,6 @@
         <div class="alert alertempty" role="alert">
             Il n'y a pas de résultat correspondant à votre recherche.
         </div>
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
 {% endblock %}

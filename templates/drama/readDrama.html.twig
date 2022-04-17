@@ -189,7 +189,7 @@
             {% endif %}
         </section>
 
-        <h3 class="pb-3 mb-2 font-italic">
+        <h3 class="pb-3  mt-4 font-italic">
             Quizzes
         </h3>
 
@@ -208,7 +208,7 @@
                                         <div class="card">
                                             <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
                                             <div class="card-img-overlay">
-                                                <h2 class="card-title">PLAY</h2>
+                                                <h2 class="card-title">{{ quizz.qzName }}</h2>
                                                 <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
                                             </div>
                                         </div>

@@ -24,7 +24,7 @@
 }
 
 .apercu .card{
-    width: 19rem;
+    width: 22rem;
     min-height: fit-content;
     position: relative;
     max-width : 320px;
@@ -68,7 +68,7 @@
     font-style: italic ;
 }
 .apercu .card:hover {
-    height : 230px;
+    height : 260px;
 }
 
 .apercu .card:hover .card-body {

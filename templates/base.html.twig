@@ -43,13 +43,6 @@
                         </li>
                         <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('quizzB') }}">QUIZZ</a></button></li>
                         <li><button type="button" class="btn btn-g btn-tube"><a href="{{ path('apropos') }}">A PROPOS</a></button></li>
-                        <li><form>
-                                <label>
-                                    <input class=" search__box" type="text" placeholder="Search">
-                                </label>
-                                <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
-                            </form>
-                        </li>
                     </ul>
                     <div class="text-end">
                         {%if is_granted('ROLE_ADMIN')  %}

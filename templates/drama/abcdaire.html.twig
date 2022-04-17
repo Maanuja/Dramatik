@@ -8,9 +8,16 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="justify-content: center;  display: flex;">
-        <nav>
-            <ul class="pagination">
+<div class="container">
+    <div class="row justify-content-start">
+        <form action="{{ path('searchDr') }}" method="get" class="col-xl-2 p-3">
+            <label>
+                <input name="search" class="search__box" type="text" placeholder="Search" required>
+            </label>
+            <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
+        </form>
+        <nav class="col-xl-9 p-3">
+            <ul class="pagination justify-content-center">
                 <li><a href="{{ path('abcdaire') }}">TOUS</a></li>
                 {% for a in ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] %}
                     {% if a in alphabet %}
@@ -58,4 +65,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

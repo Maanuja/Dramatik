@@ -9,27 +9,22 @@
 
 {% block body %}
     <div class="container full-height">
-    <section class="column-center">
-        <div class="left-box">
-            <form class="text-center">
-                <label>
-                    <input class=" search__box" type="text" placeholder="Search">
-                </label>
-                <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success ">
-                        {{ message }}
-                    </div>
-                {% endfor %}
+       <section class="column-center">
+          <div class="left-box">
+            <form action="{{ path('searchDr') }}" method="get" class="col-xl-4 mx-auto">
+              <label>
+                  <input name="search" class="search__box" type="text" placeholder="Search" required>
+              </label>
+              <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
             </form>
             <div class="jumbotron">
-                <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                    <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
-                </a>
-                <p class="lead">Hello, Bienvenue sur le site de Dramatik! Le site de référence pour les dramas ainsi
-                    que pour rencontrer d'autres fans de dramas.
-                </p>
-            </div>
+              <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                  <img src="{{ asset('images/logoDramatik.png') }}" alt="Symfony!"/>
+              </a>
+              <p class="lead">Hello, Bienvenue sur le site de Dramatik! Le site de référence pour les dramas ainsi
+              que pour rencontrer d'autres fans de dramas.
+              </p>
+           </div>
         </div>
         <div class="right-box">
             <div><a href="{{ path('home') }}">ACCUEIL</a></div>

@@ -23,10 +23,18 @@
         {% endif %}
 
         <h1 class="text-center font-monospace my-5" style="color: bisque">QUIZZES</h1>
+
+        <form action="{{ path('searchQz') }}" method="get" class="col-md-2 mx-auto">
+            <label>
+                <input name="search" class="search__box" type="text" placeholder="Search" required>
+            </label>
+            <button type="submit" class="search__icon"><i class="fa fa-search"></i></button>
+        </form>
     </div>
 {% endblock %}
 
 {% block content %}
+<div class="container">
     {% if recent is defined %}
         <div class="apercu row row-cols-auto  g-4">
             {%  for top in recent %}
@@ -46,11 +54,14 @@
             {% endfor %}
         </div>
     {% endif %}
+</div>
+
 
     {% if not (is_granted('ROLE_USER') or is_granted('ROLE_ADMIN'))  %}
         <h4 class="alert alert-primary m-4 bg-transparent"> Veuillez vous connecter/inscrire pour profiter de nos fonctionnalités </h4>
     {% endif %}
 
+<div class="container">
     {% if quizzes is defined %}
         <div class="deck row row-cols-auto g-4">
             {%  for quizz in quizzes %}
@@ -66,7 +77,7 @@
             {% endfor %}
         </div>
     {% endif %}
-
+</div>
     <div class="mt-5"  aria-label="quizz navigation">
         {{ knp_pagination_render(quizzes, null, {}, {'align': 'center'}) }}
     </div>

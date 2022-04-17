@@ -3,10 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Entity\Quizz;
-use App\Form\RegistrationFormType;
 use App\Form\RolesFormType;
-use App\Form\UpdateUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,13 +34,13 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/ajout", name="ajout")
+     * @Route("/modifier/{id}", name="modifier")
      */
-    public function ajoutUser(Request $request)
+    public function modifier(int $id,Request $request)
     {
-        $user = new User();
+        $user = $this->entityManager->getRepository(User::class)->find($id);
 
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(RolesFormType::class, $user);
 
         $form->handleRequest($request);
 
@@ -52,12 +49,13 @@ class UserController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            $this->addFlash('UserAjouter', 'User ajouté avec succès');
+            $this->addFlash('RoleChanged', 'Role ajouté avec succès');
             return $this->redirectToRoute('admin_user_home');
         }
 
         return $this->render('admin/user/ajout.html.twig', [
-            'registrationForm' => $form->createView()
+            'form' => $form->createView(),
+            'user' => $user,
         ]);
     }
 

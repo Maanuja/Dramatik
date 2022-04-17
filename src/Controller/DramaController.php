@@ -117,8 +117,15 @@ class DramaController extends AbstractController
     /**
      * @Route("/drama/commentaire/{drName}/{id}/{idc}", name="deleteComment")
      */
-    public function supprimer(int $id,int $idc)
+    public function supprimer(string $drName,int $id,int $idc)
     {
-        return $this->redirectToRoute('dramaview');
+        $comment = $this->entityManager->getRepository(Comment::class)->find($idc);
+
+        $this->entityManager->remove($comment);
+        $this->entityManager->flush();
+
+        $this->addFlash('CommentDel', 'Commentaire supprimé avec succès');
+
+        return $this->redirectToRoute('dramaview',['drName'=>$drName,'id'=>$id]);
     }
 }

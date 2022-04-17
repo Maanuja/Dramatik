@@ -1,11 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {% if app.request.attributes.get('_route') == 'admin_genre_ajout' %}
-        Ajouter Genre
-    {% else %}
-        Modifier Genre
-    {% endif %}
+        Modifier Role
 {% endblock %}
 
 {% block content %}
@@ -13,7 +9,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-md-12 mx-auto mbr-form">
-
+                    {{ form_start(form) }}
+                    <div class="dragArea form-row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h5 class="mbr-fonts-style pb-2 display-2">Changer Role de {{ user.username }}</h5>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" data-for="genre">
+                            {{ form_row(form.roles, {'attr': {'class': 'form-control display-7','placeholder': 'Roles'}}) }}
+                        </div>
+                        <div class="col-auto m-auto pt-5"><button type="submit" class="btn btn-submit display-7">ENVOYER</button></div>
+                    </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

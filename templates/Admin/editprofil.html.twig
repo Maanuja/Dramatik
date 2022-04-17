@@ -28,13 +28,15 @@
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
                         {{ form_row(form_userinfo.UsImg, {'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'value': "yes"}}) }}
-                        {#                        <input name="password" placeholder="Mot de passe" class="form-control display-7">#}
                         {%if app.user.UsImg != null %}
                             <img class="photo card__image" src="{{ asset('uploads/imageUser/') }}{{ app.user.UsImg }}" id="output"/>
                         {% else %}
                             <img class="photo card__image" src="{{ asset('images/admin/mithu.jpg') }}" id="output"/>
                         {% endif %}
 
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12" data-for="file">
+                        {{ form_row(form_userinfo.UsBanImg, {'label' : false ,'attr': {'class': 'form-control display-7','onchange': "loadFile(event)",'hidden' : 'true'}}) }}
                     </div>
                     <div class="col-auto m-auto pt-5">
                         <button type="submit" class="btn btn-submit display-7">ENVOYER</button>

@@ -5,6 +5,11 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('quizzBook') }}
+    <style>
+        .img-top {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("http://dramatik/images/tftoBanner1.png");
+        }
+    </style>
 {% endblock %}
 
 {% block nav %}

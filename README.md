@@ -2,15 +2,21 @@
 
 Un site pour mieux connaitre les kdramas à travers des fiches d'infos et des jeux.
 
-Possibilité de faire des recherches (nom, genre, drama lié) sur les pages de répertoire pour drama(catalogue et abcdaire) et pour quizz.
+Vous pouvez créer un compte user pour jouer ou créer des quizz, ajouter des critiques sur les dramas. Dans votre espace compte, vous retrouvez vos critiques et les quizz que vous avez créé (bientot vous aurez aussi l'historique de vos quizz).
+
+L'admin gere le catalogue de drama et les genres associés, vérifie les infos des users et valide les quizz créés afin de les mettre en ligne.
+
+Possibilité de faire des recherches (nom, genre, drama lié, quizz) sur les pages de répertoire de drama(catalogue et abcdaire) et de quizz.
 
 
 Configuration 
 Pour la meilleure ergonomie lors de votre utlisation du site:
     
-    yarn add bootstrap --dev
+      composer require symfony/webpack-encore-bundle
+      
+      yarn add bootstrap --dev
     
-    yarn add @popperjs/core --dev
+      yarn add @popperjs/core --dev
 
 Pour se retrouver parmi les dramas et quizz :
 
@@ -33,3 +39,15 @@ puis pour remplir les index afin de réaliser la recherche
 
     php bin/console fos:elastica:populate
 
+Pour tester: 
+
+   compte admin:
+
+      email: noreply.dramatik@gmail.com
+      mdp: admin
+
+   compte user:
+      email: paris1@univ.fr
+      mdp: Dandelions
+   
+[lien pour la base de données](https://github.com/Maanuja/Dramatik/blob/main/dramatik.sql)

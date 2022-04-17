@@ -131,4 +131,19 @@ class UserController extends AbstractController
             'critiques' => $mesCritiks
         ]);
     }
+
+    /**
+     * @Route("/account/myCritiq/{id}/{idc}", name="myCritiqDelete")
+     */
+    public function supprimer(int $id, int $idc)
+    {
+        $critik = $this->entityManager->getRepository(Critic::class)->find($idc);
+
+        $this->entityManager->remove($critik);
+        $this->entityManager->flush();
+
+        $this->addFlash('CritikDel', 'Critique supprimé avec succès');
+
+        return $this->redirectToRoute('myCritiq',['id'=>$id]);
+    }
 }

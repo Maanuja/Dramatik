@@ -4,10 +4,17 @@ Un site développé avec Symfony pour mieux connaitre les kdramas à travers des
 
 Vous pouvez créer un compte user pour jouer ou créer des quizz, ajouter des critiques sur les dramas. Dans votre espace compte, vous retrouvez vos critiques et les quizz que vous avez créé (bientot vous aurez aussi l'historique de vos quizz).
 
+Un utilisateur non connecté a quant à lui la possibilité de mettre un commentaire annonyme (il est en cours de developpement).
+
 L'admin gere le catalogue de drama et les genres associés, vérifie les infos des users et valide les quizz créés afin de les mettre en ligne.
 
 Possibilité de faire des recherches (nom, genre, drama lié, quizz) sur les pages de répertoire de drama(catalogue et abcdaire) et de quizz.
 
+Futur fonctionnalité:
+
+   - Ajout de likes aux commentaires et critques
+   - Modification des critiques
+   - Historiques des quizz
 
 Configuration 
 Pour la meilleure ergonomie lors de votre utlisation du site:
@@ -46,8 +53,13 @@ Pour tester:
       email: noreply.dramatik@gmail.com
       mdp: admin
 
-   compte user:
+   compte user 1:
+
       email: paris1@univ.fr
       mdp: Dandelions
-   
+
+compte user 2:
+
+      email: efd1bdabd5@catdogmail.live
+      mdp: Azerty2%
 [lien pour la base de données](https://github.com/Maanuja/Dramatik/blob/main/dramatik.sql)

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 17 avr. 2022 à 16:03
--- Version du serveur : 5.7.36
--- Version de PHP : 8.0.13
+-- Généré le : dim. 17 avr. 2022 à 20:53
+-- Version du serveur : 5.7.31
+-- Version de PHP : 8.0.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `choices` (
   `ch_true` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_5CE96394EB85828` (`ch_question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2845 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2869 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `choices`
@@ -397,7 +397,31 @@ INSERT INTO `choices` (`id`, `ch_question_id`, `ch_choice`, `ch_true`) VALUES
 (2841, 131, 'Ko Hyun-Jung', 1),
 (2842, 131, 'Ms. Mi-Dong', 0),
 (2843, 131, 'Seo Bong-Yeon', 0),
-(2844, 131, 'Jang Young-Sim', 0);
+(2844, 131, 'Jang Young-Sim', 0),
+(2845, 132, 'A cause d\'un saut en parachute', 1),
+(2846, 132, 'Un accident d\'avion', 0),
+(2847, 132, 'Un bombardement militaire', 0),
+(2848, 132, 'Elle s\'est faite kidnappé', 0),
+(2849, 133, 'Seri\'s Choice', 1),
+(2850, 133, 'Seri\'s Beauty', 0),
+(2851, 133, 'Seri\'s Love', 0),
+(2852, 133, 'Seri\'s House', 0),
+(2853, 134, 'Pianiste', 1),
+(2854, 134, 'Guitariste', 0),
+(2855, 134, 'Saxophoniste', 0),
+(2856, 134, 'Flutiste', 0),
+(2857, 135, 'Pianiste', 1),
+(2858, 135, 'Guitariste', 0),
+(2859, 135, 'Saxophoniste', 0),
+(2860, 135, 'Flutiste', 0),
+(2861, 136, 'Des produits de beauté', 1),
+(2862, 136, 'Des chaussures', 0),
+(2863, 136, 'De la consultance', 0),
+(2864, 136, 'Des bougies', 0),
+(2865, 137, 'D\'un centre commercial', 1),
+(2866, 137, 'De rien du tout', 0),
+(2867, 137, 'D\'une société chimique', 0),
+(2868, 137, 'D\'une société de blanchisserie', 0);
 
 -- --------------------------------------------------------
 
@@ -413,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `cm_drama_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CBC85CCB6` (`cm_drama_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -423,7 +447,13 @@ INSERT INTO `comment` (`id`, `cm_comment`, `cm_date`, `cm_drama_id`) VALUES
 (1, 'Un drama qui nous transporte au delà des frontières. Les paysages suisses sont magnifiques et ajoute à l\'atmosphère apaisante du drama.', '2022-04-13 21:06:10', 5),
 (2, 'Les personnages secondaires auraient pu être un peu plus développés.', '2022-04-13 21:17:28', 5),
 (3, 'un plaisir de découvrir le folklore avec une intrigue bien mise en place !', '2022-04-13 21:18:35', 11),
-(4, 'Une histoire qui met du baume au coeur.', '2022-04-13 21:23:38', 36);
+(4, 'Une histoire qui met du baume au coeur.', '2022-04-13 21:23:38', 36),
+(5, 'J\'ai trouvé que le drama est un peu lent...', '2022-04-17 20:02:17', 7),
+(6, 'One of the best drama of 2016 \r\nToT', '2022-04-17 20:03:10', 10),
+(7, 'Je l\'ai pas vu encore mais il a l\'air génial', '2022-04-17 20:29:32', 8),
+(8, 'Ce drama est super cool', '2022-04-17 20:29:46', 8),
+(9, 'J\'en ai vu des dramas mais celui-ci se démarque des autres!', '2022-04-17 20:30:10', 8),
+(10, 'Leurs acting est juste waouw!', '2022-04-17 20:30:32', 8);
 
 -- --------------------------------------------------------
 
@@ -465,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `critic` (
   PRIMARY KEY (`id`),
   KEY `IDX_C9E2F7F1B10BD1D7` (`cr_user_id`),
   KEY `IDX_C9E2F7F16A2016D3` (`cr_drama_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `critic`
@@ -602,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `qt_quizz_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_8ADC54D5D9D3033E` (`qt_quizz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `questions`
@@ -697,7 +727,13 @@ INSERT INTO `questions` (`id`, `qt_question`, `qt_quizz_id`) VALUES
 (128, 'Quel est la profession de Jo Kang-Hwa ?', 32),
 (129, 'Quel est le nom de la fille de Cha Yu-Ri ?', 32),
 (130, 'En quelle année Yuri rencontre Jo Kang Hwa ?', 32),
-(131, 'Qui est la meilleure ami de Yu ri ?', 32);
+(131, 'Qui est la meilleure ami de Yu ri ?', 32),
+(132, 'Comment la lead s\'est retrouvé en Corée du Nord?', 36),
+(133, 'Comment s\'appelle la société créée par Yoon Se-ri ?', 36),
+(134, 'Avant de rentrer dans l\'armée, Ri Jeong-hyuk était ...', 36),
+(135, 'Avant de rentrer dans l\'armée, Ri Jeong-hyuk était ...', 36),
+(136, 'Que vend la société de Yoon Se-ri ?', 36),
+(137, 'Seo Dan, la fiancée de Ri Jeong-hyuk, est l\'héritière...', 36);
 
 -- --------------------------------------------------------
 
@@ -719,7 +755,7 @@ CREATE TABLE IF NOT EXISTS `quizz` (
   PRIMARY KEY (`id`),
   KEY `IDX_7C77973D2988221A` (`qz_user_id`),
   KEY `IDX_7C77973D8F6D2B2D` (`qz_drama_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `quizz`
@@ -728,7 +764,7 @@ CREATE TABLE IF NOT EXISTS `quizz` (
 INSERT INTO `quizz` (`id`, `qz_name`, `qz_user_id`, `qz_drama_id`, `qz_created_at`, `qz_updated_at`, `qz_format`, `qz_img`, `qz_approved`) VALUES
 (2, 'How much do you like them?', 2, 4, '2022-04-01 20:56:29', NULL, '5', 'Capture-d-ecran-73-6248ed9b138f1.png', 1),
 (5, 'Connais tu vraiment Start Up?', 2, 14, '2022-04-05 14:55:07', '2022-04-05 15:15:12', '5', '5623840-624c584b05f1e.jpg', 1),
-(6, 'Na Hee Doo Quizz', 2, 4, '2022-04-05 15:16:12', NULL, '5', 'Capture-d-ecran-73-6248ed9b138f1.png', 1),
+(6, 'Na Hee Doo Quizz', 2, 4, '2022-04-05 15:16:12', '2022-04-17 19:39:42', '5', '8165266-625c6cfe94546.webp', 1),
 (7, 'Connais-tu vraiment AOUAD?', 4, 12, '2022-04-10 11:38:37', NULL, '5', 'Safeimagekit-resized-imgpng-6252c1bdea4d2.png', 1),
 (8, 'Un été d\'amour The quizz. (OBS)', 4, 36, '2022-04-10 11:56:14', NULL, '7', '7824878-6252c5deac793.jpg', 1),
 (9, 'Summer Break 25-21', 2, 4, '2022-04-15 21:13:19', NULL, '5', '8165264-6259dfefe6725.jpg', 1),
@@ -739,7 +775,8 @@ INSERT INTO `quizz` (`id`, `qz_name`, `qz_user_id`, `qz_drama_id`, `qz_created_a
 (30, 'Papillon', 3, 5, '2022-04-04 22:58:19', '2022-04-17 15:41:31', '7', 'ERAAIE9U4AEkOZi-625c352b60ff2.jpg', 1),
 (31, 'Grey Suit', 3, 35, '2022-04-17 23:13:48', NULL, '10', 'EcA-FG1U8AAujZb-624b7bac48595.jpg', 1),
 (32, 'Nox', 3, 35, '2022-04-04 23:33:02', '2022-04-17 12:53:38', '10', 'a79a1efa2621372a94f1618eca9a7ee5-624b802ea36c4.jpg', 1),
-(35, 'cercle', 3, 5, '2022-04-04 23:43:51', NULL, '5', 'YXim56-624b82b798452.webp', 0);
+(35, 'cercle', 3, 5, '2022-04-04 23:43:51', NULL, '5', 'YXim56-624b82b798452.webp', 0),
+(36, 'The best Couple of 2020', 2, 5, '2022-04-17 19:50:33', NULL, '5', '2112226-625c6f89a14f3.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -774,7 +811,7 @@ CREATE TABLE IF NOT EXISTS `score` (
   PRIMARY KEY (`id`),
   KEY `IDX_329937512D1E060D` (`sc_user_id`),
   KEY `IDX_3299375144CD206E` (`sc_quizz_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `score`
@@ -785,7 +822,11 @@ INSERT INTO `score` (`id`, `sc_score`, `sc_user_id`, `sc_quizz_id`) VALUES
 (2, 0, 13, 24),
 (3, 6, 3, 25),
 (4, 9, 3, 31),
-(5, 2, 3, 29);
+(5, 2, 3, 29),
+(6, 3, 2, 29),
+(7, 3, 2, 25),
+(8, 1, 2, 32),
+(9, 5, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -814,7 +855,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `us_lname`, `us_fname`, `us_ban_img`, `us_img`, `email`, `roles`, `password`, `username`) VALUES
 (1, 'Kleo', 'Franken', '', '', '', 'null', '', 'maniac'),
-(2, 'Lore', 'Jane', NULL, NULL, 'ricardo@gmail.com', '[]', '$2y$13$jZfBbUZwuR6Q6MBsIqKvAeWInNmTrXeG/PuTqDio.76VLE7yMvwnO', 'Riri809'),
+(2, 'Lore', 'Jane', '2a04da7ad9b2d64fbe2490465c9ae6d3.jpg', 'a295f4a57dcc072a8f15f2f9efd1d5bf.png', 'efd1bdabd5@catdogmail.live', '[]', '$2y$13$zrYRJ/D01dXGSo6hrUH0b.cnNzyUyLxhS18wjRe.gBWvxQmm1ymYq', 'Riri809'),
 (3, 'Treasure', 'Stay', '72ce3dd5a065840b78e952d68130c76a.jpg', '27a5a1b6a0a3b66308053802fcddab91.jpg', 'mithunah.mathikaran@etu.univ-paris1.fr', '[]', '$2y$13$Hgy9MBa7CMPxFW.9ZiuUp.Mesg.zv88E2OmvQa6rm4VeaRHtii5OO', 'delight'),
 (4, 'Jun', 'Paul', '9fb78a201680e497b87d53fdd5ee5309.png', 'a7b8efe3d49aa824bc8257df4df29f96.png', 'wabec12188@jooffy.com', '[]', '$2y$13$pk.f3kcQEKpTAy/inMGv5eKm9.7SOagOcDuHz9rQyZYQktDMHWZym', 'Meli'),
 (11, NULL, NULL, NULL, NULL, 'noreply.dramatik@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$IxGT0cDx5GomEwKyojSz5.H76tE/vApeG7KHfnoW3GZ.Xu0fHtwF6', 'admin'),

@@ -28,6 +28,7 @@
                                 <div class="comment-detail pull-right">
                                     <a href="{{ path('dramaview',{'drName': critik.crDrama.drName , 'id': critik.crDrama.id}) }}">Lire Fiche</a>
                                     <i class="fa fa-thumbs-up"></i>{{ critik.crLike }}
+                                    <a href="{{ path('myCritiqDelete',{'id': app.user.id ,'idc' : critik.id}) }}"><i class="fa fa-trash-o"></i></a>
                                 </div>
                             </div>
                         </div>

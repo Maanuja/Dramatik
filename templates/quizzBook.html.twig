@@ -34,50 +34,50 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% if recent is defined %}
-        <div class="apercu row row-cols-auto  g-4">
-            {%  for top in recent %}
-                <div class="col">
-                    <div class="card">
-                        <div class="image">
-                            <img src="{{ asset('uploads/imageQuizz/' ~ top.qzImg) }}"  alt="...">
-                        </div>
-                        <div class="card-title">
-                            <h3 class="text-center">{{ top.qzName }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <a type="button" class="btn btn-outline-dark" href="{{ path('quizzStart',{'id': top.id}) }}"> PLAY <i class="fa fa-play-circle"></i></a>
+    <div class="container">
+        {% if recent is defined %}
+            <div class="apercu row row-cols-auto  g-4">
+                {%  for top in recent %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="image">
+                                <img src="{{ asset('uploads/imageQuizz/' ~ top.qzImg) }}"  alt="...">
+                            </div>
+                            <div class="card-title">
+                                <h3 class="text-center">{{ top.qzName }}</h3>
+                            </div>
+                            <div class="card-body">
+                                <a type="button" class="btn btn-outline-dark" href="{{ path('quizzStart',{'id': top.id}) }}"> PLAY <i class="fa fa-play-circle"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 
 
     {% if not (is_granted('ROLE_USER') or is_granted('ROLE_ADMIN'))  %}
         <h4 class="alert alert-primary m-4 bg-transparent"> Veuillez vous connecter/inscrire pour profiter de nos fonctionnalités </h4>
     {% endif %}
 
-<div class="container">
-    {% if quizzes is defined %}
-        <div class="deck row row-cols-auto g-4">
-            {%  for quizz in quizzes %}
-                <div class="col">
-                    <div class="card">
-                        <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
-                        <div class="card-img-overlay">
-                            <h2 class="card-title">{{ quizz.qzName }}</h2>
-                            <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+    <div class="container">
+        {% if quizzes is defined %}
+            <div class="deck row row-cols-auto g-4">
+                {%  for quizz in quizzes %}
+                    <div class="col">
+                        <div class="card">
+                            <img src="{{ asset('uploads/imageQuizz/' ~ quizz.qzImg) }}" class="card-img-top" alt="...">
+                            <div class="card-img-overlay">
+                                <h2 class="card-title">{{ quizz.qzName }}</h2>
+                                <a href="{{ path('quizzStart',{'id': quizz.id}) }}"><i class="fa fa-play-circle-o"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
     <div class="mt-5"  aria-label="quizz navigation">
         {{ knp_pagination_render(quizzes, null, {}, {'align': 'center'}) }}
     </div>

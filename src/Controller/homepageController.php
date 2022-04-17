@@ -15,12 +15,4 @@ class homepageController extends AbstractController
     {
         return $this->render('homepage.html.twig');
     }
-
-    /**
-     * @Route("/search")
-     */
-    public function search(): Response
-    {
-        return $this->render('search.html.twig');
-    }
 }

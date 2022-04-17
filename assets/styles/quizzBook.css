@@ -9,6 +9,16 @@
     border-bottom: .5px solid black;
 }
 
+.search__box{
+    height: 2.5rem !important;
+    width: 250px !important;
+    padding-bottom: 0 !important;
+}
+
+.search__box::placeholder{
+    color: brown;
+    font-size: 1.5em;
+}
 .apercu{
     justify-content: space-evenly;
 }

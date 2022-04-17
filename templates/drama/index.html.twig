@@ -3,15 +3,23 @@
 {% block title %}Hello DramaController{% endblock %}
 
 {% block content %}
-    <div class="container" style="justify-content: center;  display: flex;">
-        <nav>
-            <ul class="pagination">
-                <li><a href="{{ path('drama') }}">TOUS</a></li>
-                {% for genre in genres %}
-                <li><a href="{{ path('filter_genre',{'genre': genre.grName,'id': genre.id }) }}">{{ genre.grName }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
+    <div class="container" >
+        <div class="row justify-content-start">
+            <form action="{{ path('searchDr') }}" method="get" class="col-md-2 p-3">
+                <label>
+                    <input name="search" class="search__box" type="text" placeholder="Search" required>
+                </label>
+                <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
+            </form>
+            <nav class="col-md-9 p-3">
+                <ul class="pagination justify-content-center">
+                    <li><a href="{{ path('drama') }}">TOUS</a></li>
+                    {% for genre in genres %}
+                        <li><a href="{{ path('filter_genre',{'genre': genre.grName,'id': genre.id }) }}">{{ genre.grName }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
     </div>
     <div class="container">
         <div class="album py-5">

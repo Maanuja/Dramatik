@@ -8,16 +8,11 @@
     <div class="container full-height">
         <section class="column-center">
             <div class="left-box">
-                <form class="text-center">
+                <form action="{{ path('searchDr') }}" method="get" class="col-xl-4">
                     <label>
-                        <input class=" search__box" type="text" placeholder="Search">
+                        <input name="search" class="search__box" type="text" placeholder="Search" required>
                     </label>
-                    <a href="{{ path('app_homepage_search')}}"><i class="fa fa-search search__icon"></i></a>
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success ">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
+                    <button type="submit" class=" search__icon"><i class="fa fa-search"></i></button>
                 </form>
                 <div class="jumbotron">
                     <a href="{{ path('home') }}" class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

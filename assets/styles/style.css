@@ -68,7 +68,8 @@ nav .btn.btn-g {
 }
 
 .search__box {
-  	float: left;
+	justify-content: center;
+	align-items: center;
 	padding-right: 1rem;
 	width: 10px;
 	height: 1rem;
@@ -78,21 +79,11 @@ nav .btn.btn-g {
 	opacity: 50%
 }
 
-/* .search__box:focus, .search__box:hover {
-  background-color: #f1f2f6;
-} */
-
 .search__icon {
-  box-sizing: border-box;
-  float: right;
-  display: inline-block;
-/*   justify-content: center;
-  align-items: center; */
-  cursor: pointer;
   position: absolute;
   color: var(--tuscany);
-  padding: .7rem;
-  border-radius: 50%;
+	background: transparent;
+	border: none;
 }
 
 
@@ -318,3 +309,7 @@ nav .btn.btn-g {
 	color: darkslategrey !important;
 }
 
+.alertempty{
+	color: darkslateblue;
+	background-color: lavenderblush;
+}
